@@ -17,6 +17,7 @@
 | frontend-design | `skills/frontend-design/SKILL.md` | 前端设计专家 | 涉及 UI/UX 设计、组件设计、样式规范时 |
 | webapp-testing | `skills/webapp-testing/SKILL.md` | Web 应用测试 | 涉及单元测试、集成测试、E2E 测试时 |
 | mcp-builder | `skills/mcp-builder/SKILL.md` | MCP 服务构建 | 需要创建 MCP Server 或集成 MCP 时 |
+| prompt-engineer | `skills/prompt-engineer/SKILL.md` | 提示词工程专家 | 需要写提示词、生成 prompt、创建角色时 |
 
 **使用方式：** 当项目涉及某技能领域时，先阅读对应 `SKILL.md`，按其规范工作。
 
