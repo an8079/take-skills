@@ -1,0 +1,50 @@
+# Claude Studio Git Ignore
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
+
+# IDE files
+.idea/
+.vscode/
+*.sublime-*
+
+# Memory bank (may contain sensitive info)
+memory-bank/*-actual.md
+memory-bank/private-*.md
+
+# Logs
+*.log
+logs/
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+__pycache__/
+*.pyc
+*.pyo
+
+# Node modules (for any Node.js projects)
+node_modules/
+
+# Test coverage
+coverage/
+.nyc_output/
+
+# Backup files
+*.bak
+*.backup

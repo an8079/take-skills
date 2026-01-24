@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(npx @anthropic-ai/claude-code /doctor:*)",
+      "Bash(\"C:\\\\Users\\\\80795\\\\AppData\\\\Roaming\\\\npm\\\\node_modules\\\\@anthropic-ai\\\\claude-code\\\\cli.js\" /doctor)",
+      "Bash(echo:*)",
+      "Bash(node:*)"
+    ]
+  }
+}

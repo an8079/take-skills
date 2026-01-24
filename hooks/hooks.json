@@ -1,0 +1,55 @@
+{
+  "PreToolUse": [
+    {
+      "matcher": "tool == \"Edit\" || tool == \"Write\"",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "echo \"[Hook] About to edit file: $file_path\""
+        }
+      ]
+    }
+  ],
+  "PostToolUse": [
+    {
+      "matcher": "tool == \"Edit\" && tool_input.file_path matches \"\\.(ts|tsx|js|jsx)$\"",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "# Check for console.log in production code\nif [[ \"$file_path\" =~ \\.(ts|tsx|js|jsx)$ ]] && [[ \"$file_path\" != */test* ]] && [[ \"$file_path\" != */spec* ]]; then\n  if grep -q 'console\\.log' \"$file_path\" 2>/dev/null; then\n    echo \"[Hook] Remove console.log from production code: $file_path\" >&2\n  fi\nfi"
+        }
+      ]
+    },
+    {
+      "matcher": "tool == \"Bash\"",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "echo \"[Hook] Command executed: $tool_input.command\""
+        }
+      ]
+    }
+  ],
+  "Start": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "echo \"[Hook] Session started at $(date -u +%Y-%m-%dT%H:%M:%SZ)\""
+        }
+      ]
+    }
+  ],
+  "Stop": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "echo \"[Hook] Session ended at $(date -u +%Y-%m-%dT%H:%M:%SZ)\""
+        }
+      ]
+    }
+  ]
+}
