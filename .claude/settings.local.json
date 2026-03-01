@@ -1,0 +1,22 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(node:*)",
+      "Bash(find agents:*)",
+      "Bash(find skills:*)",
+      "Bash(node scripts/scope-manager.js:*)",
+      "Bash(node scripts/project-analyzer.js:*)",
+      "Bash(node scripts/phase-manager.js:*)",
+      "Bash(node scripts/cross-platform-logger.js:*)"
+    ],
+    "deny": [
+      "Bash(rm -rf:*)",
+      "Bash(del /f /s /q:*)"
+    ]
+  },
+  "features": {
+    "scopeProtection": true,
+    "incrementalDevelopment": true,
+    "projectAnalysis": true
+  }
+}

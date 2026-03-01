@@ -1,0 +1,26 @@
+{
+  "mcpServers": {
+    "filesystem": {
+      "command": "node",
+      "args": ["-m", "@modelcontextprotocol/server-filesystem/dist/index.js", "/workspace"]
+    },
+    "brave-search": {
+      "command": "node",
+      "args": ["-m", "/path/to/brave-search/dist/index.js"]
+    },
+    "github": {
+      "command": "node",
+      "args": ["-m", "@modelcontextprotocol/server-github/dist/index.js"]
+    },
+    "postgres": {
+      "command": "python",
+      "args": ["-m", "mcp_postgres"]
+    },
+    "sqlite": {
+      "command": "node",
+      "args": ["-m", "@modelcontextprotocol/server-sqlite/dist/index.js", "/path/to/database.db"]
+    }
+  },
+  "disabledMcpServers": [],
+  "timeout": 30000
+}

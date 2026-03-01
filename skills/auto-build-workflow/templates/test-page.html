@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API 测试页面 - {{project_name}}</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            color: white;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .main-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .main-content {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .panel {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+        }
+
+        .panel h2 {
+            color: #333;
+            margin-bottom: 20px;
+            font-size: 1.3rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .panel h2::before {
+            content: '';
+            width: 4px;
+            height: 24px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #555;
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 14px;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #667eea;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            font-family: 'Monaco', 'Consolas', monospace;
+        }
+
+        .btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            width: 100%;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);
+        }
+
+        .btn-secondary {
+            background: #f5f5f5;
+            color: #333;
+            margin-right: 8px;
+            margin-bottom: 8px;
+        }
+
+        .btn-secondary:hover {
+            background: #e0e0e0;
+        }
+
+        .btn-secondary.active {
+            background: #667eea;
+            color: white;
+        }
+
+        .method-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 16px;
+        }
+
+        .method-btn {
+            padding: 8px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 6px;
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 12px;
+            transition: all 0.3s;
+        }
+
+        .method-btn:hover {
+            border-color: #667eea;
+        }
+
+        .method-btn.active {
+            border-color: #667eea;
+            background: #667eea;
+            color: white;
+        }
+
+        .method-btn.get { --method-color: #61affe; }
+        .method-btn.post { --method-color: #49cc90; }
+        .method-btn.put { --method-color: #fca130; }
+        .method-btn.delete { --method-color: #f93e3e; }
+        .method-btn.patch { --method-color: #50e3c2; }
+
+        .method-btn.active.get { background: #61affe; border-color: #61affe; }
+        .method-btn.active.post { background: #49cc90; border-color: #49cc90; }
+        .method-btn.active.put { background: #fca130; border-color: #fca130; }
+        .method-btn.active.delete { background: #f93e3e; border-color: #f93e3e; }
+        .method-btn.active.patch { background: #50e3c2; border-color: #50e3c2; }
+
+        .response-panel {
+            background: #1e1e1e;
+            border-radius: 8px;
+            padding: 16px;
+            min-height: 300px;
+            max-height: 500px;
+            overflow: auto;
+        }
+
+        .response-panel h3 {
+            color: #888;
+            font-size: 0.85rem;
+            margin-bottom: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .response-status {
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .response-status.success {
+            background: #49cc90;
+            color: white;
+        }
+
+        .response-status.error {
+            background: #f93e3e;
+            color: white;
+        }
+
+        .response-panel pre {
+            color: #d4d4d4;
+            font-family: 'Monaco', 'Consolas', 'Courier New', monospace;
+            font-size: 13px;
+            line-height: 1.5;
+            white-space: pre-wrap;
+            word-break: break-all;
+        }
+
+        .history {
+            margin-top: 20px;
+        }
+
+        .history-item {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 12px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .history-item:hover {
+            background: #e9ecef;
+        }
+
+        .history-item .method {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            margin-right: 8px;
+        }
+
+        .history-item .method.get { background: #61affe; }
+        .history-item .method.post { background: #49cc90; }
+        .history-item .method.put { background: #fca130; }
+        .history-item .method.delete { background: #f93e3e; }
+
+        .history-item .path {
+            color: #333;
+            font-size: 13px;
+        }
+
+        .history-item .time {
+            color: #888;
+            font-size: 11px;
+            float: right;
+        }
+
+        .quick-actions {
+            margin-bottom: 20px;
+        }
+
+        .quick-actions h4 {
+            color: #555;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+        }
+
+        .api-list {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .api-item {
+            padding: 12px;
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .api-item:hover {
+            border-color: #667eea;
+            background: #f8f9ff;
+        }
+
+        .api-item .method {
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            margin-right: 8px;
+        }
+
+        .api-item .method.get { background: #61affe; }
+        .api-item .method.post { background: #49cc90; }
+        .api-item .method.put { background: #fca130; }
+        .api-item .method.delete { background: #f93e3e; }
+        .api-item .method.patch { background: #50e3c2; }
+
+        .api-item .path {
+            color: #333;
+            font-family: monospace;
+            font-size: 13px;
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+            margin-right: 10px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+            opacity: 0.8;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>{{project_name}}</h1>
+            <p>API 测试页面 | 自动生成</p>
+        </header>
+
+        <div class="main-content">
+            <!-- 请求面板 -->
+            <div class="panel">
+                <h2>发送请求</h2>
+
+                <div class="form-group">
+                    <label>请求方法</label>
+                    <div class="method-selector">
+                        <button class="method-btn get active" data-method="GET">GET</button>
+                        <button class="method-btn post" data-method="POST">POST</button>
+                        <button class="method-btn put" data-method="PUT">PUT</button>
+                        <button class="method-btn delete" data-method="DELETE">DELETE</button>
+                        <button class="method-btn patch" data-method="PATCH">PATCH</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>请求地址</label>
+                    <input type="text" id="apiUrl" placeholder="/api/v1/..." value="{{base_url}}">
+                </div>
+
+                <div class="form-group">
+                    <label>请求头 (JSON)</label>
+                    <textarea id="headers" placeholder='{"Content-Type": "application/json"}'>{{headers}}</textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>请求体 (JSON)</label>
+                    <textarea id="body" placeholder='{"key": "value"}'></textarea>
+                </div>
+
+                <button class="btn btn-primary" id="sendBtn" onclick="sendRequest()">
+                    发送请求
+                </button>
+
+                <div class="quick-actions" style="margin-top: 24px;">
+                    <h4>快速测试 API</h4>
+                    <div class="api-list">
+                        {{#api_list}}
+                        <div class="api-item" onclick="quickApi('{{method}}', '{{path}}')">
+                            <span class="method {{method}}">{{method}}</span>
+                            <span class="path">{{path}}</span>
+                        </div>
+                        {{/api_list}}
+                    </div>
+                </div>
+            </div>
+
+            <!-- 响应面板 -->
+            <div class="panel">
+                <h2>响应结果</h2>
+                <div class="response-panel">
+                    <h3>
+                        <span>Response</span>
+                        <span class="response-status" id="statusBadge" style="display: none;"></span>
+                    </h3>
+                    <pre id="response">点击"发送请求"开始测试...</pre>
+                </div>
+
+                <div class="history">
+                    <h4 style="margin-bottom: 12px; color: #555;">请求历史</h4>
+                    <div id="historyList">
+                        <p style="color: #888; font-size: 13px;">暂无请求历史</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>Generated by Claude Studio Auto-Build | {{timestamp}}</p>
+        </div>
+    </div>
+
+    <script>
+        let currentMethod = 'GET';
+        let requestHistory = [];
+
+        // 方法选择
+        document.querySelectorAll('.method-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                currentMethod = this.dataset.method;
+            });
+        });
+
+        // 快速 API
+        function quickApi(method, path) {
+            currentMethod = method;
+            document.querySelectorAll('.method-btn').forEach(b => {
+                b.classList.remove('active');
+                if (b.dataset.method === method) b.classList.add('active');
+            });
+            document.getElementById('apiUrl').value = '{{base_url}}' + path;
+            document.getElementById('body').value = '';
+        }
+
+        // 发送请求
+        async function sendRequest() {
+            const btn = document.getElementById('sendBtn');
+            const originalText = btn.innerHTML;
+            btn.innerHTML = '<span class="loading"></span>发送中...';
+            btn.disabled = true;
+
+            const method = currentMethod;
+            const url = document.getElementById('apiUrl').value;
+            const headersText = document.getElementById('headers').value;
+            const body = document.getElementById('body').value;
+
+            let headers = {};
+            try {
+                if (headersText.trim()) {
+                    headers = JSON.parse(headersText);
+                }
+            } catch(e) {
+                alert('请求头 JSON 格式错误');
+                btn.innerHTML = originalText;
+                btn.disabled = false;
+                return;
+            }
+
+            const statusBadge = document.getElementById('statusBadge');
+            const responseEl = document.getElementById('response');
+            const startTime = Date.now();
+
+            try {
+                const options = {
+                    method: method,
+                    headers: headers,
+                    mode: 'cors'
+                };
+
+                if (body.trim() && ['POST', 'PUT', 'PATCH'].includes(method)) {
+                    options.body = body;
+                }
+
+                const response = await fetch(url, options);
+                const duration = Date.now() - startTime;
+
+                let responseText;
+                const contentType = response.headers.get('content-type');
+
+                if (contentType && contentType.includes('application/json')) {
+                    const json = await response.json();
+                    responseText = JSON.stringify(json, null, 2);
+                } else {
+                    responseText = await response.text();
+                }
+
+                // 显示状态
+                statusBadge.style.display = 'inline-block';
+                statusBadge.textContent = `${response.status} ${response.statusText} (${duration}ms)`;
+                statusBadge.className = 'response-status ' + (response.ok ? 'success' : 'error');
+
+                // 显示响应
+                responseEl.textContent = responseText;
+
+                // 添加到历史
+                addToHistory({
+                    method: method,
+                    url: url,
+                    status: response.status,
+                    time: new Date().toLocaleTimeString()
+                });
+
+            } catch (error) {
+                statusBadge.style.display = 'inline-block';
+                statusBadge.textContent = 'Error';
+                statusBadge.className = 'response-status error';
+                responseEl.textContent = '请求失败: ' + error.message;
+            }
+
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+
+        // 添加到历史
+        function addToHistory(item) {
+            requestHistory.unshift(item);
+            if (requestHistory.length > 10) requestHistory.pop();
+
+            const historyList = document.getElementById('historyList');
+            if (requestHistory.length === 1) {
+                historyList.innerHTML = '';
+            }
+
+            const div = document.createElement('div');
+            div.className = 'history-item';
+            div.innerHTML = `
+                <span class="method ${item.method.toLowerCase()}">${item.method}</span>
+                <span class="path">${item.url}</span>
+                <span class="time">${item.status} | ${item.time}</span>
+            `;
+            div.onclick = () => {
+                document.getElementById('apiUrl').value = item.url;
+            };
+            historyList.insertBefore(div, historyList.firstChild);
+        }
+
+        // 回车发送
+        document.getElementById('apiUrl').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') sendRequest();
+        });
+    </script>
+</body>
+</html>

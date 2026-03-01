@@ -1,0 +1,95 @@
+# 阶段状态文件
+# 用于跟踪项目开发的 8 个阶段进度
+# 此文件自动维护，手动修改需谨慎
+
+project:
+  name: "项目名称"
+  start_time: null
+  end_time: null
+  last_update: null
+
+# 当前阶段信息
+current_phase:
+  id: null
+  name: null
+  status: "pending"           # pending | in_progress | completed | skipped
+  start_time: null
+  end_time: null
+  notes: []
+
+# 阶段定义和状态
+phases:
+  - id: "interview"
+    name: "需求访谈"
+    command: "/interview"
+    description: "深入理解项目需求和用户期望"
+    depends: []
+    status: "pending"
+    start_time: null
+    end_time: null
+
+  - id: "spec"
+    name: "规格设计"
+    command: "/spec"
+    description: "设计系统架构，制定技术选型"
+    depends: ["interview"]
+    status: "pending"
+    start_time: null
+    end_time: null
+
+  - id: "plan"
+    name: "实现计划"
+    command: "/plan"
+    description: "拆解任务清单，识别依赖关系"
+    depends: ["spec"]
+    status: "pending"
+    start_time: null
+    end_time: null
+
+  - id: "code"
+    name: "编码实现"
+    command: "/code"
+    description: "按计划实现功能"
+    depends: ["plan"]
+    status: "pending"
+    start_time: null
+    end_time: null
+
+  - id: "test"
+    name: "测试验证"
+    command: "/test"
+    description: "生成并执行测试"
+    depends: ["code"]
+    status: "pending"
+    start_time: null
+    end_time: null
+
+  - id: "review"
+    name: "代码审查"
+    command: "/review"
+    description: "代码质量检查和安全审计"
+    depends: ["test"]
+    status: "pending"
+    start_time: null
+    end_time: null
+
+  - id: "package"
+    name: "打包交付"
+    command: "/package"
+    description: "构建项目，生成交付包"
+    depends: ["review"]
+    status: "pending"
+    start_time: null
+    end_time: null
+
+  - id: "optimize"
+    name: "迭代优化"
+    command: "/reflect"
+    description: "分析项目，提取可复用模式"
+    depends: ["package"]
+    status: "pending"
+    start_time: null
+    end_time: null
+
+# 版本信息
+version: "1.0"

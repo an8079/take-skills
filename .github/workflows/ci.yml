@@ -1,0 +1,140 @@
+# CI/CD 流水线 - 跨平台兼容性测试
+# 执行 Windows/macOS/Linux 三平台测试
+
+name: Cross-Platform CI
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  # 测试记忆系统
+  test-memory-system:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        node-version: [18.x.x]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run memory system tests
+        run: node scripts/test-memory-system.js
+        shell: bash
+
+  # 测试跨平台兼容性
+  test-cross-platform:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        node-version: [18.x.x]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run cross-platform tests
+        run: node scripts/test-cross-platform.js
+        shell: bash
+
+  # 测试 Agent 边界硬化
+  test-agent-boundaries:
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+        node-version: [18.x.x]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v3
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Run agent boundary tests
+        run: node scripts/test-agent-boundaries.js
+        shell: bash
+
+  # 完整测试套件
+  test-all:
+    needs: [test-memory-system, test-cross-platform, test-agent-boundaries]
+    strategy:
+      matrix:
+        os: [windows-latest, macos-latest, ubuntu-latest]
+
+    runs-on: ${{ matrix.os }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Run all tests
+        run: |
+          echo "Running memory system tests..."
+          node scripts/test-memory-system.js
+
+          echo "Running cross-platform tests..."
+          node scripts/test-cross-platform.js
+
+          echo "Running agent boundary tests..."
+          node scripts/test-agent-boundaries.js
+
+          echo "All tests passed!"
+        shell: bash
+
+  # 构建检查
+  build-check:
+    needs: [test-all]
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js 18.x
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18.x'
+
+      - name: Verify project structure
+
+        run: |
+          # 检查关键文件存在
+          test -f "CLAUDE.md" || exit 1
+          test -f "hooks/hooks.json" || exit 1
+          test -d "memory-bank" || exit 1
+          test -d "agents" || exit 1
+          test -d "scripts" || exit 1
+
+          # 检查脚本可执行
+          test -x "scripts/cross-platform-logger.js" || exit 1
+          test -x "scripts/check-console-log.js" || exit 1
+          test -x "scripts/session-logger.js" || exit 1
+
+          echo "Build check passed!"

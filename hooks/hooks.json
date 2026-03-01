@@ -1,0 +1,94 @@
+{
+  "PreToolUse": [
+    {
+      "matcher": "tool == \"Edit\" || tool == \"Write\"",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/scope-manager.js check \"$file_path\""
+        }
+      ]
+    },
+    {
+      "matcher": "tool == \"Bash\" && $tool_input.command matches \"(rm|del|rmdir|mkdir|move|copy)\"",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/scope-manager.js check \"$tool_input.command\""
+        }
+      ]
+    }
+  ],
+  "PostToolUse": [
+    {
+      "matcher": "tool == \"Edit\" && tool_input.file_path matches \"\\\\.(ts|tsx|js|jsx)$\"",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/check-console-log.js \"$file_path\""
+        }
+      ]
+    },
+    {
+      "matcher": "tool == \"Bash\"",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/cross-platform-logger.js --event=post-bash --command=\"$tool_input.command\""
+        }
+      ]
+    }
+  ],
+  "Start": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/session-logger.js --event=start"
+        },
+        {
+          "type": "command",
+          "command": "node scripts/phase-manager.js status"
+        },
+        {
+          "type": "command",
+          "command": "node scripts/scope-manager.js show"
+        }
+      ]
+    }
+  ],
+  "Stop": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/session-logger.js --event=stop"
+        }
+      ]
+    }
+  ],
+  "PreCommandUse": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/phase-validator.js \"$command\""
+        }
+      ]
+    }
+  ],
+  "PostCommandUse": [
+    {
+      "matcher": "*",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/phase-manager.js next"
+        }
+      ]
+    }
+  ]
+}

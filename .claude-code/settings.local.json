@@ -1,0 +1,17 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(dir:*)",
+      "Bash(echo:*)",
+      "Bash(node:*)",
+      "Bash(pip:*)",
+      "Bash(python -c:*)",
+      "Bash(curl:*)",
+      "Bash(python:*)",
+      "WebFetch(domain:localhost)",
+      "Bash(timeout:*)",
+      "Bash(chcp:*)",
+      "Bash(del:*)"
+    ]
+  }
+}
