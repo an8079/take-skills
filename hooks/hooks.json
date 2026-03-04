@@ -1,6 +1,15 @@
 {
   "PreToolUse": [
     {
+      "matcher": "tool == \"Task\"",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/agent-boundary-guard.js validate \"$tool_input.name\""
+        }
+      ]
+    },
+    {
       "matcher": "tool == \"Edit\" || tool == \"Write\"",
       "hooks": [
         {
@@ -17,6 +26,15 @@
           "command": "node scripts/scope-manager.js check \"$tool_input.command\""
         }
       ]
+    },
+    {
+      "matcher": "tool == \"Bash\" && $tool_input.command matches \"(git|mkdir|rm)\"",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/architecture-validator.js check \"$tool_input.command\""
+        }
+      ]
     }
   ],
   "PostToolUse": [
@@ -26,6 +44,10 @@
         {
           "type": "command",
           "command": "node scripts/check-console-log.js \"$file_path\""
+        },
+        {
+          "type": "command",
+          "command": "node scripts/security-scanner.js keys \"$file_path\""
         }
       ]
     },
@@ -37,12 +59,29 @@
           "command": "node scripts/cross-platform-logger.js --event=post-bash --command=\"$tool_input.command\""
         }
       ]
+    },
+    {
+      "matcher": "tool == \"Write\"",
+      "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/code-entropy.js scan \"$file_path\""
+        },
+        {
+          "type": "command",
+          "command": "node scripts/security-scanner.js scan \"$file_path\""
+        }
+      ]
     }
   ],
   "Start": [
     {
       "matcher": "*",
       "hooks": [
+        {
+          "type": "command",
+          "command": "node scripts/flow-recovery.js check"
+        },
         {
           "type": "command",
           "command": "node scripts/session-logger.js --event=start"
@@ -54,6 +93,10 @@
         {
           "type": "command",
           "command": "node scripts/scope-manager.js show"
+        },
+        {
+          "type": "command",
+          "command": "node scripts/mcp-router.js enable"
         }
       ]
     }
@@ -65,6 +108,30 @@
         {
           "type": "command",
           "command": "node scripts/session-logger.js --event=stop"
+        },
+        {
+          "type": "command",
+          "command": "node scripts/memory-manager.js validate"
+        },
+        {
+          "type": "command",
+          "command": "node scripts/memory-manager.js check memory-bank/项目进展.md"
+        },
+        {
+          "type": "command",
+          "command": "node scripts/memory-manager.js check memory-bank/学习记录.md"
+        },
+        {
+          "type": "command",
+          "command": "node scripts/memory-manager.js check memory-bank/技术决策.md"
+        },
+        {
+          "type": "command",
+          "command": "node scripts/security-scanner.js scan src"
+        },
+        {
+          "type": "command",
+          "command": "node scripts/code-entropy.js cleanup"
         }
       ]
     }
