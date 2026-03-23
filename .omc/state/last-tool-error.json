@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"powershell -Command \\\"Remove-Item -Path 'mcp-configs','rules','scripts/self-iterate' -Recurse -Force -ErrorAction SilentlyContinue; Get-ChildItem -Path 'mcp-configs','rules','scripts/self-...",
-  "error": "Exit code 1",
-  "timestamp": "2026-03-23T05:33:33.324Z",
-  "retry_count": 1
-}
