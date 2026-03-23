@@ -89,10 +89,82 @@
       "status": "completed",
       "completed_at": "2026-03-23T05:06:26.179Z",
       "duration_ms": 16141
+    },
+    {
+      "agent_id": "a3aaa17c486c0b790",
+      "agent_type": "agent-creator",
+      "started_at": "2026-03-23T05:06:39.613Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:06:46.880Z",
+      "duration_ms": 7267
+    },
+    {
+      "agent_id": "a912d74492264d865",
+      "agent_type": "doc-creator",
+      "started_at": "2026-03-23T05:06:59.296Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:07:13.703Z",
+      "duration_ms": 14407
+    },
+    {
+      "agent_id": "a8dedf2666edc42d1",
+      "agent_type": "cleaner",
+      "started_at": "2026-03-23T05:32:22.213Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:33:54.481Z",
+      "duration_ms": 92268
+    },
+    {
+      "agent_id": "ae8648d137593ec3d",
+      "agent_type": "architect",
+      "started_at": "2026-03-23T05:32:27.871Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:33:22.856Z",
+      "duration_ms": 54985
+    },
+    {
+      "agent_id": "a7b05cb9215e0a75a",
+      "agent_type": "coder",
+      "started_at": "2026-03-23T05:32:33.180Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:35:13.557Z",
+      "duration_ms": 160377
+    },
+    {
+      "agent_id": "a3d918149163a3faa",
+      "agent_type": "tester",
+      "started_at": "2026-03-23T05:32:37.679Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:34:35.148Z",
+      "duration_ms": 117469
+    },
+    {
+      "agent_id": "a854993cc330eeaaf",
+      "agent_type": "writer",
+      "started_at": "2026-03-23T05:32:42.813Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:36:11.766Z",
+      "duration_ms": 208953
+    },
+    {
+      "agent_id": "ae67909d1e12b3fbc",
+      "agent_type": "cleaner",
+      "started_at": "2026-03-23T05:33:54.898Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:34:03.140Z",
+      "duration_ms": 8242
     }
   ],
-  "total_spawned": 8,
-  "total_completed": 10,
+  "total_spawned": 16,
+  "total_completed": 18,
   "total_failed": 0,
-  "last_updated": "2026-03-23T05:06:27.779Z"
+  "last_updated": "2026-03-23T05:36:11.899Z"
 }

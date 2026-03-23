@@ -166,8 +166,8 @@
   "hotPaths": [
     {
       "path": "",
-      "accessCount": 22,
-      "lastAccessed": 1774242346555,
+      "accessCount": 27,
+      "lastAccessed": 1774244157583,
       "type": "directory"
     },
     {
@@ -339,6 +339,12 @@
       "type": "file"
     },
     {
+      "path": "commands",
+      "accessCount": 2,
+      "lastAccessed": 1774243997312,
+      "type": "directory"
+    },
+    {
       "path": "C:\\Users\\80795\\.claude\\plugins\\cache\\omc",
       "accessCount": 1,
       "lastAccessed": 1774233803484,
@@ -378,12 +384,6 @@
       "path": "agents",
       "accessCount": 1,
       "lastAccessed": 1774233920481,
-      "type": "directory"
-    },
-    {
-      "path": "commands",
-      "accessCount": 1,
-      "lastAccessed": 1774234827958,
       "type": "directory"
     },
     {

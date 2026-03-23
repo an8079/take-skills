@@ -1,7 +1,7 @@
 {
   "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"git add -A && git commit -m \\\"$(cat <<'EOF'\\nfeat: complete claude-studio v3.0.0 release\\n\\nAdd 25 commands, 10 expert agents, plugin config, and CI/CD\\n\\nCommands: deep-interview, auto-in...",
-  "error": "Exit code 128\nwarning: in the working copy of '.claude/settings.local.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'README.md', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.claude-plugin/marketplace.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of '.claude-plugin/plugin.json', LF will be replaced by CRLF the next time Git touches it\nwarning: in the worki...",
-  "timestamp": "2026-03-23T05:06:34.254Z",
+  "tool_input_preview": "{\"command\":\"powershell -Command \\\"Remove-Item -Path 'mcp-configs','rules','scripts/self-iterate' -Recurse -Force -ErrorAction SilentlyContinue; Get-ChildItem -Path 'mcp-configs','rules','scripts/self-...",
+  "error": "Exit code 1",
+  "timestamp": "2026-03-23T05:33:33.324Z",
   "retry_count": 1
 }
