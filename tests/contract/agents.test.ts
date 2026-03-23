@@ -7,6 +7,8 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'fs';
 import path from 'path';
+import { AGENTS } from '../../src/agents/index.js';
+import { DEFAULT_STAGES } from '../../src/pipeline/index.js';
 
 const SKILLS_AGENTS_DIR = path.resolve(process.cwd(), 'skills/agents');
 const SRC_AGENTS_DIR = path.resolve(process.cwd(), 'src/agents');
@@ -84,6 +86,19 @@ describe('Agent Contract Tests', () => {
 
       // Check for AgentDefinition interface with metadata
       expect(content).toContain('metadata: AgentPromptMetadata');
+    });
+
+    it('should expose enough built-in agents to satisfy the documented expert roster', () => {
+      expect(Object.keys(AGENTS).length).toBeGreaterThanOrEqual(10);
+    });
+
+    it('all pipeline stage agents must exist in the built-in registry', () => {
+      for (const stage of DEFAULT_STAGES) {
+        expect(
+          AGENTS[stage.agent],
+          `Pipeline stage ${stage.id} references unknown agent ${stage.agent}`
+        ).toBeDefined();
+      }
     });
   });
 });

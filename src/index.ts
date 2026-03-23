@@ -20,8 +20,8 @@ import { AGENTS, getAgentDefinitions, getAgent, getAvailableAgents, getDefaultMo
 export { AGENTS, getAgentDefinitions, getAgent, getAvailableAgents, getDefaultModelForCategory, isGptModel, isClaudeModel, createAgent };
 
 // Commands
-import { expandCommand, expandCommandPrompt, getCommand, getAllCommands, listCommands, commandExists, expandCommands, getBuiltInCommand, listBuiltInCommands, expandBuiltInCommand, expandPipeline } from "./commands/index.js";
-export { expandCommand, expandCommandPrompt, getCommand, getAllCommands, listCommands, commandExists, expandCommands, getBuiltInCommand, listBuiltInCommands, expandBuiltInCommand, expandPipeline };
+import { expandCommand, expandCommandPrompt, getCommand, getAllCommands, listCommands, commandExists, expandCommands, getBuiltInCommand, listBuiltInCommands, expandBuiltInCommand, expandPipeline, getBuiltInCommandsDir, getCommandSearchPaths, getProjectCommandsDir } from "./commands/index.js";
+export { expandCommand, expandCommandPrompt, getCommand, getAllCommands, listCommands, commandExists, expandCommands, getBuiltInCommand, listBuiltInCommands, expandBuiltInCommand, expandPipeline, getBuiltInCommandsDir, getCommandSearchPaths, getProjectCommandsDir };
 
 // Pipeline
 import { Pipeline, DEFAULT_STAGES } from "./pipeline/index.js";

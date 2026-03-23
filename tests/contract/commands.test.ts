@@ -8,6 +8,11 @@
 import { describe, it, expect } from 'vitest';
 import fs from 'fs';
 import path from 'path';
+import {
+  getBuiltInCommandsDir,
+  getCommand,
+  getCommandSearchPaths,
+} from '../../src/commands/index.js';
 
 const COMMANDS_DIR = path.resolve(process.cwd(), 'commands');
 
@@ -33,6 +38,18 @@ describe('Command Contract Tests', () => {
         expect(fs.existsSync(filePath), `Command file ${filePath} must exist`).toBe(true);
       });
     }
+  });
+
+  describe('Built-in command registry must be wired to the shipped repository commands', () => {
+    it('should include the built-in commands directory in search paths', () => {
+      expect(getCommandSearchPaths()).toContain(getBuiltInCommandsDir());
+    });
+
+    it('should resolve a shipped command from the repository command set', () => {
+      const command = getCommand('autopilot');
+      expect(command).not.toBeNull();
+      expect(command?.filePath.includes(`${path.sep}commands${path.sep}`)).toBe(true);
+    });
   });
 
   describe('All command files must have valid frontmatter', () => {

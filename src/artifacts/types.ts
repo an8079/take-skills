@@ -21,10 +21,12 @@ export type ArtifactType =
   | 'PROJECT'
   | 'REQUIREMENTS'
   | 'SPEC'
+  | 'PLAN'
   | 'ROADMAP'
   | `PHASE-${number}-CONTEXT`
   | `PHASE-${number}-PLAN`
   | 'EXECUTION-STATE'
+  | 'EXECUTION-LOG'
   | 'VERIFICATION'
   | 'QA-REPORT'
   | 'RELEASE'
@@ -86,6 +88,13 @@ export interface SpecArtifact extends BaseArtifact {
 }
 
 /**
+ * Plan artifact - PLAN.md
+ */
+export interface PlanArtifact extends BaseArtifact {
+  frontmatter: ArtifactFrontmatter;
+}
+
+/**
  * Roadmap artifact - ROADMAP.md
  */
 export interface RoadmapArtifact extends BaseArtifact {
@@ -116,6 +125,13 @@ export interface PhasePlanArtifact extends BaseArtifact {
 export interface ExecutionStateArtifact extends BaseArtifact {
   frontmatter: ArtifactFrontmatter;
   content: Record<string, unknown>;
+}
+
+/**
+ * Execution log artifact - EXECUTION-LOG.md
+ */
+export interface ExecutionLogArtifact extends BaseArtifact {
+  frontmatter: ArtifactFrontmatter;
 }
 
 /**
@@ -153,10 +169,12 @@ export type Artifact =
   | ProjectArtifact
   | RequirementsArtifact
   | SpecArtifact
+  | PlanArtifact
   | RoadmapArtifact
   | PhaseContextArtifact
   | PhasePlanArtifact
   | ExecutionStateArtifact
+  | ExecutionLogArtifact
   | VerificationArtifact
   | QAReportArtifact
   | ReleaseArtifact
@@ -218,10 +236,12 @@ export const ARTIFACT_FILE_PATTERNS: Record<ArtifactType, RegExp> = {
   'PROJECT': /^PROJECT\.md$/,
   'REQUIREMENTS': /^REQUIREMENTS\.md$/,
   'SPEC': /^SPEC\.md$/,
+  'PLAN': /^PLAN\.md$/,
   'ROADMAP': /^ROADMAP\.md$/,
   'PHASE-0-CONTEXT': /^PHASE-0-CONTEXT\.md$/,
   'PHASE-0-PLAN': /^PHASE-0-PLAN\.md$/,
   'EXECUTION-STATE': /^EXECUTION-STATE\.json$/,
+  'EXECUTION-LOG': /^EXECUTION-LOG\.md$/,
   'VERIFICATION': /^VERIFICATION\.md$/,
   'QA-REPORT': /^QA-REPORT\.md$/,
   'RELEASE': /^RELEASE\.md$/,

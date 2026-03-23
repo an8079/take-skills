@@ -41,6 +41,8 @@ export interface StageContext {
   metadata?: Record<string, unknown>;
 }
 
+import type { StageGate } from "../phase-manager/index.js";
+
 /**
  * Pipeline stage definition
  */
@@ -53,6 +55,15 @@ export interface StageDefinition {
   dependsOn: PipelineStage[];
   optional?: boolean;
   timeout?: number; // ms
+  /**
+   * Gate to check before executing this stage.
+   * If blocking criteria fail, stage execution is blocked and pipeline halts.
+   */
+  gate?: StageGate;
+  /**
+   * Phase ID for governance tracking (maps stage to a governance phase)
+   */
+  phaseId?: string;
 }
 
 /**

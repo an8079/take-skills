@@ -18,7 +18,7 @@
 | **架构与设计** | /structure_thinking（架构分析）、/rag（RAG设计） |
 | **测试团队** | /test-teams（3测试员+1资深）、/team（动态组队） |
 | **执行引擎** | /autopilot、/ralph、/ultrawork、/ultraqa |
-| **10+ 专家 Agent** | 软件架构师、安全工程师、代码审查员等 |
+| **12+ 内置 Agent** | interviewer、architect、planner、executor、qa-tester、code-reviewer 等 |
 | **通知系统** | /notify（集成 claude-notifications-go） |
 | **激将激励** | /pua（竞争压力激励） |
 
@@ -82,7 +82,7 @@ cp -r commands/*.md ~/.claude/commands/
 
 | 命令 | 用途 | 特点 |
 |------|------|------|
-| `/autopilot` | 全自动执行 | 5阶段管道 |
+| `/autopilot` | 全自动执行 | 8阶段管道 |
 | `/ralph` | 持久循环 | 包含ultrawork |
 | `/ultrawork` | 最大并行 | 批量修复重构 |
 | `/ultraqa` | QA循环 | 测试→验证→修复 |

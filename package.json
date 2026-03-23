@@ -43,7 +43,8 @@
     "lint": "eslint src",
     "format": "prettier --write src/**/*.ts",
     "typecheck": "tsc --noEmit",
-    "prepublishOnly": "npm run build",
+    "verify": "npm run typecheck && npm run build && npm run test:run",
+    "prepublishOnly": "npm run verify",
     "release": "node scripts/release.mjs"
   },
   "dependencies": {

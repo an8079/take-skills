@@ -5,11 +5,19 @@
  */
 
 import { readFileSync, existsSync, readdirSync } from "fs";
-import { join } from "path";
+import { dirname, join, resolve } from "path";
+import { fileURLToPath } from "url";
 import type { CommandInfo, ExpandedCommand } from "../types/index.js";
 
 /**
- * Get the commands directory path
+ * Normalize line endings so frontmatter parsing works on Windows and Unix.
+ */
+function normalizeLineEndings(content: string): string {
+  return content.replace(/\r\n/g, "\n");
+}
+
+/**
+ * Get the user commands directory path.
  */
 export function getCommandsDir(): string {
   const homeDir = process.env.HOME || process.env.USERPROFILE || "";
@@ -17,13 +25,36 @@ export function getCommandsDir(): string {
 }
 
 /**
+ * Get the project-local commands directory path.
+ */
+export function getProjectCommandsDir(): string {
+  return join(process.cwd(), ".claude", "commands");
+}
+
+/**
+ * Get the built-in commands shipped with claude-studio.
+ */
+export function getBuiltInCommandsDir(): string {
+  const moduleDir = dirname(fileURLToPath(import.meta.url));
+  return resolve(moduleDir, "../../commands");
+}
+
+/**
+ * Get command directories in override order.
+ */
+export function getCommandSearchPaths(): string[] {
+  return [getProjectCommandsDir(), getCommandsDir(), getBuiltInCommandsDir()];
+}
+
+/**
  * Parse command frontmatter and content
  */
 function parseCommandFile(content: string): { description: string; template: string } {
-  const frontmatterMatch = content.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
+  const normalized = normalizeLineEndings(content);
+  const frontmatterMatch = normalized.match(/^---\n([\s\S]*?)\n---\n([\s\S]*)$/);
 
   if (!frontmatterMatch) {
-    return { description: "", template: content };
+    return { description: "", template: normalized };
   }
 
   const frontmatter = frontmatterMatch[1];
@@ -39,56 +70,67 @@ function parseCommandFile(content: string): { description: string; template: str
  * Get a specific command by name
  */
 export function getCommand(name: string): CommandInfo | null {
-  const commandsDir = getCommandsDir();
-  const filePath = join(commandsDir, `${name}.md`);
+  for (const commandsDir of getCommandSearchPaths()) {
+    const filePath = join(commandsDir, `${name}.md`);
 
-  if (!existsSync(filePath)) {
-    return null;
+    if (!existsSync(filePath)) {
+      continue;
+    }
+
+    try {
+      const content = readFileSync(filePath, "utf-8");
+      const { description, template } = parseCommandFile(content);
+
+      return {
+        name,
+        description,
+        template,
+        filePath,
+      };
+    } catch (error) {
+      console.error(`Error reading command ${name}:`, error);
+      return null;
+    }
   }
 
-  try {
-    const content = readFileSync(filePath, "utf-8");
-    const { description, template } = parseCommandFile(content);
-
-    return {
-      name,
-      description,
-      template,
-      filePath,
-    };
-  } catch (error) {
-    console.error(`Error reading command ${name}:`, error);
-    return null;
-  }
+  return null;
 }
 
 /**
  * Get all available commands
  */
 export function getAllCommands(): CommandInfo[] {
-  const commandsDir = getCommandsDir();
+  const commands: CommandInfo[] = [];
+  const seen = new Set<string>();
 
-  if (!existsSync(commandsDir)) {
-    return [];
-  }
-
-  try {
-    const files = readdirSync(commandsDir).filter((f) => f.endsWith(".md"));
-    const commands: CommandInfo[] = [];
-
-    for (const file of files) {
-      const name = file.replace(".md", "");
-      const command = getCommand(name);
-      if (command) {
-        commands.push(command);
-      }
+  for (const commandsDir of getCommandSearchPaths()) {
+    if (!existsSync(commandsDir)) {
+      continue;
     }
 
-    return commands;
-  } catch (error) {
-    console.error("Error listing commands:", error);
-    return [];
+    try {
+      const files = readdirSync(commandsDir).filter(
+        (f) => f.endsWith(".md") && f !== "COMMANDS_INDEX.md"
+      );
+
+      for (const file of files) {
+        const name = file.replace(".md", "");
+        if (seen.has(name)) {
+          continue;
+        }
+
+        const command = getCommand(name);
+        if (command) {
+          commands.push(command);
+          seen.add(name);
+        }
+      }
+    } catch (error) {
+      console.error(`Error listing commands from ${commandsDir}:`, error);
+    }
   }
+
+  return commands;
 }
 
 /**
@@ -184,6 +226,24 @@ const BUILT_IN_COMMANDS: BuiltInCommand[] = [
     description: "Code review mode",
     promptTemplate:
       "You are reviewing code. Examine: $ARGUMENTS. Provide detailed feedback on correctness, style, and potential improvements.",
+  },
+  {
+    name: "test",
+    description: "Test and QA mode",
+    promptTemplate:
+      "You are validating the implementation. Run or describe the most relevant test and QA steps for: $ARGUMENTS. Summarize failures and evidence clearly.",
+  },
+  {
+    name: "deploy",
+    description: "Deployment mode",
+    promptTemplate:
+      "You are preparing and validating a deployment for: $ARGUMENTS. Check prerequisites, rollout steps, and rollback guidance before proceeding.",
+  },
+  {
+    name: "canary",
+    description: "Canary release mode",
+    promptTemplate:
+      "You are supervising a canary release for: $ARGUMENTS. Define traffic shift, health checks, and abort conditions before rollout.",
   },
   {
     name: "debug",
