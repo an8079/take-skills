@@ -12,7 +12,7 @@ export type ModelType = "sonnet" | "opus" | "haiku" | "inherit";
 /**
  * Cost tier for agent usage
  */
-export type AgentCost = "FREE" | "CHEAP" | "EXPENSIVE";
+export type AgentCost = "FREE" | "CHEAP" | "EXPENSIVE" | "MEDIUM";
 
 /**
  * Agent category for routing and grouping

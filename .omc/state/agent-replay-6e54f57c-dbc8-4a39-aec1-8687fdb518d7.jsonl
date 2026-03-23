@@ -1,0 +1,16 @@
+{"t":0,"agent":"aca7517","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"aecced1","agent_type":"engineer","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"ac399f8","agent_type":"闭环专家","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"a8c583a","agent_type":"方法论专家","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"acbb03f","agent_type":"cleaner","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"a108810","agent_type":"reviewer","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"ade367f","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"acbb03f","agent_type":"cleaner","event":"agent_stop","success":true,"duration_ms":34999}
+{"t":0,"agent":"aec7b5d","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"aecced1","agent_type":"engineer","event":"agent_stop","success":true,"duration_ms":210729}
+{"t":0,"agent":"ab2fa64","agent_type":"engineer","event":"agent_start","parent_mode":"none"}
+{"t":0,"agent":"ab2fa64","agent_type":"engineer","event":"agent_stop","success":true,"duration_ms":10052}
+{"t":0,"agent":"af8b726","agent_type":"unknown","event":"agent_stop","success":true}
+{"t":0,"agent":"ac399f8","agent_type":"闭环专家","event":"agent_stop","success":true,"duration_ms":238446}
+{"t":0,"agent":"a8c583a","agent_type":"方法论专家","event":"agent_stop","success":true,"duration_ms":305387}
+{"t":0,"agent":"a108810","agent_type":"reviewer","event":"agent_stop","success":true,"duration_ms":705721}

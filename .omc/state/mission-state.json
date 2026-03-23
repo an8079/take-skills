@@ -1,4 +1,151 @@
 {
-  "updatedAt": "2026-03-23T05:49:23.110Z",
-  "missions": []
+  "updatedAt": "2026-03-23T06:09:00.676Z",
+  "missions": [
+    {
+      "id": "session:6e54f57c-dbc8-4a39-aec1-8687fdb518d7:none",
+      "source": "session",
+      "name": "none",
+      "objective": "Session mission",
+      "createdAt": "2026-03-23T05:56:53.603Z",
+      "updatedAt": "2026-03-23T06:09:00.676Z",
+      "status": "done",
+      "workerCount": 6,
+      "taskCounts": {
+        "total": 6,
+        "pending": 0,
+        "blocked": 0,
+        "inProgress": 0,
+        "completed": 6,
+        "failed": 0
+      },
+      "agents": [
+        {
+          "name": "engineer:aecced1",
+          "role": "engineer",
+          "ownership": "aecced162ead96ec5",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-03-23T06:00:52.394Z"
+        },
+        {
+          "name": "闭环专家:ac399f8",
+          "role": "闭环专家",
+          "ownership": "ac399f86f94a13949",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-03-23T06:00:57.767Z"
+        },
+        {
+          "name": "方法论专家:a8c583a",
+          "role": "方法论专家",
+          "ownership": "a8c583ae3e5c7867a",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-03-23T06:02:10.135Z"
+        },
+        {
+          "name": "cleaner:acbb03f",
+          "role": "cleaner",
+          "ownership": "acbb03f7eb3110622",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-03-23T05:57:45.130Z"
+        },
+        {
+          "name": "reviewer:a108810",
+          "role": "reviewer",
+          "ownership": "a1088100b4e6c4644",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-03-23T06:09:00.676Z"
+        },
+        {
+          "name": "engineer:ab2fa64",
+          "role": "engineer",
+          "ownership": "ab2fa645b8aecb792",
+          "status": "done",
+          "currentStep": null,
+          "latestUpdate": "completed",
+          "completedSummary": null,
+          "updatedAt": "2026-03-23T06:00:34.886Z"
+        }
+      ],
+      "timeline": [
+        {
+          "id": "session-stop:aec7b5db3236983e7:2026-03-23T05:57:58.248Z",
+          "at": "2026-03-23T05:57:58.248Z",
+          "kind": "completion",
+          "agent": "engineer:aecced1",
+          "detail": "completed",
+          "sourceKey": "session-stop:aec7b5db3236983e7"
+        },
+        {
+          "id": "session-stop:aecced162ead96ec5:2026-03-23T06:00:24.332Z",
+          "at": "2026-03-23T06:00:24.332Z",
+          "kind": "completion",
+          "agent": "engineer:aecced1",
+          "detail": "completed",
+          "sourceKey": "session-stop:aecced162ead96ec5"
+        },
+        {
+          "id": "session-start:ab2fa645b8aecb792:2026-03-23T06:00:24.834Z",
+          "at": "2026-03-23T06:00:24.834Z",
+          "kind": "update",
+          "agent": "engineer:ab2fa64",
+          "detail": "started engineer:ab2fa64",
+          "sourceKey": "session-start:ab2fa645b8aecb792"
+        },
+        {
+          "id": "session-stop:ab2fa645b8aecb792:2026-03-23T06:00:34.886Z",
+          "at": "2026-03-23T06:00:34.886Z",
+          "kind": "completion",
+          "agent": "engineer:ab2fa64",
+          "detail": "completed",
+          "sourceKey": "session-stop:ab2fa645b8aecb792"
+        },
+        {
+          "id": "session-stop:af8b7264432c56c2e:2026-03-23T06:00:52.394Z",
+          "at": "2026-03-23T06:00:52.394Z",
+          "kind": "completion",
+          "agent": "engineer:aecced1",
+          "detail": "completed",
+          "sourceKey": "session-stop:af8b7264432c56c2e"
+        },
+        {
+          "id": "session-stop:ac399f86f94a13949:2026-03-23T06:00:57.767Z",
+          "at": "2026-03-23T06:00:57.767Z",
+          "kind": "completion",
+          "agent": "闭环专家:ac399f8",
+          "detail": "completed",
+          "sourceKey": "session-stop:ac399f86f94a13949"
+        },
+        {
+          "id": "session-stop:a8c583ae3e5c7867a:2026-03-23T06:02:10.135Z",
+          "at": "2026-03-23T06:02:10.135Z",
+          "kind": "completion",
+          "agent": "方法论专家:a8c583a",
+          "detail": "completed",
+          "sourceKey": "session-stop:a8c583ae3e5c7867a"
+        },
+        {
+          "id": "session-stop:a1088100b4e6c4644:2026-03-23T06:09:00.676Z",
+          "at": "2026-03-23T06:09:00.676Z",
+          "kind": "completion",
+          "agent": "reviewer:a108810",
+          "detail": "completed",
+          "sourceKey": "session-stop:a1088100b4e6c4644"
+        }
+      ]
+    }
+  ]
 }

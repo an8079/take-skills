@@ -1,0 +1,62 @@
+{
+  "agents": [
+    {
+      "agent_id": "aecced162ead96ec5",
+      "agent_type": "engineer",
+      "started_at": "2026-03-23T05:56:53.603Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T06:00:24.332Z",
+      "duration_ms": 210729
+    },
+    {
+      "agent_id": "ac399f86f94a13949",
+      "agent_type": "闭环专家",
+      "started_at": "2026-03-23T05:56:59.321Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T06:00:57.767Z",
+      "duration_ms": 238446
+    },
+    {
+      "agent_id": "a8c583ae3e5c7867a",
+      "agent_type": "方法论专家",
+      "started_at": "2026-03-23T05:57:04.748Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T06:02:10.135Z",
+      "duration_ms": 305387
+    },
+    {
+      "agent_id": "acbb03f7eb3110622",
+      "agent_type": "cleaner",
+      "started_at": "2026-03-23T05:57:10.131Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:57:45.130Z",
+      "duration_ms": 34999
+    },
+    {
+      "agent_id": "a1088100b4e6c4644",
+      "agent_type": "reviewer",
+      "started_at": "2026-03-23T05:57:14.955Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T06:09:00.676Z",
+      "duration_ms": 705721
+    },
+    {
+      "agent_id": "ab2fa645b8aecb792",
+      "agent_type": "engineer",
+      "started_at": "2026-03-23T06:00:24.834Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T06:00:34.886Z",
+      "duration_ms": 10052
+    }
+  ],
+  "total_spawned": 6,
+  "total_completed": 6,
+  "total_failed": 0,
+  "last_updated": "2026-03-23T06:09:00.809Z"
+}

@@ -71,7 +71,7 @@ export function deepMerge<T extends object>(target: T, source: Partial<T>): T {
       continue;
 
     const sourceValue = source[key];
-    const targetValue = result[key];
+    const targetValue = result[key as string];
 
     if (
       sourceValue !== undefined &&

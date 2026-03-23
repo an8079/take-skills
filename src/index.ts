@@ -3,53 +3,50 @@
  *
  * A multi-agent orchestration system for Claude Code.
  * Provides intelligent delegation, context management, and tool integration.
- *
- * Main features:
- * - Agent orchestration: Delegate tasks to specialized agents
- * - Parallel execution: Background agents run concurrently
- * - LSP/AST tools: IDE-like capabilities for agents
- * - Context management: Auto-injection from configuration files
- * - Command expansion: SDK-compatible slash command utilities
  */
 
 // Types
 export * from "./types/index.js";
+export type { PluginConfig } from "./types/index.js";
 
 // Utils
-export { loadConfig, getDefaultConfig, deepMerge } from "./utils/config.js";
-export { logger, createLogger, setLogLevel, getLogLevel, LogLevel } from "./utils/logger.js";
+import { loadConfig, getDefaultConfig, deepMerge } from "./utils/config.js";
+import { logger, createLogger, setLogLevel, getLogLevel, LogLevel } from "./utils/logger.js";
+export { loadConfig, getDefaultConfig, deepMerge };
+export { logger, createLogger, setLogLevel, getLogLevel, LogLevel };
 
 // Agents
-export {
-  AGENTS,
-  getAgentDefinitions,
-  getAgent,
-  getAvailableAgents,
-  getDefaultModelForCategory,
-  isGptModel,
-  isClaudeModel,
-  createAgent,
-  type AgentDefinition,
-} from "./agents/index.js";
+import { AGENTS, getAgentDefinitions, getAgent, getAvailableAgents, getDefaultModelForCategory, isGptModel, isClaudeModel, createAgent } from "./agents/index.js";
+export { AGENTS, getAgentDefinitions, getAgent, getAvailableAgents, getDefaultModelForCategory, isGptModel, isClaudeModel, createAgent };
 
 // Commands
-export {
-  expandCommand,
-  expandCommandPrompt,
-  getCommand,
-  getAllCommands,
-  listCommands,
-  commandExists,
-  expandCommands,
-  getBuiltInCommand,
-  listBuiltInCommands,
-  expandBuiltInCommand,
-} from "./commands/index.js";
+import { expandCommand, expandCommandPrompt, getCommand, getAllCommands, listCommands, commandExists, expandCommands, getBuiltInCommand, listBuiltInCommands, expandBuiltInCommand, expandPipeline } from "./commands/index.js";
+export { expandCommand, expandCommandPrompt, getCommand, getAllCommands, listCommands, commandExists, expandCommands, getBuiltInCommand, listBuiltInCommands, expandBuiltInCommand, expandPipeline };
+
+// Pipeline
+import { Pipeline, DEFAULT_STAGES } from "./pipeline/index.js";
+export { Pipeline, DEFAULT_STAGES };
+
+// Runner
+import { TaskRunner, DEFAULT_RUNNER_CONFIG } from "./runner/index.js";
+export { TaskRunner, DEFAULT_RUNNER_CONFIG };
+
+// Phase Manager
+import { PhaseStateMachine, STAGE_GATES, PhaseTracker, ApprovalWorkflow } from "./phase-manager/index.js";
+export { PhaseStateMachine, STAGE_GATES, PhaseTracker, ApprovalWorkflow };
+
+// Governance
+import { ProcessController, AuditLog } from "./governance/index.js";
+export { ProcessController, AuditLog };
+
+// Validator
+import { PhaseChecker, DeliverableChecker } from "./validator/index.js";
+export { PhaseChecker, DeliverableChecker };
 
 /**
  * Version information
  */
-export const VERSION = "1.0.0";
+export const VERSION = "3.0.0";
 
 /**
  * Create a session with all agents configured
@@ -57,7 +54,7 @@ export const VERSION = "1.0.0";
 export interface StudioSession {
   agents: Record<string, { description: string; prompt: string; model?: string }>;
   config: import("./types/index.js").PluginConfig;
-  logger: ReturnType<typeof import("./utils/logger.js").createLogger>;
+  logger: ReturnType<typeof createLogger>;
 }
 
 export function createSession(): StudioSession {

@@ -225,3 +225,101 @@ export function expandBuiltInCommand(name: string, args: string = ""): ExpandedC
     description: command.description,
   };
 }
+
+/**
+ * Pipeline command definition
+ */
+export interface PipelineCommand {
+  name: string;
+  stages: PipelineStageCommand[];
+  description: string;
+}
+
+export interface PipelineStageCommand {
+  stage: string;
+  command: string;
+  prompt: string;
+  agent: string;
+}
+
+/**
+ * Full E2E pipeline stages in order
+ */
+const PIPELINE_STAGES: PipelineStageCommand[] = [
+  {
+    stage: "interview",
+    command: "interview",
+    prompt: "You are entering a requirements interview mode. Ask clarifying questions following the 8 dimensions: business understanding, feature boundaries, technical feasibility, data flow, interface contracts, error handling, non-functional requirements, and deployment. Help the user articulate their needs clearly. $ARGUMENTS",
+    agent: "interviewer",
+  },
+  {
+    stage: "spec",
+    command: "spec",
+    prompt: "You are creating a technical specification. Based on the requirements from interview: $ARGUMENTS. Document the architecture, interfaces, data models, and acceptance criteria in detail.",
+    agent: "architect",
+  },
+  {
+    stage: "plan",
+    command: "plan",
+    prompt: "You are creating a task plan. Break down the specification into actionable tasks. Identify P0/P1/P2 priorities, dependencies, and execution order. $ARGUMENTS",
+    agent: "planner",
+  },
+  {
+    stage: "code",
+    command: "code",
+    prompt: "You are implementing code following the plan. Write clean, type-safe, well-tested code. Follow project conventions and ensure all P0 tasks are completed first. $ARGUMENTS",
+    agent: "executor",
+  },
+  {
+    stage: "test",
+    command: "test",
+    prompt: "You are running tests and QA verification. Execute test commands, verify functionality matches spec, and report any failures. $ARGUMENTS",
+    agent: "qa-tester",
+  },
+  {
+    stage: "review",
+    command: "review",
+    prompt: "You are reviewing code for correctness, style, and potential improvements. Examine all changed files, verify test coverage, and provide actionable feedback. $ARGUMENTS",
+    agent: "code-reviewer",
+  },
+  {
+    stage: "deploy",
+    command: "deploy",
+    prompt: "You are deploying the application. Follow deployment procedures, verify environment configuration, and execute deployment commands. $ARGUMENTS",
+    agent: "executor",
+  },
+  {
+    stage: "canary",
+    command: "canary",
+    prompt: "You are managing a canary release. Monitor metrics, gradually shift traffic, and verify stability before full rollout. Report status continuously. $ARGUMENTS",
+    agent: "qa-tester",
+  },
+];
+
+/**
+ * Expand the full E2E pipeline as a sequence of commands
+ */
+export function expandPipeline(args: string = ""): PipelineCommand {
+  return {
+    name: "e2e",
+    description: "Full E2E execution pipeline: interview → spec → plan → code → test → review → deploy → canary",
+    stages: PIPELINE_STAGES.map((s) => ({
+      ...s,
+      prompt: s.prompt.replace(/\$ARGUMENTS/g, args),
+    })),
+  };
+}
+
+/**
+ * Get a specific stage from the pipeline
+ */
+export function getPipelineStage(stageName: string): PipelineStageCommand | null {
+  return PIPELINE_STAGES.find((s) => s.stage === stageName) || null;
+}
+
+/**
+ * Get all pipeline stage names in order
+ */
+export function listPipelineStages(): string[] {
+  return PIPELINE_STAGES.map((s) => s.stage);
+}

@@ -166,26 +166,26 @@
   "hotPaths": [
     {
       "path": "",
-      "accessCount": 27,
-      "lastAccessed": 1774244157583,
+      "accessCount": 35,
+      "lastAccessed": 1774245492294,
       "type": "directory"
     },
     {
       "path": "README.md",
-      "accessCount": 13,
-      "lastAccessed": 1774242248243,
+      "accessCount": 14,
+      "lastAccessed": 1774245492185,
       "type": "file"
     },
     {
       "path": "commands\\plan.md",
-      "accessCount": 4,
-      "lastAccessed": 1774242183937,
+      "accessCount": 5,
+      "lastAccessed": 1774245461855,
       "type": "file"
     },
     {
       "path": "commands\\interview.md",
-      "accessCount": 4,
-      "lastAccessed": 1774242184198,
+      "accessCount": 5,
+      "lastAccessed": 1774245462060,
       "type": "file"
     },
     {

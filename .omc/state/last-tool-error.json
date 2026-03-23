@@ -1,0 +1,7 @@
+{
+  "tool_name": "Bash",
+  "tool_input_preview": "{\"command\":\"cd F:/claude-studio/3.4/claude-studio/claude-studio && npm run typecheck 2>&1\"}",
+  "error": "Exit code 2\n\n> claude-studio@3.0.0 typecheck\n> tsc --noEmit\n\nsrc/index.ts(56,11): error TS2304: Cannot find name 'PluginConfig'.",
+  "timestamp": "2026-03-23T06:26:19.126Z",
+  "retry_count": 3
+}

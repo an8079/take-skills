@@ -1,0 +1,63 @@
+# Source files
+src/
+*.ts
+*.tsx
+!*.d.ts
+
+# Development files
+.env
+.env.*
+.eslintrc*
+.prettierrc*
+vitest.config.*
+tsconfig.json
+
+# Test files
+**/*.test.*
+**/*.spec.*
+**/__tests__/**
+**/__mocks__/**
+
+# Build scripts
+scripts/
+Makefile
+*.sh
+
+# Documentation source
+*.md
+!README.md
+!LICENSE
+
+# CI/CD
+.github/
+
+# Editor directories
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Debug logs
+*.log
+npm-debug.log*
+
+# Temporary files
+tmp/
+temp/
+*.tmp
+
+# Benchmark files
+benchmarks/
+
+# Coverage
+coverage/
+
+# Test scripts referenced in ci.yml
+test-memory-system.js
+test-cross-platform.js
+test-agent-boundaries.js
