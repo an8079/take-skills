@@ -1,0 +1,43 @@
+{
+  "name": "Claude Dev Assistant",
+  "tagline": "Personalized Development Assistant Workflow",
+  "description": "An intelligent development workflow featuring Socratic interviewing, dual-agent debate, expert team coordination, and RAG system design. Built on Claude Code for seamless AI-assisted development.",
+  "longDescription": "Claude Dev Assistant transforms your development workflow with:\n\n- **Socratic Interview Mode**: Deep requirement gathering through guided questioning\n- **Dual-Agent Debate**: Architectural decisions validated through AI debate\n- **Expert Team Coordination**: Specialized agents for architecture, coding, review, and debugging\n- **RAG Design Skills**: Built-in retrieval-augmented generation system design\n- **Phase-Based Workflow**: Structured development from spec to delivery",
+  "categories": ["productivity", "development", "ai", "workflow-automation"],
+  "features": [
+    "Socratic requirement interviewing",
+    "Dual-agent architectural debate",
+    "Multi-agent team coordination",
+    "RAG system design",
+    "TDD workflow support",
+    "Code review automation",
+    "Debug session management"
+  ],
+  "screenshots": [],
+  "author": {
+    "name": "Claude Studio Contributors",
+    "url": "https://github.com/claude-studio"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/claude-studio/claude-studio.git"
+  },
+  "keywords": [
+    "claude",
+    "claude-code",
+    "development",
+    "workflow",
+    "ai-assistant",
+    "socratic-method",
+    "rag",
+    "code-review",
+    "tdd"
+  ],
+  "readme": "README.md",
+  "license": "MIT",
+  "version": "1.0.0",
+  "compatibility": {
+    "claude-code": ">=3.0.0",
+    "node": ">=18.0.0"
+  }
+}

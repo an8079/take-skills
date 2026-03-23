@@ -1,0 +1,98 @@
+{
+  "agents": [
+    {
+      "agent_id": "a3f19b44000c2bb04",
+      "agent_type": "tech-integrator",
+      "started_at": "2026-03-23T05:02:44.409Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:04:46.586Z",
+      "duration_ms": 122177
+    },
+    {
+      "agent_id": "a0a277c9f41fe1299",
+      "agent_type": "project-structurer",
+      "started_at": "2026-03-23T05:02:44.501Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:04:19.077Z",
+      "duration_ms": 94576
+    },
+    {
+      "agent_id": "af3c73d0fec989cae",
+      "agent_type": "release-manager",
+      "started_at": "2026-03-23T05:02:44.766Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:04:22.382Z",
+      "duration_ms": 97616
+    },
+    {
+      "agent_id": "afcd89844ee5a5b8d",
+      "agent_type": "doc-creator",
+      "started_at": "2026-03-23T05:02:44.841Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:06:09.612Z",
+      "duration_ms": 204771
+    },
+    {
+      "agent_id": "a117bdb3591f4f091",
+      "agent_type": "cleaner",
+      "started_at": "2026-03-23T05:03:30.361Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:04:49.070Z",
+      "duration_ms": 78709
+    },
+    {
+      "agent_id": "ab0eb7758c2264685",
+      "agent_type": "cleaner",
+      "started_at": "2026-03-23T05:03:39.710Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:05:09.586Z",
+      "duration_ms": 89876
+    },
+    {
+      "agent_id": "a849549f51a869267",
+      "agent_type": "command-integrator",
+      "started_at": "2026-03-23T05:06:08.829Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:06:19.971Z",
+      "duration_ms": 11142
+    },
+    {
+      "agent_id": "a37870ad6e7b8d8f8",
+      "agent_type": "doc-writer",
+      "started_at": "2026-03-23T05:06:09.037Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:06:27.646Z",
+      "duration_ms": 18609
+    },
+    {
+      "agent_id": "ac0b4469fb4316353",
+      "agent_type": "agent-creator",
+      "started_at": "2026-03-23T05:06:09.829Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:06:21.712Z",
+      "duration_ms": 11883
+    },
+    {
+      "agent_id": "a75a90843dbf29870",
+      "agent_type": "doc-creator",
+      "started_at": "2026-03-23T05:06:10.038Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T05:06:26.179Z",
+      "duration_ms": 16141
+    }
+  ],
+  "total_spawned": 8,
+  "total_completed": 10,
+  "total_failed": 0,
+  "last_updated": "2026-03-23T05:06:27.779Z"
+}

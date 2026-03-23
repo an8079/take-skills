@@ -1,0 +1,469 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1774232452893,
+  "projectRoot": "F:\\claude-studio\\3.4\\claude-studio\\claude-studio",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "docs",
+      "examples",
+      "scripts"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "agents": {
+      "path": "agents",
+      "purpose": null,
+      "fileCount": 6,
+      "lastAccessed": 1774232452855,
+      "keyFiles": [
+        "architect.md",
+        "coder.md",
+        "debug-helper.md",
+        "interviewer.md",
+        "interviewer.md.tmp.29180.1772271616687"
+      ]
+    },
+    "commands": {
+      "path": "commands",
+      "purpose": null,
+      "fileCount": 11,
+      "lastAccessed": 1774232452857,
+      "keyFiles": [
+        "analyze.md",
+        "code.md",
+        "debug.md",
+        "import.md",
+        "interview.md"
+      ]
+    },
+    "contexts": {
+      "path": "contexts",
+      "purpose": null,
+      "fileCount": 4,
+      "lastAccessed": 1774232452857,
+      "keyFiles": [
+        "delivery.md",
+        "dev.md",
+        "research.md",
+        "review.md"
+      ]
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 9,
+      "lastAccessed": 1774232452859,
+      "keyFiles": [
+        "api-template.md",
+        "architecture-template.md",
+        "auto-build-example.md",
+        "AUTO-BUILD-GUIDE.md",
+        "database-schema-template.md"
+      ]
+    },
+    "examples": {
+      "path": "examples",
+      "purpose": "Example code",
+      "fileCount": 2,
+      "lastAccessed": 1774232452859,
+      "keyFiles": [
+        "CLAUDE.md"
+      ]
+    },
+    "hooks": {
+      "path": "hooks",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1774232452860,
+      "keyFiles": [
+        "hooks.json"
+      ]
+    },
+    "mcp-configs": {
+      "path": "mcp-configs",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1774232452860,
+      "keyFiles": [
+        "mcp-servers.json"
+      ]
+    },
+    "memory-bank": {
+      "path": "memory-bank",
+      "purpose": null,
+      "fileCount": 5,
+      "lastAccessed": 1774232452861,
+      "keyFiles": [
+        "任务历史.md",
+        "学习记录.md",
+        "当前任务.md",
+        "技术决策.md",
+        "项目进展.md"
+      ]
+    },
+    "projects": {
+      "path": "projects",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1774232452861,
+      "keyFiles": [
+        "README.md"
+      ]
+    },
+    "rules": {
+      "path": "rules",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1774232452862,
+      "keyFiles": [
+        "architecture-boundary.md"
+      ]
+    },
+    "scripts": {
+      "path": "scripts",
+      "purpose": "Build/utility scripts",
+      "fileCount": 23,
+      "lastAccessed": 1774232452862,
+      "keyFiles": [
+        "agent-boundary-guard.js",
+        "architecture-validator.js",
+        "check-console-log.js",
+        "code-entropy.js",
+        "cross-platform-logger.js"
+      ]
+    },
+    "skills": {
+      "path": "skills",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1774232452863,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "",
+      "accessCount": 22,
+      "lastAccessed": 1774242346555,
+      "type": "directory"
+    },
+    {
+      "path": "README.md",
+      "accessCount": 13,
+      "lastAccessed": 1774242248243,
+      "type": "file"
+    },
+    {
+      "path": "commands\\plan.md",
+      "accessCount": 4,
+      "lastAccessed": 1774242183937,
+      "type": "file"
+    },
+    {
+      "path": "commands\\interview.md",
+      "accessCount": 4,
+      "lastAccessed": 1774242184198,
+      "type": "file"
+    },
+    {
+      "path": "skills",
+      "accessCount": 3,
+      "lastAccessed": 1774242196678,
+      "type": "directory"
+    },
+    {
+      "path": "ARCHITECTURE.md",
+      "accessCount": 3,
+      "lastAccessed": 1774242330185,
+      "type": "file"
+    },
+    {
+      "path": "docs",
+      "accessCount": 2,
+      "lastAccessed": 1774241756892,
+      "type": "directory"
+    },
+    {
+      "path": "commands\\deep-interview.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241762996,
+      "type": "file"
+    },
+    {
+      "path": "commands\\find-product-remind.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241763419,
+      "type": "file"
+    },
+    {
+      "path": "commands\\auto-interview.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241763699,
+      "type": "file"
+    },
+    {
+      "path": "commands\\autopilot.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241764117,
+      "type": "file"
+    },
+    {
+      "path": "commands\\notify.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241764371,
+      "type": "file"
+    },
+    {
+      "path": "commands\\office-hours.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241765469,
+      "type": "file"
+    },
+    {
+      "path": "commands\\rag.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241780674,
+      "type": "file"
+    },
+    {
+      "path": "commands\\pua.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241780875,
+      "type": "file"
+    },
+    {
+      "path": "commands\\ralph.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241780993,
+      "type": "file"
+    },
+    {
+      "path": "commands\\structure_thinking.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241781072,
+      "type": "file"
+    },
+    {
+      "path": "commands\\team.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241781141,
+      "type": "file"
+    },
+    {
+      "path": "commands\\ultraqa.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241781584,
+      "type": "file"
+    },
+    {
+      "path": "commands\\ultrawork.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241781642,
+      "type": "file"
+    },
+    {
+      "path": "commands\\test-teams.md",
+      "accessCount": 2,
+      "lastAccessed": 1774241781754,
+      "type": "file"
+    },
+    {
+      "path": "agents\\interviewer.md",
+      "accessCount": 2,
+      "lastAccessed": 1774242182548,
+      "type": "file"
+    },
+    {
+      "path": "agents\\architect.md",
+      "accessCount": 2,
+      "lastAccessed": 1774242182691,
+      "type": "file"
+    },
+    {
+      "path": "commands\\tdd.md",
+      "accessCount": 2,
+      "lastAccessed": 1774242184120,
+      "type": "file"
+    },
+    {
+      "path": "commands\\test.md",
+      "accessCount": 2,
+      "lastAccessed": 1774242184261,
+      "type": "file"
+    },
+    {
+      "path": "commands\\review.md",
+      "accessCount": 2,
+      "lastAccessed": 1774242184336,
+      "type": "file"
+    },
+    {
+      "path": "commands\\code.md",
+      "accessCount": 2,
+      "lastAccessed": 1774242184461,
+      "type": "file"
+    },
+    {
+      "path": "commands\\spec.md",
+      "accessCount": 2,
+      "lastAccessed": 1774242184524,
+      "type": "file"
+    },
+    {
+      "path": "skills\\agents\\software-architect\\SKILL.md",
+      "accessCount": 2,
+      "lastAccessed": 1774242204739,
+      "type": "file"
+    },
+    {
+      "path": "C:\\Users\\80795\\.claude\\plugins\\cache\\omc",
+      "accessCount": 1,
+      "lastAccessed": 1774233803484,
+      "type": "directory"
+    },
+    {
+      "path": "C:\\Users\\80795\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.0\\skills",
+      "accessCount": 1,
+      "lastAccessed": 1774233806337,
+      "type": "directory"
+    },
+    {
+      "path": "C:\\Users\\80795\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.0\\skills\\ultraqa\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774233813211,
+      "type": "file"
+    },
+    {
+      "path": "C:\\Users\\80795\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.0\\skills\\hud\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774233813301,
+      "type": "file"
+    },
+    {
+      "path": "C:\\Users\\80795\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.0\\skills\\deep-interview\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774233813401,
+      "type": "file"
+    },
+    {
+      "path": "C:\\Users\\80795\\.claude\\plugins\\cache\\omc\\oh-my-claudecode\\4.9.0\\skills\\team\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774233813549,
+      "type": "file"
+    },
+    {
+      "path": "agents",
+      "accessCount": 1,
+      "lastAccessed": 1774233920481,
+      "type": "directory"
+    },
+    {
+      "path": "commands",
+      "accessCount": 1,
+      "lastAccessed": 1774234827958,
+      "type": "directory"
+    },
+    {
+      "path": "skills\\graph-rag\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774240903852,
+      "type": "file"
+    },
+    {
+      "path": "skills\\langgraph-workflows\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774240903979,
+      "type": "file"
+    },
+    {
+      "path": "skills\\rag-design\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774240965305,
+      "type": "file"
+    },
+    {
+      "path": "skills\\notifications\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774241223403,
+      "type": "file"
+    },
+    {
+      "path": "skills\\agents\\senior-developer\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774241571612,
+      "type": "file"
+    },
+    {
+      "path": "skills\\agents\\code-reviewer\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774241572191,
+      "type": "file"
+    },
+    {
+      "path": "skills\\agents\\security-engineer\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774241572740,
+      "type": "file"
+    },
+    {
+      "path": "commands\\analyze.md",
+      "accessCount": 1,
+      "lastAccessed": 1774241762038,
+      "type": "file"
+    },
+    {
+      "path": "commands\\debug.md",
+      "accessCount": 1,
+      "lastAccessed": 1774241763868,
+      "type": "file"
+    },
+    {
+      "path": "commands\\import.md",
+      "accessCount": 1,
+      "lastAccessed": 1774241764567,
+      "type": "file"
+    },
+    {
+      "path": "commands\\scope.md",
+      "accessCount": 1,
+      "lastAccessed": 1774241781817,
+      "type": "file"
+    },
+    {
+      "path": "skills\\agents\\backend-architect\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774241850762,
+      "type": "file"
+    },
+    {
+      "path": "skills\\agents\\frontend-developer\\SKILL.md",
+      "accessCount": 1,
+      "lastAccessed": 1774241851334,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

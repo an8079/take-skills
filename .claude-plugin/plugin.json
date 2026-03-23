@@ -1,0 +1,101 @@
+{
+  "name": "claude-dev-assistant",
+  "description": "个性化开发助手工作流 - 苏格拉底访谈、双Agent辩论、专家团队、RAG设计",
+  "version": "1.0.0",
+  "author": "Claude Studio Contributors",
+  "homepage": "https://github.com/claude-studio/claude-studio",
+  "license": "MIT",
+  "commands": [
+    {
+      "name": "/interview",
+      "description": "苏格拉底式需求访谈",
+      "file": "commands/interview.md"
+    },
+    {
+      "name": "/spec",
+      "description": "技术规格设计",
+      "file": "commands/spec.md"
+    },
+    {
+      "name": "/plan",
+      "description": "任务计划制定",
+      "file": "commands/plan.md"
+    },
+    {
+      "name": "/code",
+      "description": "编码实现",
+      "file": "commands/code.md"
+    },
+    {
+      "name": "/tdd",
+      "description": "TDD测试驱动开发",
+      "file": "commands/tdd.md"
+    },
+    {
+      "name": "/test",
+      "description": "测试验证",
+      "file": "commands/test.md"
+    },
+    {
+      "name": "/review",
+      "description": "代码审查",
+      "file": "commands/review.md"
+    },
+    {
+      "name": "/debug",
+      "description": "调试模式",
+      "file": "commands/debug.md"
+    }
+  ],
+  "agents": [
+    {
+      "name": "interviewer",
+      "description": "需求访谈Agent - 苏格拉底式提问引导",
+      "file": "agents/interviewer.md"
+    },
+    {
+      "name": "architect",
+      "description": "架构设计Agent",
+      "file": "agents/architect.md"
+    },
+    {
+      "name": "coder",
+      "description": "编码实现Agent",
+      "file": "agents/coder.md"
+    },
+    {
+      "name": "reviewer",
+      "description": "代码审查Agent",
+      "file": "agents/reviewer.md"
+    },
+    {
+      "name": "debug-helper",
+      "description": "调试助手Agent",
+      "file": "agents/debug-helper.md"
+    }
+  ],
+  "skills": [
+    {
+      "name": "rag-design",
+      "description": "RAG系统设计技能",
+      "file": "skills/rag-design/SKILL.md"
+    },
+    {
+      "name": "tdd-workflow",
+      "description": "TDD工作流技能",
+      "file": "skills/tdd-workflow/SKILL.md"
+    },
+    {
+      "name": "code-review",
+      "description": "代码审查技能",
+      "file": "skills/code-review/SKILL.md"
+    }
+  ],
+  "hooks": {
+    "pre-command": "hooks/pre-command.js",
+    "post-command": "hooks/post-command.js"
+  },
+  "requires": {
+    "claude-code": ">=3.0.0"
+  }
+}

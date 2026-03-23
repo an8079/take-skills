@@ -1,8 +1,26 @@
 # Claude Code 开发助手配置
 
-> **版本：** v1.0.0 | AI 软件开发助手配置
+[![CI](https://github.com/YOUR_USERNAME/claude-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/claude-studio/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+> **版本：** v3.0.0 | 更新日期：2026-03-23 | 个性化开发助手工作流
 
 基于 Claude Code 的完整开发工作流配置，覆盖需求分析到项目交付的完整流程。
+
+---
+
+## 项目特性
+
+| 特性 | 说明 |
+|------|------|
+| **核心访谈命令** | /deep-interview（苏格拉底式）、/auto-interview（双Agent辩论） |
+| **产品审视命令** | /office-hours（gstack风格）、/find-product-remind（技能推荐） |
+| **架构与设计** | /structure_thinking（架构分析）、/rag（RAG设计） |
+| **测试团队** | /test-teams（3测试员+1资深）、/team（动态组队） |
+| **执行引擎** | /autopilot、/ralph、/ultrawork、/ultraqa |
+| **10+ 专家 Agent** | 软件架构师、安全工程师、代码审查员等 |
+| **通知系统** | /notify（集成 claude-notifications-go） |
+| **激将激励** | /pua（竞争压力激励） |
 
 ---
 
@@ -12,135 +30,69 @@
 
 ```bash
 # 添加到 marketplace
-/plugin marketplace add local F:/claude-studio/2.22/opencode-z
+/plugin marketplace add local F:/claude-studio/3.4/claude-studio/claude-studio
 
 # 安装插件
-/plugin install opencode-z@opencode-z
+/plugin install claude-dev-assistant@claude-studio
 ```
 
-### 方式二：手动安装
+### 方式二：手动复制
 
 ```bash
 # 复制所有组件到 Claude Code 配置目录
-cp -r agents/* ~/.claude-code/agents/
-cp -r skills/* ~/.claude-code/skills/
-cp -r commands/* ~/.claude-code/commands/
-cp -r rules/* ~/.claude-code/rules/
-cp -r contexts/* ~/.claude-code/contexts/
-
-# 复制 hooks 配置（合并到 settings.json）
-# 复制 CLAUDE.md 到你的项目根目录
+cp -r skills/agents/* ~/.claude/skills/
+cp -r commands/*.md ~/.claude/commands/
 ```
 
 ---
 
-## 目录结构
+## 命令索引
 
-```
-opencode-z/
-├── README.md                 # 项目说明
-├── CLAUDE.md                 # 系统提示词（全局配置）
-├── .claude-code/             # Claude Code 配置
-│   ├── agents/
-│   ├── skills/
-│   ├── commands/
-│   ├── hooks/
-│   └── contexts/
-│
-├── agents/                   # 专用 AI Agent
-│   ├── interviewer.md        # 需求访谈专家
-│   ├── architect.md          # 架构设计专家
-│   ├── planner.md            # 实现计划专家
-│   ├── coder.md              # 编码专家
-│   ├── tester.md             # 测试专家
-│   ├── reviewer.md           # 代码审查专家
-│   ├── security-reviewer.md  # 安全审查专家
-│   ├── devops.md             # DevOps 交付专家
-│   ├── optimizer.md          # 迭代优化专家
-│   └── debug-helper.md       # 调试助手
-│
-├── skills/                   # 技能库（领域知识）
-│   ├── requirement-analysis/ # 需求分析技能
-│   ├── spec-writing/         # 规格文档编写
-│   ├── tdd-workflow/         # TDD 工作流
-│   ├── frontend-patterns/    # 前端模式
-│   ├── backend-patterns/     # 后端模式
-│   ├── database-design/      # 数据库设计
-│   ├── api-design/           # API 设计
-│   ├── security-review/      # 安全审查
-│   ├── performance-tuning/   # 性能调优
-│   ├── langchain-arch/       # LangChain 架构
-│   ├── langgraph-workflows/  # LangGraph 工作流
-│   ├── continuous-learning/  # 持续学习
-│   ├── prompt-engineering/   # 提示词工程
-│   ├── mcp-builder/          # MCP 构建器
-│   └── skill-creator/       # 技能创建器
-│
-├── commands/                 # 斜杠命令
-│   ├── interview.md          # /interview - 开始需求访谈
-│   ├── spec.md               # /spec - 生成规格文档
-│   ├── plan.md               # /plan - 创建实现计划
-│   ├── code.md               # /code - 编码模式
-│   ├── tdd.md                # /tdd - TDD 工作流
-│   ├── test.md               # /test - 运行测试
-│   ├── review.md             # /review - 代码审查
-│   ├── security.md           # /security - 安全审查
-│   ├── build.md              # /build - 构建项目
-│   ├── deploy.md             # /deploy - 部署项目
-│   ├── package.md            # /package - 打包交付
-│   ├── reflect.md            # /reflect - 反思学习
-│   ├── learn.md              # /learn - 提取学习模式
-│   ├── verify.md             # /verify - 验证循环
-│   └── checkpoint.md         # /checkpoint - 保存验证点
-│
-├── rules/                    # 全局规则（始终遵守）
-│   ├── workflow.md           # 工作流规则
-│   ├── coding-style.md       # 代码风格
-│   ├── security.md           # 安全规则
-│   ├── testing.md            # 测试规则
-│   ├── git-workflow.md       # Git 工作流
-│   ├── performance.md        # 性能规则
-│   └── agents.md             # Agent 使用规则
-│
-├── hooks/                    # 自动化 Hooks
-│   ├── hooks.json            # Hooks 配置
-│   ├── session-lifecycle/    # 会话生命周期
-│   ├── quality-check/        # 质量检查
-│   └── memory-persistence/   # 记忆持久化
-│
-├── contexts/                 # 上下文注入
-│   ├── dev.md                # 开发模式
-│   ├── review.md             # 审查模式
-│   ├── research.md           # 研究模式
-│   └── delivery.md           # 交付模式
-│
-├── mcp-configs/              # MCP 服务器配置
-│   └── mcp-servers.json
-│
-├── examples/                 # 示例配置
-│   ├── CLAUDE.md             # 项目级配置示例
-│   └── sessions/             # 示例会话
-│
-├── memory-bank/              # 记忆库
-│   ├── 项目进展.md           # 项目进展
-│   ├── 学习记录.md           # 学习记录
-│   └── 技术决策.md           # 技术决策
-│
-├── docs/                     # 文档
-│   ├── spec-template.md      # 规格文档模板
-│   ├── api-template.md       # API 文档模板
-│   └── deployment-guide.md   # 部署指南
-│
-└── projects/                 # 项目存放区
-    └── [项目名称]/
-        ├── README.md
-        ├── CLAUDE.md
-        ├── .env.example
-        ├── src/
-        ├── tests/
-        ├── docs/
-        └── deploy/
-```
+### 核心访谈命令
+
+| 命令 | 用途 | 特点 |
+|------|------|------|
+| `/deep-interview` | 苏格拉底式需求访谈 | 模糊度评分、8维度检查 |
+| `/auto-interview` | 双Agent辩论式访谈 | PM(逆向) vs 架构师(传统) |
+
+### 产品审视命令
+
+| 命令 | 用途 | 特点 |
+|------|------|------|
+| `/office-hours` | gstack风格产品审视 | 该不该做 |
+| `/find-product-remind` | 技能推荐与安装 | 从lenny-skills搜索 |
+
+### 架构与设计命令
+
+| 命令 | 用途 | 特点 |
+|------|------|------|
+| `/structure_thinking` | 顶级架构师思维分析 | 需要规格文档 |
+| `/rag` | RAG项目设计与讨论 | LangGraph/LangFuse/LangChain |
+
+### 测试与团队命令
+
+| 命令 | 用途 | 特点 |
+|------|------|------|
+| `/test-teams` | 测试大队 | 3测试员+1资深，内部共识 |
+| `/team` | 动态专家团队 | 10种角色可选，灵活配置 |
+| `/tdd` | TDD测试模式 | 测试先行 |
+| `/qa` | QA测试模式 | 标准化测试 |
+
+### 执行引擎命令
+
+| 命令 | 用途 | 特点 |
+|------|------|------|
+| `/autopilot` | 全自动执行 | 5阶段管道 |
+| `/ralph` | 持久循环 | 包含ultrawork |
+| `/ultrawork` | 最大并行 | 批量修复重构 |
+| `/ultraqa` | QA循环 | 测试→验证→修复 |
+
+### 辅助命令
+
+| 命令 | 用途 | 特点 |
+|------|------|------|
+| `/notify` | 通知配置 | claude-notifications-go集成 |
+| `/pua` | 激将激励 | 竞争压力激发斗志 |
 
 ---
 
@@ -153,7 +105,8 @@ opencode-z/
 ```
 
 - interviewer agent 进行深度访谈
-- 8 维度完整度检查
+- 8 维度完整度检查（业务理解、功能边界、技术可行性、数据流、接口契约、异常处理、非功能需求、部署交付）
+- KANO 需求分类
 - 自动识别是否需要新技能
 
 ### 阶段二：规格设计
@@ -172,8 +125,8 @@ opencode-z/
 /plan                   # 创建实现计划
 ```
 
-- planner agent 拆解任务
-- 识别依赖关系
+- 任务拆解与依赖分析
+- 里程碑定义
 - 输出可执行的任务清单
 
 ### 阶段四：编码实现
@@ -194,8 +147,8 @@ opencode-z/
 /verify                 # 验证循环
 ```
 
-- tester agent 生成测试
-- 执行单元/集成/E2E 测试
+- 测试用例生成与执行
+- 单元/集成/E2E 测试
 - 验证通过标准
 
 ### 阶段六：代码审查
@@ -217,72 +170,103 @@ opencode-z/
 /package                # 打包交付
 ```
 
-- devops agent 处理构建部署
+- 构建与部署
 - 生成交付包
 - 包含完整文档和配置
 
 ### 阶段八：迭代优化
 
 ```bash
-/reflect                 # 反思学习
-/learn                   # 提取模式
+/reflect                # 反思学习
+/learn                  # 提取学习模式
 ```
 
-- optimizer agent 分析项目
+- 分析项目表现
 - 提取可复用模式
 - 更新知识库
 
 ---
 
+## 专家 Agents（10个）
+
+| Agent | 专长 |
+|-------|------|
+| 🏛️ 软件架构师 | 系统设计、DDD、架构模式 |
+| 💎 高级开发者 | Laravel、React/Vue、Three.js |
+| 👁️ 代码审查员 | 代码审查、质量保证 |
+| 🔒 安全工程师 | 威胁建模、漏洞评估 |
+| 🏗️ 后端架构师 | 数据库、API、云基础设施 |
+| 🖥️ 前端开发者 | React/Vue、响应式设计 |
+| ⚙️ DevOps自动化 | CI/CD、容器化 |
+| 📊 数据工程师 | ETL、数据管道 |
+| 📝 技术作家 | API文档、技术规格 |
+| 📈 SRE | 监控、告警、可靠性 |
+
+详细说明请参考 [docs/AGENTS.md](docs/AGENTS.md)
+
+---
+
+## 目录结构
+
+```
+claude-studio/
+├── README.md                 # 项目说明
+├── CLAUDE.md                 # 系统提示词（全局配置）
+├── ARCHITECTURE.md           # 架构文档
+│
+├── commands/                 # 斜杠命令 (25个)
+│   ├── deep-interview.md     # 苏格拉底式访谈
+│   ├── auto-interview.md     # 双Agent辩论
+│   ├── office-hours.md       # 产品审视
+│   ├── find-product-remind.md # 技能推荐
+│   ├── structure_thinking.md  # 架构分析
+│   ├── rag.md               # RAG设计
+│   ├── test-teams.md        # 测试团队
+│   ├── team.md              # 动态组队
+│   ├── autopilot.md          # 全自动执行
+│   ├── ralph.md             # 持久循环
+│   ├── ultrawork.md         # 最大并行
+│   ├── ultraqa.md           # QA循环
+│   ├── notify.md            # 通知配置
+│   ├── pua.md               # 激将激励
+│   └── ...                  # 更多命令
+│
+├── skills/                   # 技能库
+│   ├── agents/              # 专家Agent (10个)
+│   │   ├── software-architect/
+│   │   ├── senior-developer/
+│   │   ├── code-reviewer/
+│   │   ├── security-engineer/
+│   │   ├── backend-architect/
+│   │   ├── frontend-developer/
+│   │   ├── devops-automator/
+│   │   ├── data-engineer/
+│   │   ├── technical-writer/
+│   │   └── sre/
+│   ├── rag-design/          # RAG设计知识
+│   ├── notifications/       # 通知系统
+│   └── ...                  # 更多技能
+│
+├── docs/                     # 文档
+│   ├── COMMANDS.md          # 命令索引
+│   ├── AGENTS.md            # Agent索引
+│   └── ...
+│
+└── .omc/                    # OMC配置
+    └── specs/               # 规格文档
+```
+
+---
+
 ## 触发词速查
 
-| 命令 | 作用 |
+| 输入 | 行为 |
 |------|------|
-| `/interview` | 开始需求访谈 |
-| `/spec` | 生成规格文档 |
-| `/plan` | 创建实现计划 |
-| `/code` | 进入编码模式 |
-| `/tdd` | TDD 工作流 |
-| `/test` | 运行测试 |
-| `/review` | 代码审查 |
-| `/security` | 安全审查 |
-| `/build` | 构建项目 |
-| `/deploy` | 部署项目 |
-| `/package` | 打包交付 |
-| `/reflect` | 反思学习 |
-| `/learn` | 提取学习模式 |
-| `/verify` | 验证循环 |
-| `/checkpoint` | 保存验证点 |
-
----
-
-## 核心 Agents
-
-| Agent | 职责 | 时机 |
-|-------|------|------|
-| interviewer | 需求访谈 | 新项目启动、需求变更 |
-| architect | 架构设计 | 规格输出前 |
-| planner | 计划拆解 | 编码开始前 |
-| coder | 编码实现 | 实现阶段 |
-| tester | 测试生成 | 编码完成后 |
-| reviewer | 代码审查 | PR/commit 前 |
-| security-reviewer | 安全审计 | 交付前 |
-| devops | 构建部署 | 打包交付时 |
-| optimizer | 迭代优化 | 里程碑/项目结束 |
-
----
-
-## Hooks 自动化
-
-Hooks 在以下时机自动触发：
-
-| 时机 | 触发内容 |
-|------|----------|
-| Edit 工具后 | 检查代码风格、console.log |
-| Bash 工具后 | 检查命令是否成功 |
-| 会话开始时 | 加载项目记忆 |
-| 会话结束时 | 保存状态、提取学习 |
-| 编码模式 | 实时质量检查 |
+| `开始访谈` | 进入访谈模式 |
+| `导入项目` | 导入现有项目 |
+| `分析项目` | 分析项目架构 |
+| `设置范围` | 管理开发边界 |
+| `快速开始` | 跳过访谈进入规格阶段 |
 
 ---
 
@@ -299,7 +283,6 @@ Hooks 在以下时机自动触发：
 - 会话结束自动提取模式
 - `/reflect` 命令处理纠正
 - `/learn` 命令手动提取
-- 学习内容保存为 skills/learned/
 
 ---
 
@@ -317,6 +300,10 @@ MIT License
 
 ---
 
-## Star History
+## 相关文档
 
-如果这个项目对你有帮助，请给个 Star
+- [架构文档](ARCHITECTURE.md) - 系统架构详解
+- [命令索引](docs/COMMANDS.md) - 所有命令快速参考
+- [Agent 索引](docs/AGENTS.md) - 所有专家 Agent 目录
+- [规格模板](docs/spec-template.md) - 规格文档模板
+- [部署指南](docs/deployment-guide.md) - 部署配置指南

@@ -8,7 +8,9 @@
       "Bash(node scripts/project-analyzer.js:*)",
       "Bash(node scripts/phase-manager.js:*)",
       "Bash(node scripts/cross-platform-logger.js:*)",
-      "Bash(rm:*)"
+      "Bash(rm:*)",
+      "Bash(git push:*)",
+      "Bash(dir:*)"
     ],
     "deny": [
       "Bash(rm -rf:*)",
