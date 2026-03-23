@@ -166,26 +166,26 @@
   "hotPaths": [
     {
       "path": "",
-      "accessCount": 35,
-      "lastAccessed": 1774245492294,
+      "accessCount": 50,
+      "lastAccessed": 1774247615720,
       "type": "directory"
     },
     {
       "path": "README.md",
-      "accessCount": 14,
-      "lastAccessed": 1774245492185,
+      "accessCount": 16,
+      "lastAccessed": 1774247599992,
+      "type": "file"
+    },
+    {
+      "path": "commands\\interview.md",
+      "accessCount": 6,
+      "lastAccessed": 1774247592564,
       "type": "file"
     },
     {
       "path": "commands\\plan.md",
       "accessCount": 5,
       "lastAccessed": 1774245461855,
-      "type": "file"
-    },
-    {
-      "path": "commands\\interview.md",
-      "accessCount": 5,
-      "lastAccessed": 1774245462060,
       "type": "file"
     },
     {
@@ -198,6 +198,12 @@
       "path": "ARCHITECTURE.md",
       "accessCount": 3,
       "lastAccessed": 1774242330185,
+      "type": "file"
+    },
+    {
+      "path": "skills\\agents\\software-architect\\SKILL.md",
+      "accessCount": 3,
+      "lastAccessed": 1774247608345,
       "type": "file"
     },
     {
@@ -330,12 +336,6 @@
       "path": "commands\\spec.md",
       "accessCount": 2,
       "lastAccessed": 1774242184524,
-      "type": "file"
-    },
-    {
-      "path": "skills\\agents\\software-architect\\SKILL.md",
-      "accessCount": 2,
-      "lastAccessed": 1774242204739,
       "type": "file"
     },
     {

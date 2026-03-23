@@ -1,62 +1,89 @@
 {
   "agents": [
     {
-      "agent_id": "aecced162ead96ec5",
-      "agent_type": "engineer",
-      "started_at": "2026-03-23T05:56:53.603Z",
+      "agent_id": "ac21502c46fada6ec",
+      "agent_type": "browser-qa",
+      "started_at": "2026-03-23T06:32:09.437Z",
       "parent_mode": "none",
       "status": "completed",
-      "completed_at": "2026-03-23T06:00:24.332Z",
-      "duration_ms": 210729
+      "completed_at": "2026-03-23T06:43:57.141Z",
+      "duration_ms": 707704
     },
     {
-      "agent_id": "ac399f86f94a13949",
-      "agent_type": "闭环专家",
-      "started_at": "2026-03-23T05:56:59.321Z",
+      "agent_id": "a0e07ba230a967b50",
+      "agent_type": "artifacts",
+      "started_at": "2026-03-23T06:32:20.296Z",
       "parent_mode": "none",
       "status": "completed",
-      "completed_at": "2026-03-23T06:00:57.767Z",
-      "duration_ms": 238446
+      "completed_at": "2026-03-23T06:37:35.600Z",
+      "duration_ms": 315304
     },
     {
-      "agent_id": "a8c583ae3e5c7867a",
-      "agent_type": "方法论专家",
-      "started_at": "2026-03-23T05:57:04.748Z",
+      "agent_id": "a40a761c5e67bc71c",
+      "agent_type": "contracts",
+      "started_at": "2026-03-23T06:32:29.608Z",
       "parent_mode": "none",
       "status": "completed",
-      "completed_at": "2026-03-23T06:02:10.135Z",
-      "duration_ms": 305387
+      "completed_at": "2026-03-23T06:46:04.759Z",
+      "duration_ms": 815151
     },
     {
-      "agent_id": "acbb03f7eb3110622",
-      "agent_type": "cleaner",
-      "started_at": "2026-03-23T05:57:10.131Z",
+      "agent_id": "ace4d91b224d0533b",
+      "agent_type": "governance",
+      "started_at": "2026-03-23T06:32:38.934Z",
       "parent_mode": "none",
       "status": "completed",
-      "completed_at": "2026-03-23T05:57:45.130Z",
-      "duration_ms": 34999
+      "completed_at": "2026-03-23T06:37:09.133Z",
+      "duration_ms": 270199
     },
     {
-      "agent_id": "a1088100b4e6c4644",
-      "agent_type": "reviewer",
-      "started_at": "2026-03-23T05:57:14.955Z",
+      "agent_id": "aa295a18dba61cfb8",
+      "agent_type": "integrator",
+      "started_at": "2026-03-23T06:32:46.464Z",
       "parent_mode": "none",
       "status": "completed",
-      "completed_at": "2026-03-23T06:09:00.676Z",
-      "duration_ms": 705721
+      "completed_at": "2026-03-23T06:34:03.788Z",
+      "duration_ms": 77324
     },
     {
-      "agent_id": "ab2fa645b8aecb792",
-      "agent_type": "engineer",
-      "started_at": "2026-03-23T06:00:24.834Z",
+      "agent_id": "adfcf49045a2144a9",
+      "agent_type": "artifacts",
+      "started_at": "2026-03-23T06:37:36.092Z",
       "parent_mode": "none",
       "status": "completed",
-      "completed_at": "2026-03-23T06:00:34.886Z",
-      "duration_ms": 10052
+      "completed_at": "2026-03-23T06:37:42.017Z",
+      "duration_ms": 5925
+    },
+    {
+      "agent_id": "aa56ca9a5918b4eff",
+      "agent_type": "browser-qa",
+      "started_at": "2026-03-23T06:43:57.632Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T06:44:18.741Z",
+      "duration_ms": 21109
+    },
+    {
+      "agent_id": "a06951d39a281257e",
+      "agent_type": "contracts",
+      "started_at": "2026-03-23T06:46:05.243Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T06:46:23.273Z",
+      "duration_ms": 18030
+    },
+    {
+      "agent_id": "ae29b3d766f2a8b60",
+      "agent_type": "contracts",
+      "started_at": "2026-03-23T06:46:23.785Z",
+      "parent_mode": "none",
+      "status": "completed",
+      "completed_at": "2026-03-23T06:46:26.734Z",
+      "duration_ms": 2949
     }
   ],
-  "total_spawned": 6,
-  "total_completed": 6,
+  "total_spawned": 9,
+  "total_completed": 9,
   "total_failed": 0,
-  "last_updated": "2026-03-23T06:09:00.809Z"
+  "last_updated": "2026-03-23T06:46:26.868Z"
 }
