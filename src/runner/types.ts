@@ -17,6 +17,46 @@ export type TaskStatus =
   | "cancelled";
 
 /**
+ * Agent types for concurrency management
+ */
+export type AgentType =
+  | "interviewer"
+  | "architect"
+  | "explorer"
+  | "planner"
+  | "executor"
+  | "reviewer"
+  | "code-reviewer"
+  | "qa-tester"
+  | "security-engineer"
+  | "devops-automator"
+  | "technical-writer"
+  | "debugger";
+
+/**
+ * Task priority levels for priority queue
+ */
+export type PriorityLevel = "critical" | "high" | "normal" | "low";
+
+/**
+ * Agent concurrency configuration
+ */
+export interface AgentConcurrencyConfig {
+  maxConcurrent: Record<AgentType, number>;
+  priorityQueue: boolean;
+}
+
+/**
+ * Priority queue entry
+ */
+export interface PriorityQueueEntry {
+  taskId: string;
+  priority: PriorityLevel;
+  agentType: AgentType;
+  enqueuedAt: number;
+}
+
+/**
  * Task execution record
  */
 export interface TaskRecord {
@@ -73,6 +113,7 @@ export interface RunnerConfig {
   maxRetries: number;
   pollingInterval: number;
   onEvent?: RunnerEventHandler;
+  agentConcurrency?: AgentConcurrencyConfig;
 }
 
 export const DEFAULT_RUNNER_CONFIG: RunnerConfig = {
@@ -80,4 +121,21 @@ export const DEFAULT_RUNNER_CONFIG: RunnerConfig = {
   defaultTimeout: 300000,
   maxRetries: 2,
   pollingInterval: 100,
+  agentConcurrency: {
+    maxConcurrent: {
+      interviewer: 2,
+      architect: 1,
+      explorer: 3,
+      planner: 1,
+      executor: 3,
+      reviewer: 2,
+      "code-reviewer": 2,
+      "qa-tester": 2,
+      "security-engineer": 1,
+      "devops-automator": 1,
+      "technical-writer": 2,
+      debugger: 2,
+    },
+    priorityQueue: true,
+  },
 };

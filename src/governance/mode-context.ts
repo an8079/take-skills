@@ -8,12 +8,16 @@
 import {
   type GovernanceMode,
   type ModeConfig,
+  type ModeCapabilities,
   type GateStrictness,
   type PhaseName,
   getMode,
   isValidMode,
+  getCapabilities,
   GOVERNANCE_MODES,
 } from "./modes.js";
+
+const ENTERPRISE_LICENSE_KEY = "enterprise-license-key";
 
 export interface ModeTransitionEvent {
   fromMode: GovernanceMode | null;
@@ -60,6 +64,10 @@ export class ModeContext {
 
   getModeConfig(): ModeConfig {
     return { ...this.currentMode, gates: { ...this.currentMode.gates } };
+  }
+
+  getCapabilities(): ModeCapabilities {
+    return getCapabilities(this.currentMode.id);
   }
 
   getGates(): Record<PhaseName, GateStrictness> {
@@ -197,12 +205,16 @@ export class ModeContext {
     return this.options.allowDynamicSwitch;
   }
 
-  switchMode(newMode: GovernanceMode, reason: string = "", actor: string = "system"): boolean {
+  switchMode(newMode: GovernanceMode, reason: string = "", actor: string = "system", licenseKey?: string): boolean {
     if (!this.options.allowDynamicSwitch) {
       return false;
     }
 
     if (!isValidMode(newMode)) {
+      return false;
+    }
+
+    if (newMode === "enterprise" && licenseKey !== ENTERPRISE_LICENSE_KEY) {
       return false;
     }
 
@@ -244,14 +256,14 @@ export class ModeContext {
   }
 
   isAtLeastStrictness(requested: GovernanceMode): boolean {
-    const order: GovernanceMode[] = ["lite", "standard", "strict"];
+    const order: GovernanceMode[] = ["lite", "standard", "strict", "enterprise"];
     const currentIndex = order.indexOf(this.currentMode.id);
     const requestedIndex = order.indexOf(requested);
     return currentIndex >= requestedIndex;
   }
 
   compareModes(other: GovernanceMode): number {
-    const order: GovernanceMode[] = ["lite", "standard", "strict"];
+    const order: GovernanceMode[] = ["lite", "standard", "strict", "enterprise"];
     const currentIndex = order.indexOf(this.currentMode.id);
     const otherIndex = order.indexOf(other);
     return currentIndex - otherIndex;
@@ -371,4 +383,8 @@ export function createStandardContext(options?: Partial<ModeContextOptions>): Mo
 
 export function createStrictContext(options?: Partial<ModeContextOptions>): ModeContext {
   return new ModeContext({ initialMode: "strict", ...options });
+}
+
+export function createEnterpriseContext(options?: Partial<ModeContextOptions>): ModeContext {
+  return new ModeContext({ initialMode: "enterprise", ...options });
 }

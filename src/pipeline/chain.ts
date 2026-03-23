@@ -10,6 +10,7 @@ import { AuditLog } from "../governance/audit-log.js";
 import { checkGate, type StageGate } from "../phase-manager/index.js";
 import type { GateCheckResult } from "../phase-manager/stage-gates.js";
 import { ApprovalWorkflow, type ApprovalRequest } from "../phase-manager/approval-workflow.js";
+import { MetricsCollector } from "../metrics/collector.js";
 import type {
   PipelineStage,
   StageContext,
@@ -190,6 +191,7 @@ export class Pipeline {
   private auditLog: AuditLog;
   private approvalWorkflow: ApprovalWorkflow;
   private gateStatusEntries: Map<PipelineStage, GateStatusEntry>;
+  private metrics: MetricsCollector;
 
   constructor(config?: Partial<PipelineConfig>) {
     this.config = {
@@ -211,6 +213,7 @@ export class Pipeline {
     this.auditLog = new AuditLog();
     this.approvalWorkflow = new ApprovalWorkflow();
     this.gateStatusEntries = new Map();
+    this.metrics = MetricsCollector.getInstance();
   }
 
   private generateId(): string {
@@ -438,6 +441,11 @@ export class Pipeline {
     // Check gate before executing stage
     const gateResult = await this.checkGateForStage(stage);
 
+    // Record gate check metrics
+    if (gateResult) {
+      this.metrics.recordGateCheck(stageId, stage.gate?.id || "default", gateResult.passed);
+    }
+
     const context: StageContext = {
       stage: stageId,
       input,
@@ -461,12 +469,22 @@ export class Pipeline {
       context.status = "completed";
       context.endTime = Date.now();
       this.updateStage(context);
+
+      // Record stage completion metrics
+      const duration = context.endTime - (context.startTime || 0);
+      this.metrics.recordStageCompletion(stageId, duration, "completed");
+
       logger.info(`[Pipeline:${this.pipelineId}] Completed stage: ${stageId}`);
       return context;
     } catch (error) {
       context.status = "failed";
       context.error = error instanceof Error ? error.message : String(error);
       context.endTime = Date.now();
+
+      // Record stage failure metrics
+      const duration = context.endTime - (context.startTime || 0);
+      this.metrics.recordStageCompletion(stageId, duration, "failed");
+
       this.failStage(stageId, context.error);
       throw error;
     }

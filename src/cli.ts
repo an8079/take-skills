@@ -16,6 +16,9 @@ import { runSetup, printSetupResults } from "./commands/setup.js";
 import { runVerify, printVerifyResults } from "./commands/verify.js";
 import { getStatus, printStatus } from "./commands/status.js";
 import { printPipelineInfo } from "./commands/pipeline-run.js";
+import { runRecover, printRecoverResults } from "./commands/recover.js";
+import { isRecoveryAvailable, getUnfinishedSessionSummary } from "./state/index.js";
+import { runMetrics } from "./commands/metrics.js";
 
 const { version } = packageJson;
 const program = new Command();
@@ -118,6 +121,18 @@ program
     printStatus(status);
   });
 
+// Recover command - recover an unfinished session
+program
+  .command("recover")
+  .description("Recover an unfinished session from STATE.json")
+  .action(() => {
+    const result = runRecover();
+    printRecoverResults(result);
+    if (!result.recovered) {
+      process.exitCode = 1;
+    }
+  });
+
 // Pipeline command group
 const pipelineCmd = program
   .command("pipeline")
@@ -144,5 +159,49 @@ pipelineCmd
   .action(() => {
     printPipelineInfo();
   });
+
+// Metrics command group
+const metricsCmd = program
+  .command("metrics")
+  .description("Pipeline metrics operations");
+
+metricsCmd
+  .command("show")
+  .description("Display metrics in console table format")
+  .action(() => {
+    runMetrics("show");
+  });
+
+metricsCmd
+  .command("json")
+  .description("Output metrics as JSON (for external tools)")
+  .action(() => {
+    runMetrics("json");
+  });
+
+metricsCmd
+  .command("reset")
+  .description("Reset all collected metrics")
+  .action(() => {
+    runMetrics("reset");
+  });
+
+// Auto-recovery check on startup (only for non-command invocations)
+const args = process.argv.slice(2);
+const isHelpOrVersion = args.some(arg => ["--help", "-h", "--version", "-V"].includes(arg));
+const hasSubcommand = args.length > 0 && !args[0].startsWith("-");
+
+if (!isHelpOrVersion && !hasSubcommand) {
+  // Check for unfinished session and offer recovery
+  const summary = getUnfinishedSessionSummary();
+  if (summary.available) {
+    console.log(chalk.yellow("\n⚠ Unfinished session detected\n"));
+    console.log(chalk.white(summary.summary));
+    if (summary.age) {
+      console.log(chalk.gray(`Last saved: ${summary.age}`));
+    }
+    console.log(chalk.cyan("\nRun 'cs recover' to restore your session.\n"));
+  }
+}
 
 program.parse(process.argv);

@@ -5,7 +5,23 @@
  * Controls gate strictness, artifact requirements, audit depth, and team features.
  */
 
-export type GovernanceMode = "lite" | "standard" | "strict";
+export type GovernanceMode = "lite" | "standard" | "strict" | "enterprise";
+
+export type UserRole = "admin" | "developer" | "viewer";
+
+export interface ModeCapabilities {
+  auditFileLogging: boolean;
+  complianceCheckHooks: boolean;
+  roleBasedAccess: boolean;
+  multiAgentCoordination: boolean;
+  approvalWorkflows: boolean;
+  autoEscalation: boolean;
+  requireCodeSignoff: boolean;
+  requireSecurityReview: boolean;
+  blockOnVulnerabilities: boolean;
+  maxActivePhases: number;
+  allowSkipPhases: boolean;
+}
 
 export type GateStrictness = "none" | "warning" | "required";
 
@@ -270,10 +286,67 @@ export const STRICT_MODE: ModeConfig = {
 // Mode Registry
 // ---------------------------------------------------------------------------
 
+// ---------------------------------------------------------------------------
+// Enterprise Mode - Full governance with audit logging, compliance, and RBAC
+// ---------------------------------------------------------------------------
+
+export const ENTERPRISE_MODE: ModeConfig = {
+  id: "enterprise",
+  name: "Enterprise",
+  description: "Maximum governance with audit file logging, compliance hooks, and role-based access control.",
+
+  gates: {
+    interview: "required",
+    spec: "required",
+    plan: "required",
+    execute: "required",
+    review: "required",
+    qa: "required",
+    ship: "required",
+  },
+
+  artifacts: {
+    minRequired: STRICT_ARTIFACTS,
+    optional: OPTIONAL_ARTIFACTS,
+  },
+
+  audit: {
+    enabled: true,
+    logPhaseTransitions: true,
+    logApprovals: true,
+    logGateViolations: true,
+    logConfigChanges: true,
+    logTeamEvents: true,
+  },
+
+  security: {
+    enabled: true,
+    requireCodeSignoff: true,
+    requireSecurityReview: true,
+    blockOnVulnerabilities: true,
+  },
+
+  teamFeatures: {
+    enabled: true,
+    multiAgentCoordination: true,
+    roleEnforcement: true,
+    approvalWorkflows: true,
+    autoEscalation: true,
+  },
+
+  process: {
+    allowSkipPhases: false,
+    maxActivePhases: 1,
+    autoAdvance: false,
+    requireExplicitComplete: true,
+  },
+};
+
 export const GOVERNANCE_MODES: Record<GovernanceMode, ModeConfig> = {
   lite: LITE_MODE,
   standard: STANDARD_MODE,
   strict: STRICT_MODE,
+  enterprise: ENTERPRISE_MODE,
 };
 
 export function getMode(mode: GovernanceMode): ModeConfig {
@@ -281,7 +354,24 @@ export function getMode(mode: GovernanceMode): ModeConfig {
 }
 
 export function isValidMode(mode: string): mode is GovernanceMode {
-  return mode === "lite" || mode === "standard" || mode === "strict";
+  return mode === "lite" || mode === "standard" || mode === "strict" || mode === "enterprise";
+}
+
+export function getCapabilities(mode: GovernanceMode): ModeCapabilities {
+  const config = GOVERNANCE_MODES[mode];
+  return {
+    auditFileLogging: config.id === "enterprise",
+    complianceCheckHooks: config.id === "enterprise",
+    roleBasedAccess: config.teamFeatures.roleEnforcement,
+    multiAgentCoordination: config.teamFeatures.multiAgentCoordination,
+    approvalWorkflows: config.teamFeatures.approvalWorkflows,
+    autoEscalation: config.teamFeatures.autoEscalation,
+    requireCodeSignoff: config.security.requireCodeSignoff,
+    requireSecurityReview: config.security.requireSecurityReview,
+    blockOnVulnerabilities: config.security.blockOnVulnerabilities,
+    maxActivePhases: config.process.maxActivePhases,
+    allowSkipPhases: config.process.allowSkipPhases,
+  };
 }
 
 export function getDefaultMode(): ModeConfig {

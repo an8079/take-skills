@@ -43,6 +43,10 @@ export { ProcessController, AuditLog };
 import { PhaseChecker, DeliverableChecker } from "./validator/index.js";
 export { PhaseChecker, DeliverableChecker };
 
+// Metrics
+import { MetricsCollector, metricsCollector, latencySummary, p50, p75, p90, p95, p99, avg, min, max, formatDuration, formatBytes } from "./metrics/index.js";
+export { MetricsCollector, metricsCollector, latencySummary, p50, p75, p90, p95, p99, avg, min, max, formatDuration, formatBytes };
+
 /**
  * Version information
  */

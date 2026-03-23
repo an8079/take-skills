@@ -12,7 +12,209 @@ import type {
   RunnerEvent,
   RunnerEventHandler,
   TaskExecutor,
+  AgentConcurrencyConfig,
+  PriorityLevel,
+  PriorityQueueEntry,
+  AgentType,
 } from "./types.js";
+
+/**
+ * Priority queue weights for sorting
+ */
+const PRIORITY_WEIGHTS: Record<PriorityLevel, number> = {
+  critical: 0,
+  high: 1,
+  normal: 2,
+  low: 3,
+};
+
+/**
+ * Priority Queue for agent tasks with priority levels
+ */
+export class PriorityQueue {
+  private buckets: Map<PriorityLevel, PriorityQueueEntry[]>;
+  private agentTypeBuckets: Map<AgentType, PriorityQueueEntry[]>;
+  private allEntries: Map<string, PriorityQueueEntry>;
+
+  constructor() {
+    this.buckets = new Map([
+      ["critical", []],
+      ["high", []],
+      ["normal", []],
+      ["low", []],
+    ]);
+    this.agentTypeBuckets = new Map();
+    this.allEntries = new Map();
+  }
+
+  /**
+   * Enqueue a task
+   */
+  enqueue(taskId: string, priority: PriorityLevel, agentType: AgentType): void {
+    const entry: PriorityQueueEntry = {
+      taskId,
+      priority,
+      agentType,
+      enqueuedAt: Date.now(),
+    };
+
+    // Add to priority bucket
+    const priorityBucket = this.buckets.get(priority) || [];
+    priorityBucket.push(entry);
+    this.buckets.set(priority, priorityBucket);
+
+    // Add to agent type bucket
+    if (!this.agentTypeBuckets.has(agentType)) {
+      this.agentTypeBuckets.set(agentType, []);
+    }
+    this.agentTypeBuckets.get(agentType)!.push(entry);
+
+    // Track in main map
+    this.allEntries.set(taskId, entry);
+  }
+
+  /**
+   * Dequeue the highest priority task for a specific agent type
+   */
+  dequeue(agentType: AgentType): PriorityQueueEntry | undefined {
+    const entries = this.agentTypeBuckets.get(agentType);
+    if (!entries || entries.length === 0) return undefined;
+
+    // Find highest priority entry for this agent type
+    let bestIndex = -1;
+    let bestWeight = Infinity;
+
+    for (let i = 0; i < entries.length; i++) {
+      const entry = entries[i];
+      const weight = PRIORITY_WEIGHTS[entry.priority];
+      if (weight < bestWeight) {
+        bestWeight = weight;
+        bestIndex = i;
+      }
+    }
+
+    if (bestIndex === -1) return undefined;
+
+    const [removed] = entries.splice(bestIndex, 1);
+    this.allEntries.delete(removed.taskId);
+
+    // Remove from priority bucket
+    const priorityBucket = this.buckets.get(removed.priority) || [];
+    const idx = priorityBucket.findIndex((e) => e.taskId === removed.taskId);
+    if (idx !== -1) priorityBucket.splice(idx, 1);
+
+    return removed;
+  }
+
+  /**
+   * Get next task using fair round-robin across agent types
+   */
+  dequeueFair(agentTypes: AgentType[], agentConcurrency: Record<AgentType, number>, runningByType: Map<AgentType, number>): PriorityQueueEntry | undefined {
+    // Build list of agent types that have available slots
+    const availableTypes: AgentType[] = [];
+    for (const type of agentTypes) {
+      const max = agentConcurrency[type] ?? Infinity;
+      const current = runningByType.get(type) || 0;
+      if (current < max) {
+        availableTypes.push(type);
+      }
+    }
+
+    if (availableTypes.length === 0) return undefined;
+
+    // Round-robin: pick the agent type with the oldest entry
+    let oldestEntry: PriorityQueueEntry | undefined;
+    let oldestTime = Infinity;
+    let oldestType: AgentType | undefined;
+
+    for (const type of availableTypes) {
+      const entries = this.agentTypeBuckets.get(type);
+      if (!entries || entries.length === 0) continue;
+
+      // Find highest priority entry for this type
+      let bestIndex = -1;
+      let bestWeight = Infinity;
+
+      for (let i = 0; i < entries.length; i++) {
+        const entry = entries[i];
+        const weight = PRIORITY_WEIGHTS[entry.priority];
+        if (weight < bestWeight) {
+          bestWeight = weight;
+          bestIndex = i;
+        }
+      }
+
+      if (bestIndex !== -1) {
+        const entry = entries[bestIndex];
+        if (entry.enqueuedAt < oldestTime) {
+          oldestTime = entry.enqueuedAt;
+          oldestEntry = entry;
+          oldestType = type;
+        }
+      }
+    }
+
+    if (oldestEntry && oldestType) {
+      // Remove from agent type bucket
+      const entries = this.agentTypeBuckets.get(oldestType)!;
+      const idx = entries.findIndex((e) => e.taskId === oldestEntry!.taskId);
+      if (idx !== -1) entries.splice(idx, 1);
+
+      // Remove from priority bucket
+      const priorityBucket = this.buckets.get(oldestEntry.priority) || [];
+      const pIdx = priorityBucket.findIndex((e) => e.taskId === oldestEntry!.taskId);
+      if (pIdx !== -1) priorityBucket.splice(pIdx, 1);
+
+      this.allEntries.delete(oldestEntry.taskId);
+    }
+
+    return oldestEntry;
+  }
+
+  /**
+   * Remove a specific task
+   */
+  remove(taskId: string): boolean {
+    const entry = this.allEntries.get(taskId);
+    if (!entry) return false;
+
+    // Remove from agent type bucket
+    const typeEntries = this.agentTypeBuckets.get(entry.agentType);
+    if (typeEntries) {
+      const idx = typeEntries.findIndex((e) => e.taskId === taskId);
+      if (idx !== -1) typeEntries.splice(idx, 1);
+    }
+
+    // Remove from priority bucket
+    const priorityBucket = this.buckets.get(entry.priority) || [];
+    const idx = priorityBucket.findIndex((e) => e.taskId === taskId);
+    if (idx !== -1) priorityBucket.splice(idx, 1);
+
+    this.allEntries.delete(taskId);
+    return true;
+  }
+
+  /**
+   * Get queue size
+   */
+  size(): number {
+    return this.allEntries.size;
+  }
+
+  /**
+   * Check if empty
+   */
+  isEmpty(): boolean {
+    return this.allEntries.size === 0;
+  }
+
+  /**
+   * Get all queued task IDs
+   */
+  getAllTaskIds(): string[] {
+    return Array.from(this.allEntries.keys());
+  }
+}
 
 /**
  * Default runner configuration
@@ -31,7 +233,9 @@ export class TaskRunner {
   private config: RunnerConfig;
   private tasks: Map<string, TaskRecord>;
   private queue: string[]; // Task IDs in queue order
+  private priorityQueue: PriorityQueue | null;
   private running: Set<string>;
+  private runningByType: Map<AgentType, number>;
   private eventHandlers: Set<RunnerEventHandler>;
 
   constructor(config: Partial<RunnerConfig> = {}) {
@@ -39,7 +243,11 @@ export class TaskRunner {
     this.tasks = new Map();
     this.queue = [];
     this.running = new Set();
+    this.runningByType = new Map();
     this.eventHandlers = new Set();
+    this.priorityQueue = this.config.agentConcurrency?.priorityQueue
+      ? new PriorityQueue()
+      : null;
   }
 
   /**
@@ -127,6 +335,8 @@ export class TaskRunner {
     prompt: string;
     context?: Record<string, unknown>;
     priority?: "P0" | "P1" | "P2";
+    agentType?: AgentType;
+    taskPriority?: PriorityLevel;
     timeout?: number;
     retries?: number;
     dependencies?: string[];
@@ -149,6 +359,16 @@ export class TaskRunner {
 
     this.tasks.set(id, task);
     this.queue.push(id);
+
+    // Add to priority queue if enabled
+    if (this.priorityQueue && config.agentType) {
+      this.priorityQueue.enqueue(
+        id,
+        config.taskPriority || "normal",
+        config.agentType
+      );
+    }
+
     this.emit({ type: "task:queued", taskId: id });
 
     logger.info(`[Runner] Task added: ${id} (${config.name})`);
@@ -177,13 +397,45 @@ export class TaskRunner {
   }
 
   /**
-   * Get next executable tasks (respecting concurrency)
+   * Get next executable tasks (respecting per-agent-type concurrency limits)
    */
   private getNextExecutable(): string[] {
     if (this.running.size >= this.config.maxConcurrent) {
       return [];
     }
 
+    const agentConcurrency = this.config.agentConcurrency;
+    const maxByType = agentConcurrency?.maxConcurrent;
+
+    // If priority queue is enabled, use fair scheduling
+    if (this.priorityQueue && maxByType) {
+      const available: string[] = [];
+      const agentTypes = Object.keys(maxByType) as AgentType[];
+
+      while (available.length < (this.config.maxConcurrent - this.running.size)) {
+        const entry = this.priorityQueue.dequeueFair(
+          agentTypes,
+          maxByType,
+          this.runningByType
+        );
+
+        if (!entry) break;
+
+        const task = this.tasks.get(entry.taskId);
+        if (!task || task.status !== "pending") continue;
+        if (!this.areDependenciesMet(task)) {
+          // Re-enqueue if dependencies not met
+          this.priorityQueue.enqueue(entry.taskId, entry.priority, entry.agentType);
+          continue;
+        }
+
+        available.push(entry.taskId);
+      }
+
+      return available;
+    }
+
+    // Legacy behavior: simple global concurrency limit
     const available: string[] = [];
     const slots = this.config.maxConcurrent - this.running.size;
 
@@ -208,10 +460,17 @@ export class TaskRunner {
     executor: TaskExecutor
   ): Promise<void> {
     const task = this.tasks.get(taskId)!;
+    const agentType = task.context?.agentType as AgentType | undefined;
 
     task.status = "running";
     task.startTime = Date.now();
     this.running.add(taskId);
+
+    // Track running count per agent type
+    if (agentType && this.runningByType) {
+      this.runningByType.set(agentType, (this.runningByType.get(agentType) || 0) + 1);
+    }
+
     this.emit({ type: "task:start", taskId });
 
     logger.info(`[Runner] Task started: ${taskId} (${task.name})`);
@@ -234,6 +493,13 @@ export class TaskRunner {
       task.endTime = Date.now();
       task.duration = task.endTime - task.startTime;
       this.running.delete(taskId);
+
+      // Decrement running count per agent type
+      if (agentType && this.runningByType) {
+        const current = this.runningByType.get(agentType) || 0;
+        this.runningByType.set(agentType, Math.max(0, current - 1));
+      }
+
       this.emit({ type: "task:complete", taskId, result });
 
       logger.info(
@@ -242,6 +508,12 @@ export class TaskRunner {
     } catch (error) {
       task.endTime = Date.now();
       task.duration = task.endTime - (task.startTime || 0);
+
+      // Decrement running count per agent type on error
+      if (agentType && this.runningByType) {
+        const current = this.runningByType.get(agentType) || 0;
+        this.runningByType.set(agentType, Math.max(0, current - 1));
+      }
 
       if (error instanceof Error && error.message.includes("timeout")) {
         task.status = "timeout";
@@ -254,6 +526,13 @@ export class TaskRunner {
           task.retries++;
           task.status = "pending";
           this.running.delete(taskId);
+
+          // Re-add to priority queue if using one
+          if (this.priorityQueue && task.context?.agentType) {
+            const taskPriority = task.context.taskPriority as PriorityLevel || "normal";
+            this.priorityQueue.enqueue(taskId, taskPriority, task.context.agentType as AgentType);
+          }
+
           logger.info(
             `[Runner] Task retry ${task.retries}/${task.maxRetries}: ${taskId}`
           );
