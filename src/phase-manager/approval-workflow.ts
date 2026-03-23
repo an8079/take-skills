@@ -3,6 +3,12 @@
  *
  * Manages approval requests and signatures for phase transitions.
  * Provides audit trail and accountability.
+ *
+ * Approval States:
+ * - pending: Awaiting approval decision
+ * - approved: Approved, artifact approvalState updated to "approved"
+ * - rejected: Rejected, artifact approvalState remains "pending"
+ * - revoked: Request expired or was cancelled
  */
 
 export type ApprovalStatus = "pending" | "approved" | "rejected" | "revoked";
@@ -224,6 +230,89 @@ export class ApprovalWorkflow {
 
     request.status = "revoked";
     return { success: true };
+  }
+
+  /**
+   * Sign an approval by updating the artifact's approvalState to "approved".
+   * This method should be called after approve() succeeds to persist the signature.
+   *
+   * @param approvalId - The approval request ID
+   * @param artifactId - The artifact ID to sign
+   * @returns success boolean and error message if failed
+   */
+  async sign(
+    approvalId: string,
+    artifactId: string
+  ): Promise<{ success: boolean; error?: string }> {
+    const request = this.requests.get(approvalId);
+
+    if (!request) {
+      return { success: false, error: "Approval request not found" };
+    }
+
+    if (request.status !== "approved") {
+      return { success: false, error: `Cannot sign an unapproved request (status: ${request.status})` };
+    }
+
+    // Dynamically import to avoid circular dependency
+    const { artifactRegistry } = await import("../artifacts/registry.js");
+    const updated = artifactRegistry.updateApprovalState(artifactId, "approved");
+
+    if (!updated) {
+      return { success: false, error: `Artifact ${artifactId} not found in registry` };
+    }
+
+    return { success: true };
+  }
+
+  /**
+   * Check if all required artifacts for a gate have been approved.
+   * This is used by gates to verify artifact approvalState before allowing stage progression.
+   *
+   * @param gateId - The gate ID to check
+   * @returns Object with approved status and list of unapproved artifacts
+   */
+  async checkGateArtifactsApproved(gateId: string): Promise<{
+    allApproved: boolean;
+    unapprovedArtifacts: string[];
+  }> {
+    // Mapping of gates to their required artifact types
+    const gateArtifactRequirements: Record<string, string[]> = {
+      "gate-discuss-complete": ["PROJECT", "REQUIREMENTS"],
+      "gate-plan-complete": ["PROJECT", "REQUIREMENTS", "SPEC"],
+      "gate-execute-complete": ["PROJECT", "REQUIREMENTS", "SPEC", "PLAN"],
+      "gate-verify-complete": ["PROJECT", "REQUIREMENTS", "SPEC", "PLAN", "EXECUTION-LOG"],
+    };
+
+    const requiredTypes = gateArtifactRequirements[gateId];
+    if (!requiredTypes) {
+      // Gate doesn't have specific artifact requirements
+      return { allApproved: true, unapprovedArtifacts: [] };
+    }
+
+    const { artifactRegistry } = await import("../artifacts/registry.js");
+    const unapprovedArtifacts: string[] = [];
+
+    for (const artifactType of requiredTypes) {
+      const entries = artifactRegistry.getByType(artifactType as any);
+      if (entries.length === 0) {
+        // No artifact of this type exists
+        unapprovedArtifacts.push(artifactType);
+      } else {
+        // Check if all artifacts of this type are approved
+        const unapproved = entries.filter(
+          (e) => e.artifact.frontmatter.approvalState !== "approved"
+        );
+        if (unapproved.length > 0) {
+          unapprovedArtifacts.push(artifactType);
+        }
+      }
+    }
+
+    return {
+      allApproved: unapprovedArtifacts.length === 0,
+      unapprovedArtifacts,
+    };
   }
 
   cleanupExpired(): number {

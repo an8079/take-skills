@@ -30,7 +30,8 @@ export type ArtifactType =
   | 'VERIFICATION'
   | 'QA-REPORT'
   | 'RELEASE'
-  | 'RETRO';
+  | 'RETRO'
+  | 'DEPLOYMENT';
 
 /**
  * Frontmatter schema for all artifacts
@@ -246,4 +247,5 @@ export const ARTIFACT_FILE_PATTERNS: Record<ArtifactType, RegExp> = {
   'QA-REPORT': /^QA-REPORT\.md$/,
   'RELEASE': /^RELEASE\.md$/,
   'RETRO': /^RETRO\.md$/,
+  'DEPLOYMENT': /^DEPLOYMENT\.md$/,
 };

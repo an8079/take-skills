@@ -183,6 +183,7 @@ export function validateArtifactFilename(
     'QA-REPORT': /^QA-REPORT\.md$/,
     'RELEASE': /^RELEASE\.md$/,
     'RETRO': /^RETRO\.md$/,
+    'DEPLOYMENT': /^DEPLOYMENT\.md$/,
   };
 
   const pattern = typePatterns[expectedType];

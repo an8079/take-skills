@@ -159,10 +159,10 @@ export const STAGE_ARTIFACTS: Record<PipelineStage, StageArtifacts> = {
   },
   deploy: {
     inputs: ["QA-REPORT"],
-    outputs: ["RELEASE"],
+    outputs: ["RELEASE", "DEPLOYMENT"],
   },
   canary: {
-    inputs: ["RELEASE"],
+    inputs: ["RELEASE", "DEPLOYMENT"],
     outputs: [],
   },
 };

@@ -48,51 +48,35 @@ cp -r commands/*.md ~/.claude/commands/
 
 ## 命令索引
 
-### 核心访谈命令
-
-| 命令 | 用途 | 特点 |
-|------|------|------|
-| `/deep-interview` | 苏格拉底式需求访谈 | 模糊度评分、8维度检查 |
-| `/auto-interview` | 双Agent辩论式访谈 | PM(逆向) vs 架构师(传统) |
-
-### 产品审视命令
-
-| 命令 | 用途 | 特点 |
-|------|------|------|
-| `/office-hours` | gstack风格产品审视 | 该不该做 |
-| `/find-product-remind` | 技能推荐与安装 | 从lenny-skills搜索 |
-
-### 架构与设计命令
-
-| 命令 | 用途 | 特点 |
-|------|------|------|
-| `/structure_thinking` | 顶级架构师思维分析 | 需要规格文档 |
-| `/rag` | RAG项目设计与讨论 | LangGraph/LangFuse/LangChain |
-
-### 测试与团队命令
-
-| 命令 | 用途 | 特点 |
-|------|------|------|
-| `/test-teams` | 测试大队 | 3测试员+1资深，内部共识 |
-| `/team` | 动态专家团队 | 10种角色可选，灵活配置 |
-| `/tdd` | TDD测试模式 | 测试先行 |
-| `/qa` | QA测试模式 | 标准化测试 |
-
-### 执行引擎命令
-
-| 命令 | 用途 | 特点 |
-|------|------|------|
-| `/autopilot` | 全自动执行 | 8阶段管道 |
-| `/ralph` | 持久循环 | 包含ultrawork |
-| `/ultrawork` | 最大并行 | 批量修复重构 |
-| `/ultraqa` | QA循环 | 测试→验证→修复 |
-
-### 辅助命令
-
-| 命令 | 用途 | 特点 |
-|------|------|------|
-| `/notify` | 通知配置 | claude-notifications-go集成 |
-| `/pua` | 激将激励 | 竞争压力激发斗志 |
+<!-- AUTO-COMMANDS -->
+| 命令 | 用途 |
+|------|------|
+| `analyze` | |
+| `auto-interview` | |
+| `autopilot` | |
+| `code` | |
+| `debug` | |
+| `deep-interview` | |
+| `find-product-remind` | |
+| `import` | |
+| `interview` | |
+| `notify` | |
+| `office-hours` | |
+| `plan` | |
+| `pua` | |
+| `rag` | |
+| `ralph` | |
+| `review` | |
+| `scope` | |
+| `spec` | |
+| `structure-thinking` | |
+| `tdd` | |
+| `team` | |
+| `test-teams` | |
+| `test` | |
+| `ultraqa` | |
+| `ultrawork` | |
+<!-- /AUTO-COMMANDS -->
 
 ---
 
@@ -187,20 +171,22 @@ cp -r commands/*.md ~/.claude/commands/
 
 ---
 
-## 专家 Agents（10个）
-
+<!-- AUTO-AGENTS -->
 | Agent | 专长 |
 |-------|------|
-| 🏛️ 软件架构师 | 系统设计、DDD、架构模式 |
-| 💎 高级开发者 | Laravel、React/Vue、Three.js |
-| 👁️ 代码审查员 | 代码审查、质量保证 |
-| 🔒 安全工程师 | 威胁建模、漏洞评估 |
-| 🏗️ 后端架构师 | 数据库、API、云基础设施 |
-| 🖥️ 前端开发者 | React/Vue、响应式设计 |
-| ⚙️ DevOps自动化 | CI/CD、容器化 |
-| 📊 数据工程师 | ETL、数据管道 |
-| 📝 技术作家 | API文档、技术规格 |
-| 📈 SRE | 监控、告警、可靠性 |
+| interviewer | Requirements interview specialist |
+| architect | Architecture design specialist |
+| explorer | Code exploration and search specialist |
+| planner | Strategic planning specialist |
+| executor | Code implementation specialist |
+| reviewer | Code review specialist |
+| code-reviewer | Detailed code review specialist |
+| qa-tester | QA and verification specialist |
+| security-engineer | Security review specialist |
+| devops-automator | Build, release, and deployment specialist |
+| technical-writer | Documentation and handoff specialist |
+| debugger | Debugging specialist |
+<!-- /AUTO-AGENTS -->
 
 详细说明请参考 [docs/AGENTS.md](docs/AGENTS.md)
 

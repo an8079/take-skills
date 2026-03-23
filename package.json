@@ -32,7 +32,7 @@
     "LICENSE"
   ],
   "scripts": {
-    "build": "tsc && node scripts/build-cli.mjs && node scripts/build-dist.mjs",
+    "build": "tsc && node scripts/build-cli.mjs && node scripts/sync-readme.mjs && node scripts/build-dist.mjs",
     "build:cli": "node scripts/build-cli.mjs",
     "build:dist": "node scripts/build-dist.mjs",
     "dev": "tsc --watch",

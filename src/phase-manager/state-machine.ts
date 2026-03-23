@@ -152,17 +152,12 @@ export class PhaseStateMachine {
       };
     }
 
-    if (transition.guard) {
-      const guardResult = await transition.guard();
+    // Use options.guard if provided, otherwise use built-in guard
+    const guardFn = options?.guard ?? transition.guard;
+    if (guardFn) {
+      const guardResult = await guardFn();
       if (!guardResult) {
         return { success: false, error: "Transition guard failed" };
-      }
-    }
-
-    if (options?.guard) {
-      const guardResult = await options.guard();
-      if (!guardResult) {
-        return { success: false, error: "Custom guard failed" };
       }
     }
 
