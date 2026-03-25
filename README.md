@@ -1,279 +1,249 @@
-# Claude Code 开发助手配置
+# Claude-Studio：让 AI 成为真正的开发搭档
 
-[![CI](https://github.com/YOUR_USERNAME/claude-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/claude-studio/actions/workflows/ci.yml)
+> **版本：** v3.1.0 | 更新日期：2026-03-25 | 多智能体软件开发工作台
+
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
-> **版本：** v3.1.0 | 更新日期：2026-03-25 | 个性化开发助手工作流
-
-基于 Claude Code 的完整开发工作流配置，覆盖需求分析到项目交付的完整流程。
 
 ---
 
-## 项目特性
+## 核心理念
 
-| 特性 | 说明 |
-|------|------|
-| **核心访谈命令** | /deep-interview（苏格拉底式）、/auto-interview（双Agent辩论） |
-| **产品审视命令** | /office-hours（gstack风格）、/find-product-remind（技能推荐） |
-| **架构与设计** | /structure_thinking（架构分析）、/rag（RAG设计） |
-| **测试团队** | /test-teams（3测试员+1资深）、/team（动态组队） |
-| **执行引擎** | /autopilot、/ralph、/ultrawork、/ultraqa |
-| **12+ 内置 Agent** | interviewer、architect、planner、executor、qa-tester、code-reviewer 等 |
-| **通知系统** | /notify（集成 claude-notifications-go） |
-| **激将激励** | /pua（竞争压力激励） |
+Claude-Studio 不只是一个 AI 编程助手，而是一个完整的**开发流程管理系统**：
+
+> **记忆系统 + 团队协作 + 质量门禁 + 流程引擎**
+
+---
+
+## 核心功能（30+ 命令）
+
+### 创意工具箱
+
+这些是在实践中摸索出来的独特工具：
+
+| 命令 | 功能 | 亮点 |
+|------|------|------|
+| `/lyd-boss` | PUA 督导模式 | 任务追踪、进度激励、不达标不放行 |
+| `/lyd-plan-review` | GAN 风格计划审查 | CEO + Architect 双视角，量化打分，80分门槛 |
+| `/lyd-fro-review` | 前端对抗性审查 | Generator vs Evaluator，原创性 checklist |
+| `/lyd-code-review` | 多角色代码审查 | 安全/性能/可维护性/架构，四维度独立评审 |
+| `/lyd-reverse-architect` | 魔鬼代言人 | 挑战所有假设，识别隐藏风险 |
+| `/lyd-cleaner` | AI Slop 清理器 | 回归安全，删除工作流 |
+
+### 深度思考
+
+| 命令 | 功能 | 亮点 |
+|------|------|------|
+| `/lyd-structure-thinking` | 架构思维分析 | 直接扫描代码，6 维度评估 |
+| `/lyd-deep-interview` | 苏格拉底式访谈 | 数学模糊度门槛，需求结晶 |
+| `/lyd-auto-interview` | 双 Agent 辩论 | 攻防交锋，暴露隐藏假设 |
+
+### 执行引擎
+
+| 命令 | 功能 | 亮点 |
+|------|------|------|
+| `/lyd-autopilot` | 全自动驾驶 | 零干预，idea 到代码 |
+| `/lyd-ralph` | Ralph 循环 | 自我反思迭代，目标验证 |
+| `/lyd-ultrawork` | 最大并行 | 高吞吐任务完成 |
+| `/lyd-ultraqa` | QA 循环 | test→verify→fix 迭代 |
+| `/lyd-sandbox` | 容器隔离执行 | 安全执行未知代码 |
+
+### 团队协作
+
+| 命令 | 功能 | 亮点 |
+|------|------|------|
+| `/lyd-team` | 动态组队 | analyst + executor + verifier 协同 |
+| `/lyd-test-teams` | 测试团队 | 3 测试员 + 1 资深 |
+
+### 开发者工具
+
+| 命令 | 功能 | 亮点 |
+|------|------|------|
+| `/lyd-po` | 提示词优化器 | 自动调优提示词 |
+| `/lyd-imapo` | 图片提示词工程师 | Midjourney/DALL-E 优化 |
+| `/lyd-label` | GitHub Issue 自动标签 | P0/P1/P2 + bug/feature |
+| `/lyd-sandbox` | 容器隔离 | Docker 容器安全执行 |
+
+### 产品与需求
+
+| 命令 | 功能 | 亮点 |
+|------|------|------|
+| `/lyd-office-hours` | 产品审视 | gstack 风格，深度拷问 |
+| `/lyd-find-product-remind` | 技能推荐 | 智能检测缺失技能 |
+
+---
+
+## 团队协作管道
+
+```
+┌─────────────────────────────────────────────────────────┐
+│                  团队协作管道                          │
+├─────────────────────────────────────────────────────────┤
+│                                                         │
+│  team-plan    →    team-exec    →    team-verify     │
+│  (分析规划)         (执行任务)          (验证结果)        │
+│       ↓                   ↓                ↓            │
+│       └───────────────────┼────────────────┘            │
+│                           ↓                             │
+│                    team-fix (如需要)                      │
+│                    (修复问题，最多3次)                    │
+│                           ↓                             │
+│                    complete / failed                     │
+└─────────────────────────────────────────────────────────┘
+```
+
+### 团队角色
+
+| 角色 | Agent | 职责 |
+|------|-------|------|
+| 监督者 | team-lead | 协调团队、跟踪进度 |
+| 分析师 | analyst | 拆解需求、设计方案 |
+| 执行者 | executor | 实现功能 |
+| 验证者 | verifier | 检查质量 |
+| 批评者 | critic | 挑战方案 |
+
+---
+
+## 状态与记忆系统
+
+### 跨 Session 持久化
+
+```
+.omc/state/
+├── sessions/{sessionId}/   # Session 级状态
+└── team/{teamName}/        # 团队状态
+    ├── tasks/              # 任务列表
+    ├── workers/            # Worker 信息
+    ├── shared-memory.json  # 共享内存
+    └── events.jsonl        # 事件日志
+```
+
+### Notepad 共享笔记本
+
+团队知识沉淀三区域：
+
+- **Priority** - 高优先级上下文（自动加载）
+- **Working** - 工作日志（7 天自动清理）
+- **Manual** - 永久笔记
+
+### 心跳与健康检测
+
+- 30 秒心跳超时检测
+- Worker 失联自动告警
+- 任务重新分配
+
+---
+
+## 质量门禁
+
+| 阶段 | 门槛 | 失败处理 |
+|------|------|---------|
+| plan→exec | 需要计划文档 | 阻塞直到达标 |
+| exec→verify | 所有任务完成 | Fix 循环 |
+| verify→complete | 80 分门槛 | 最多 3 次修复 |
+
+### 代码审查评分
+
+```
+P0 (Critical): 安全漏洞、性能灾难、数据丢失风险
+P1 (Important): 内存泄漏、并发问题、边界条件
+P2 (Suggestion): 代码风格、重复代码、文档缺失
+P3 (Info): 优化建议
+```
+
+---
+
+## 为什么选择 Claude-Studio？
+
+| 对比项 | 传统 AI | Claude-Studio |
+|--------|---------|---------------|
+| 上下文 | 单次会话 | 跨 Session 持久化 |
+| 协作 | 单打独斗 | 团队分工 |
+| 质量 | 依赖自觉 | 强制门禁 |
+| 记忆 | 无 | 完整项目记忆 |
+| 流程 | 随意 | 8 阶段管道 |
+| 审查 | 自评 | 多角色对抗 |
+| 迭代 | 手动 | 自动 Fix 循环 |
+
+---
+
+## 适用场景
+
+### 复杂项目开发
+
+多模块、多技术栈的项目需要：
+1. 分析师拆解需求
+2. 架构师设计方案
+3. `/lyd-plan-review` 双视角审查
+4. 团队并行实现
+5. `/lyd-code-review` 多维度审查
+6. Fix 循环直到达标
+
+### 遗留项目维护
+
+没有文档的老代码：
+1. `/lyd-structure-thinking` 直接分析代码
+2. 生成架构文档
+3. `/lyd-reverse-architect` 识别风险
+
+### 高要求代码审查
+
+AI 自评有 bias，需要对抗：
+1. `/lyd-fro-review` 前端 GAN 审查
+2. `/lyd-code-review` 四角色独立评审
+3. P0 问题必须修复
 
 ---
 
 ## 快速开始
 
-### 方式一：作为插件安装（推荐）
-
 ```bash
-# 添加到 marketplace
-/plugin marketplace add local F:/claude-studio/3.4/claude-studio/claude-studio
+# 安装
+/plugin install claude-studio
 
-# 安装插件
-/plugin install claude-dev-assistant@claude-studio
+# 团队协作
+/lyd-team "构建电商后端"
+
+# 计划审查
+/lyd-plan-review
+
+# 代码审查
+/lyd-code-review
+
+# 架构分析
+/lyd-structure-thinking
 ```
-
-### 方式二：手动复制
-
-```bash
-# 复制所有组件到 Claude Code 配置目录
-cp -r skills/agents/* ~/.claude/skills/
-cp -r commands/*.md ~/.claude/commands/
-```
-
----
-
-## 命令索引
-
-<!-- AUTO-COMMANDS -->
-| 命令 | 用途 |
-|------|------|
-| `analyze` | |
-| `auto-interview` | |
-| `autopilot` | |
-| `code` | |
-| `debug` | |
-| `deep-interview` | |
-| `find-product-remind` | |
-| `import` | |
-| `interview` | |
-| `notify` | |
-| `office-hours` | |
-| `plan` | |
-| `pua` | |
-| `qa-only` | |
-| `qa` | |
-| `rag` | |
-| `ralph` | |
-| `review` | |
-| `scope` | |
-| `spec` | |
-| `structure-thinking` | |
-| `tdd` | |
-| `team` | |
-| `test-teams` | |
-| `test` | |
-| `ultraqa` | |
-| `ultrawork` | |
-<!-- /AUTO-COMMANDS -->
-
----
-
-## 工作流程
-
-### 阶段一：需求分析
-
-```bash
-/interview              # 开始需求访谈
-```
-
-- interviewer agent 进行深度访谈
-- 8 维度完整度检查（业务理解、功能边界、技术可行性、数据流、接口契约、异常处理、非功能需求、部署交付）
-- KANO 需求分类
-- 自动识别是否需要新技能
-
-### 阶段二：规格设计
-
-```bash
-/spec                   # 生成规格文档
-```
-
-- architect agent 输出精细规格
-- 包含功能规格、技术规格、非功能需求
-- 用户确认后进入计划阶段
-
-### 阶段三：实现计划
-
-```bash
-/plan                   # 创建实现计划
-```
-
-- 任务拆解与依赖分析
-- 里程碑定义
-- 输出可执行的任务清单
-
-### 阶段四：编码实现
-
-```bash
-/code                   # 进入编码模式
-/tdd                    # TDD 工作流
-```
-
-- coder agent 按计划实现
-- 可选 TDD 模式
-- 实时代码风格检查
-
-### 阶段五：测试验证
-
-```bash
-/test                   # 运行测试
-```
-
-- 测试用例生成与执行
-- 单元/集成/E2E 测试
-- 验证通过标准
-
-### 阶段六：代码审查
-
-```bash
-/review                 # 代码审查
-```
-
-- reviewer agent 质量检查
-- security-reviewer agent 安全审计
-- 审查通过后才能继续
-
-### 阶段七：打包交付
-
-```bash
-npm run build          # 构建项目
-```
-
-- 构建与部署
-- 生成交付包
-- 包含完整文档和配置
-
-### 阶段八：迭代优化
-
-```bash
-/review                 # 代码审查与反思
-```
-
-- 分析项目表现
-- 提取可复用模式
-- 更新知识库
-
----
-
-<!-- AUTO-AGENTS -->
-| Agent | 专长 |
-|-------|------|
-| interviewer | Requirements interview specialist |
-| architect | Architecture design specialist |
-| explorer | Code exploration and search specialist |
-| planner | Strategic planning specialist |
-| executor | Code implementation specialist |
-| reviewer | Code review specialist |
-| code-reviewer | Detailed code review specialist |
-| qa-tester | QA and verification specialist |
-| security-engineer | Security review specialist |
-| devops-automator | Build, release, and deployment specialist |
-| technical-writer | Documentation and handoff specialist |
-| debugger | Debugging specialist |
-<!-- /AUTO-AGENTS -->
-
-详细说明请参考 [docs/AGENTS.md](docs/AGENTS.md)
 
 ---
 
 ## 目录结构
 
 ```
-claude-studio/
-├── README.md                 # 项目说明
-├── CLAUDE.md                 # 系统提示词（全局配置）
-├── ARCHITECTURE.md           # 架构文档
-│
-├── commands/                 # 斜杠命令 (25个)
-│   ├── deep-interview.md     # 苏格拉底式访谈
-│   ├── auto-interview.md     # 双Agent辩论
-│   ├── office-hours.md       # 产品审视
-│   ├── find-product-remind.md # 技能推荐
-│   ├── structure_thinking.md  # 架构分析
-│   ├── rag.md               # RAG设计
-│   ├── test-teams.md        # 测试团队
-│   ├── team.md              # 动态组队
-│   ├── autopilot.md          # 全自动执行
-│   ├── ralph.md             # 持久循环
-│   ├── ultrawork.md         # 最大并行
-│   ├── ultraqa.md           # QA循环
-│   ├── notify.md            # 通知配置
-│   ├── pua.md               # 激将激励
-│   └── ...                  # 更多命令
-│
-├── skills/                   # 技能库
-│   ├── agents/              # 专家Agent (10个)
-│   │   ├── software-architect/
-│   │   ├── senior-developer/
-│   │   ├── code-reviewer/
-│   │   ├── security-engineer/
-│   │   ├── backend-architect/
-│   │   ├── frontend-developer/
-│   │   ├── devops-automator/
-│   │   ├── data-engineer/
-│   │   ├── technical-writer/
-│   │   └── sre/
-│   ├── rag-design/          # RAG设计知识
-│   ├── notifications/       # 通知系统
-│   └── ...                  # 更多技能
-│
-├── docs/                     # 文档
-│   ├── COMMANDS.md          # 命令索引
-│   ├── AGENTS.md            # Agent索引
+Claude-Studio/
+├── commands/              # 30+ 斜杠命令
+│   ├── lyd-*.md          # 18 个 lyd 系列命令
 │   └── ...
-│
-└── .omc/                    # OMC配置
-    └── specs/               # 规格文档
+├── agents/               # Agent 定义
+│   └── team-agents.md    # 6 个团队 Agent
+├── src/team/             # 团队协作核心
+│   ├── pipeline.ts        # 5 阶段管道
+│   ├── task-manager.ts    # 任务分发
+│   ├── message-router.ts  # 消息传递
+│   ├── heartbeat.ts       # 健康检测
+│   ├── notepad.ts        # 共享笔记本
+│   └── shared-memory.ts   # 共享内存
+├── src/mcp/              # MCP 工具
+│   └── state-tools.ts     # 状态管理
+└── scripts/              # 工程化脚本
 ```
 
 ---
 
-## 触发词速查
+## Roadmap
 
-| 输入 | 行为 |
-|------|------|
-| `开始访谈` | 进入访谈模式 |
-| `导入项目` | 导入现有项目 |
-| `分析项目` | 分析项目架构 |
-| `设置范围` | 管理开发边界 |
-| `快速开始` | 跳过访谈进入规格阶段 |
-
----
-
-## 记忆系统
-
-### 项目记忆（memory-bank/）
-
-- `项目进展.md` - 追踪项目各阶段进展
-- `学习记录.md` - 记录用户纠正和经验
-- `技术决策.md` - 记录重要技术决策
-
-### 持续学习
-
-- 会话结束自动提取模式
-- `/review` 命令处理审查
-- `/ralph` 命令处理反思
-
----
-
-## 跨平台支持
-
-本插件完全支持 **Windows、macOS、Linux**。
-
-所有脚本使用 Node.js 实现，兼容性最佳。
+- [ ] Web UI 可视化团队状态
+- [ ] 更多专业化 Agent
+- [ ] Git 深度集成
+- [ ] 图形化流程配置
 
 ---
 
@@ -283,10 +253,4 @@ MIT License
 
 ---
 
-## 相关文档
-
-- [架构文档](ARCHITECTURE.md) - 系统架构详解
-- [命令索引](docs/COMMANDS.md) - 所有命令快速参考
-- [Agent 索引](docs/AGENTS.md) - 所有专家 Agent 目录
-- [规格模板](docs/spec-template.md) - 规格文档模板
-- [部署指南](docs/deployment-guide.md) - 部署配置指南
+**GitHub**: https://github.com/an8079/take-skills
