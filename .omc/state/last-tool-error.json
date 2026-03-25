@@ -1,7 +1,0 @@
-{
-  "tool_name": "Bash",
-  "tool_input_preview": "{\"command\":\"cd F:/claude-studio/3.4/claude-studio/claude-studio && npx tsx src/cli.ts doctor 2>&1\",\"description\":\"Run doctor via tsx\"}",
-  "error": "Exit code 1\nF:\\claude-studio\\3.4\\claude-studio\\claude-studio\\node_modules\\commander\\lib\\command.js:628\r\n      throw new Error(\r\n            ^\r\n\r\nError: cannot add command 'pipeline' as already have command 'pipeline'\r\n    at Command._registerCommand (F:\\claude-studio\\3.4\\claude-studio\\claude-studio\\node_modules\\commander\\lib\\command.js:628:13)\r\n    at Command.command (F:\\claude-studio\\3.4\\claude-studio\\claude-studio\\node_modules\\commander\\lib\\command.js:162:10)\r\n    at <anonymous> (F:\\claude-stu...",
-  "timestamp": "2026-03-23T07:52:17.362Z",
-  "retry_count": 3
-}
