@@ -1,5 +1,5 @@
 ---
-name: import
+name: lyd-import
 description: 导入现有项目。在用户已有项目、只负责部分开发时使用。自动分析项目结构并建立开发边界。
 ---
 

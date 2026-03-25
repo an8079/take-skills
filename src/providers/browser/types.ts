@@ -78,9 +78,9 @@ export interface NetworkCapture {
 /**
  * Page evaluation result
  */
-export interface EvaluationResult {
+export interface EvaluationResult<T = unknown> {
   success: boolean;
-  value?: unknown;
+  value?: T;
   error?: string;
 }
 

@@ -178,7 +178,7 @@ async function executeIteration(
       id: `fix_plan_${iterationNumber}`,
       url: "",
       createdAt: Date.now(),
-      suites: [{ id: "fix", name: "Fix Suite", cases: modifiedCases }],
+      suites: [{ id: "fix", name: "Fix Suite", cases: modifiedCases, tags: [] }],
       config: { url: "" },
       estimatedDuration: 0,
       totalCases: modifiedCases.length,
@@ -307,7 +307,7 @@ export async function runFixLoop(
     );
 
     result.iterations.push(iterationResult);
-    result.totalAttempts += iterationResult.actions.length;
+    result.totalAttempts += iterationResult.actions.reduce((sum, a) => sum + a.attempts, 0);
 
     // Check if all passed
     if (iterationResult.remainingCases.length === 0) {
@@ -355,7 +355,7 @@ export async function runFixLoop(
     }
   }
 
-  if (result.status === "running" && result.iterations.length >= result.maxAttempts) {
+  if (result.status === "running" && result.iterations.length > result.maxAttempts) {
     result.status = "max_attempts";
   }
 

@@ -8,7 +8,7 @@
 import { spawn } from "child_process";
 import { writeFile, mkdir } from "fs/promises";
 import { existsSync } from "fs";
-import { join } from "path";
+import { join, dirname } from "path";
 import type {
   QAProvider,
   QAProviderType,

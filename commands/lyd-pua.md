@@ -1,5 +1,5 @@
 ---
-name: pua
+name: lyd-pua
 description: 激将法激励模式，用竞争压力激发用户斗志。
 ---
 

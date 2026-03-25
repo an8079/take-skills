@@ -7,6 +7,43 @@
 
 ---
 
+## [3.0.0] - 2026-03-24
+
+### 新增 (Added)
+
+#### 核心架构
+- **Pipeline 重构** - 完整的阶段管道编排，支持 gate 检查和 artifact 加载
+- **Phase Manager** - 8阶段状态机 (interview → spec → plan → code → test → review → deploy → canary)
+- **Artifact System** - 工件加载、验证、审计日志完整实现
+- **Governance Framework** - 审批流程、违规检测、模式上下文
+
+#### QA 模块
+- **自动化 QA 流程** - runQAWorkflow、analyzeResults、fixLoop 完整实现
+- **Browser Provider** - Playwright/Puppeteer 双引擎支持
+- **CLI QA Provider** - 跨平台命令行测试执行
+- **Deploy Provider** - 部署与 Canary 发布支持
+
+#### 工程化
+- **TypeScript 严格模式** - 全项目 0 TypeScript 错误
+- **测试覆盖率** - 247 测试，覆盖率 49%+ (pipeline 77%, phase-manager 59%)
+- **ESLint 配置** - 完整的 ESLint 10.x 配置，0 errors
+- **安全修复** - 命令注入防护、路径遍历防护、Git 输出注入防护
+
+### 修复 (Fixed)
+
+- `fix-loop.ts` - 迭代逻辑 `>=` → `>` 修复
+- `fix-loop.ts` - totalAttempts 累加修复
+- `run.ts` - 移除多余的 browser.close() 调用
+- `playwright.ts` - preserve-caught-error 修复
+- `install.js` - 命令注入漏洞 (PowerShell/cp → Node.js 内置优先)
+- `release.mjs` - Git 输出注入防护
+- `memory-manager.js` - 路径遍历攻击防护
+
+### 移除 (Removed)
+
+- 废弃的 agents/ 目录结构
+- 过时的 memory-bank 依赖
+
 ## [2.1.0] - 2026-02-20
 
 ### 新增 (Added)
@@ -28,6 +65,43 @@
 #### 示例文档
 - `docs/auto-build-example.md` - 示例参考文档
 - `docs/AUTO-BUILD-GUIDE.md` - 使用指南
+
+---
+
+## [3.1.0] - 2026-03-25
+
+### 新增 (Added)
+
+#### claude-hub 集成 (Phase 1-3)
+- **GitHub CLI 封装** - `scripts/gh-utils.ts` 提供 `gh pr view/diff/review`、`gh issue edit` 等命令封装
+- **凭证管理** - `scripts/credential-manager.ts` 实现 Token 掩码、脱敏、安全存储
+- **Issue 自动标签** - `/lyd-label` 命令，支持 P0/P1/P2、bug/feature/enhancement 分类
+- **Webhook 框架** - `scripts/webhook-utils.ts` 实现 HMAC-SHA256 签名验证和事件路由
+
+#### claude-hub 集成 Phase 2
+- **容器隔离执行** - `scripts/docker-utils.ts` (969行) 实现完整的 Docker 容器生命周期管理
+- **会话编排系统** - `scripts/orchestration.ts` (23.9KB) 实现 DAG 执行引擎，支持 parallel/sequential/wait_for_core
+
+#### 新增命令 (6个)
+- `/lyd-boss` - PUA 督导模式，任务进度追踪与激励
+- `/lyd-reverse-architect` - 魔鬼代言人架构审查
+- `/lyd-po` - 提示词优化器
+- `/lyd-imapo` - 图片提示词工程师
+- `/lyd-cleaner` - AI slop 清理器，回归安全删除工作流
+- `/lyd-sandbox` - 容器隔离执行命令
+
+#### Agent 标准格式
+- 所有 Agent Prompt 统一格式：vibe 描述 + color 标识 + emoji 标记 + template 结构
+- 5个核心 Agent 全部重构：interviewer、architect、coder、reviewer、debug-helper
+
+### 修复 (Fixed)
+- `commands.test.ts` - 更新测试用例匹配 lyd- 前缀命令名称
+- GitHub webhook 安全 - HMAC-SHA256 签名验证
+
+### 文档 (Documentation)
+- `docs/AGENTS.md` - v3.1.0，Agent 标准格式
+- `docs/COMMANDS.md` - v3.1.0，34 个命令完整文档
+- `docs/knowledge/agent-guide.md` - 完整重构
 
 ---
 

@@ -108,6 +108,7 @@ async function executeStep(
     action: step.action,
     target: step.target,
     value: step.value,
+    success: true,
   };
 
   try {
@@ -143,7 +144,7 @@ async function executeStep(
         break;
 
       case "type":
-        await browser.type(step.target!, step.value!);
+        await browser.typeText(step.target!, step.value!);
         break;
 
       case "press":
@@ -508,8 +509,6 @@ export async function executeTestPlan(config: QARunConfig): Promise<TestRunResul
     result.completedAt = Date.now();
     result.duration = result.completedAt - result.startedAt;
     result.evidence = collector.getEvidence();
-
-    await config.browser.close();
   }
 
   return result;

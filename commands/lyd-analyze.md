@@ -1,5 +1,5 @@
 ---
-name: analyze
+name: lyd-analyze
 description: 分析现有项目架构。在导入项目后深入理解项目结构、技术栈和模块关系。
 ---
 

@@ -47,10 +47,17 @@ export { PhaseChecker, DeliverableChecker };
 import { MetricsCollector, metricsCollector, latencySummary, p50, p75, p90, p95, p99, avg, min, max, formatDuration, formatBytes } from "./metrics/index.js";
 export { MetricsCollector, metricsCollector, latencySummary, p50, p75, p90, p95, p99, avg, min, max, formatDuration, formatBytes };
 
+// Team Collaboration
+import * as Team from "./team/index.js";
+export { Team };
+
+// State Tools
+export * from "./mcp/state-tools.js";
+
 /**
  * Version information
  */
-export const VERSION = "3.0.0";
+export const VERSION = "3.1.0";
 
 /**
  * Create a session with all agents configured

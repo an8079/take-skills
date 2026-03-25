@@ -27,6 +27,7 @@ export interface TestAssertion {
   actual?: unknown;
   message?: string;
   passed?: boolean;
+  error?: string;
 }
 
 /**

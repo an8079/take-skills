@@ -16,13 +16,18 @@ import {
 
 const COMMANDS_DIR = path.resolve(process.cwd(), 'commands');
 
-// Commands that should exist according to README
+// Commands that should exist according to README (v3.0.0)
+// Core commands: no prefix
+// Enhanced commands: lyd- prefix
 const README_COMMANDS = [
-  'interview', 'spec', 'plan', 'code', 'tdd', 'test', 'review',
-  'import', 'analyze', 'scope', 'debug',
-  'deep-interview', 'auto-interview', 'autopilot', 'ralph', 'ultrawork', 'ultraqa',
-  'notify', 'pua', 'rag', 'team', 'test-teams', 'office-hours', 'find-product-remind',
-  'structure-thinking'
+  // Core commands (no prefix)
+  'interview', 'spec', 'plan', 'code', 'tdd', 'test', 'review', 'debug',
+  // lyd-* enhanced commands
+  'lyd-analyze', 'lyd-scope', 'lyd-import',
+  'lyd-autopilot', 'lyd-ultraqa', 'lyd-ultrawork', 'lyd-team',
+  'lyd-qa', 'lyd-qa-only', 'lyd-rag', 'lyd-pua', 'lyd-office-hours',
+  'lyd-structure-thinking', 'lyd-find-product-remind', 'lyd-test-teams', 'lyd-ralph',
+  'lyd-deep-interview', 'lyd-auto-interview', 'lyd-notify', 'lyd-boss', 'lyd-reverse-architect', 'lyd-po', 'lyd-imapo'
 ];
 
 // Normalize line endings to handle CRLF (Windows) and LF (Unix)
@@ -46,7 +51,7 @@ describe('Command Contract Tests', () => {
     });
 
     it('should resolve a shipped command from the repository command set', () => {
-      const command = getCommand('autopilot');
+      const command = getCommand('lyd-autopilot');
       expect(command).not.toBeNull();
       expect(command?.filePath.includes(`${path.sep}commands${path.sep}`)).toBe(true);
     });

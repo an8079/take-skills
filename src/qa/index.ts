@@ -104,7 +104,14 @@ export async function runQAWorkflow(config: QAWorkflowConfig): Promise<QAWorkflo
     ...config.planConfig,
   };
 
+  await browser.launch({
+    headless: true,
+    viewport: planConfig.viewport,
+    timeout: planConfig.timeout,
+  });
+
   const plan = await generateTestPlan(browser, planConfig);
+  await browser.close();
 
   // Step 2: Execute tests
   const runConfig: QARunConfig = {

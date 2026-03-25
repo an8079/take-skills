@@ -20,7 +20,7 @@ export {
   VALID_TRANSITIONS,
 } from "./state-machine.js";
 
-export { STAGE_GATES, type StageGate } from "./stage-gates.js";
+export { STAGE_GATES, type StageGate, PHASE_DISCUSS_GATE, PHASE_PLAN_GATE, PHASE_EXECUTE_GATE, PHASE_VERIFY_GATE } from "./stage-gates.js";
 export { getGateForTransition, checkGate, formatGateReport } from "./stage-gates.js";
 export { PhaseTracker, type Phase, type ProjectPhaseState, type PhaseTransitionRecord } from "./phase-tracker.js";
 export { ApprovalWorkflow, type ApprovalRequest, type ApprovalPolicy } from "./approval-workflow.js";

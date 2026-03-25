@@ -21,6 +21,10 @@ Thumbs.db
 memory-bank/*-actual.md
 memory-bank/private-*.md
 
+# OMC (oh-my-claude) runtime state - do NOT commit
+.omc/
+!.omc/README.md
+
 # Logs
 *.log
 logs/

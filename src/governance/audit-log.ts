@@ -8,7 +8,7 @@
 export interface AuditEntry {
   id: string;
   timestamp: number;
-  category: "phase" | "approval" | "gate" | "violation" | "config";
+  category: "phase" | "approval" | "gate" | "violation" | "config" | "artifact";
   action: string;
   actor: string;
   phaseId?: string;

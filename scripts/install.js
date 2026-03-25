@@ -87,7 +87,7 @@ function copyWithCp(source, dest) {
   execSync(`cp -r "${source}" "${dest}"`, { stdio: 'inherit' });
 }
 
-// 跨平台复制函数
+// 跨平台复制函数 - 优先使用 Node.js 内置（安全）
 function copy(source, dest) {
   const platform = getPlatform();
 
@@ -97,21 +97,23 @@ function copy(source, dest) {
     pathUtils.mkdirSync(destDir, { recursive: true });
   }
 
-  if (platform === 'windows') {
-    // Windows: 使用 PowerShell 或 fs.cpSync
-    if (hasPowerShell()) {
+  // 优先使用 Node.js 内置复制（零命令注入风险）
+  try {
+    copyWithNode(source, dest);
+    return;
+  } catch (err) {
+    // Node 复制失败时，Windows 尝试 PowerShell
+    if (platform === 'windows' && hasPowerShell()) {
       copyWithPowerShell(source, dest);
-    } else {
-      // 回退到 Node.js 内置
-      copyWithNode(source, dest);
+      return;
     }
-  } else {
-    // Unix: 使用 cp 或 Node.js
+    // Unix 尝试 cp
     if (hasBash()) {
       copyWithCp(source, dest);
-    } else {
-      copyWithNode(source, dest);
+      return;
     }
+    // 最后抛出原错误
+    throw err;
   }
 }
 

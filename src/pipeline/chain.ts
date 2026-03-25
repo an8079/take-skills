@@ -7,7 +7,10 @@
 
 import { logger } from "../utils/logger.js";
 import { AuditLog } from "../governance/audit-log.js";
-import { checkGate, type StageGate } from "../phase-manager/index.js";
+import { ProcessController, type ProcessViolation } from "../governance/process-controller.js";
+import { PhaseTracker, checkGate, type StageGate, PHASE_DISCUSS_GATE, PHASE_PLAN_GATE, PHASE_EXECUTE_GATE, PHASE_VERIFY_GATE } from "../phase-manager/index.js";
+import { loadArtifact, loadArtifactsFromDirectory, isArtifactFile, getArtifactTypeFromFilename } from "../artifacts/loader.js";
+import { validateArtifact } from "../artifacts/validator.js";
 import type { GateCheckResult } from "../phase-manager/stage-gates.js";
 import { ApprovalWorkflow, type ApprovalRequest } from "../phase-manager/approval-workflow.js";
 import { MetricsCollector } from "../metrics/collector.js";
@@ -19,6 +22,7 @@ import type {
   StageDefinition,
 } from "./types.js";
 import type { ArtifactType } from "../artifacts/types.js";
+import { join } from "path";
 
 /**
  * Input/output artifact specification for a stage
@@ -70,6 +74,8 @@ export const DEFAULT_STAGES: StageDefinition[] = [
     agent: "interviewer",
     command: "interview",
     dependsOn: [],
+    gate: PHASE_DISCUSS_GATE,
+    phaseId: "discuss",
   },
   {
     id: "spec",
@@ -78,6 +84,8 @@ export const DEFAULT_STAGES: StageDefinition[] = [
     agent: "architect",
     command: "spec",
     dependsOn: ["interview"],
+    gate: PHASE_PLAN_GATE,
+    phaseId: "plan",
   },
   {
     id: "plan",
@@ -94,6 +102,8 @@ export const DEFAULT_STAGES: StageDefinition[] = [
     agent: "executor",
     command: "code",
     dependsOn: ["plan"],
+    gate: PHASE_EXECUTE_GATE,
+    phaseId: "execute",
   },
   {
     id: "test",
@@ -102,6 +112,8 @@ export const DEFAULT_STAGES: StageDefinition[] = [
     agent: "qa-tester",
     command: "test",
     dependsOn: ["code"],
+    gate: PHASE_VERIFY_GATE,
+    phaseId: "verify",
   },
   {
     id: "review",
@@ -192,6 +204,9 @@ export class Pipeline {
   private approvalWorkflow: ApprovalWorkflow;
   private gateStatusEntries: Map<PipelineStage, GateStatusEntry>;
   private metrics: MetricsCollector;
+  private tracker: import("../phase-manager/index.js").PhaseTracker;
+  private processController: ProcessController | null = null;
+  private readonly artifactDir: string;
 
   constructor(config?: Partial<PipelineConfig>) {
     this.config = {
@@ -214,10 +229,35 @@ export class Pipeline {
     this.approvalWorkflow = new ApprovalWorkflow();
     this.gateStatusEntries = new Map();
     this.metrics = MetricsCollector.getInstance();
+    this.artifactDir = (config as { artifactDir?: string })?.artifactDir ?? join(process.cwd(), "artifacts");
+    this.tracker = new PhaseTracker();
   }
 
   private generateId(): string {
     return `pipeline-${Date.now()}-${Math.random().toString(36).slice(2, 8)}`;
+  }
+
+  private initializeProcessGovernance(): void {
+    if (!this.processController) {
+      return;
+    }
+
+    const governancePhaseIds = Array.from(
+      new Set(
+        this.config.stages
+          .map((stage) => stage.phaseId)
+          .filter((phaseId): phaseId is string => Boolean(phaseId))
+      )
+    );
+
+    governancePhaseIds.forEach((phaseId, index) => {
+      const stage = this.config.stages.find((candidate) => candidate.phaseId === phaseId);
+      this.processController?.registerRuntimePhase(phaseId, {
+        name: stage?.name ?? phaseId,
+        status: "pending",
+        dependencies: index === 0 ? [] : [governancePhaseIds[index - 1]],
+      });
+    });
   }
 
   /**
@@ -231,6 +271,93 @@ export class Pipeline {
       }
     }
     return true;
+  }
+
+  /**
+   * Get artifact filename for a given artifact type
+   */
+  private getArtifactFilename(type: ArtifactType): string {
+    const map: Record<string, string> = {
+      "PROJECT": "PROJECT.md",
+      "REQUIREMENTS": "REQUIREMENTS.md",
+      "SPEC": "SPEC.md",
+      "PLAN": "PLAN.md",
+      "ROADMAP": "ROADMAP.md",
+      "EXECUTION-STATE": "EXECUTION-STATE.json",
+      "EXECUTION-LOG": "EXECUTION-LOG.md",
+      "VERIFICATION": "VERIFICATION.md",
+      "QA-REPORT": "QA-REPORT.md",
+      "RELEASE": "RELEASE.md",
+      "RETRO": "RETRO.md",
+      "DEPLOYMENT": "DEPLOYMENT.md",
+    };
+    if (map[type]) return map[type];
+    // Handle PHASE-N-CONTEXT and PHASE-N-PLAN
+    if (type.startsWith("PHASE-")) {
+      const match = type.match(/^(PHASE-\d+-(CONTEXT|PLAN))$/);
+      if (match) return `${match[1]}.md`;
+    }
+    return `${type}.md`;
+  }
+
+  /**
+   * Load input artifacts for a stage
+   */
+  private async loadInputArtifacts(stageId: PipelineStage): Promise<Record<string, unknown> | null> {
+    const stageArtifacts = STAGE_ARTIFACTS[stageId];
+    if (!stageArtifacts || stageArtifacts.inputs.length === 0) return null;
+
+    const inputs: Record<string, unknown> = {};
+    for (const type of stageArtifacts.inputs) {
+      const filename = this.getArtifactFilename(type);
+      const filePath = join(this.artifactDir, filename);
+      try {
+        const artifact = await loadArtifact(filePath);
+        const validation = validateArtifact(artifact);
+        if (!validation.valid) {
+          logger.warn(`[Pipeline:${this.pipelineId}] Invalid artifact ${filename}: ${validation.errors.join(", ")}`);
+        }
+        inputs[type] = artifact;
+      } catch {
+        // Input artifact not found - stage may be starting fresh
+        logger.warn(`[Pipeline:${this.pipelineId}] Input artifact not found: ${filename}`);
+      }
+    }
+    return Object.keys(inputs).length > 0 ? inputs : null;
+  }
+
+  /**
+   * Validate output artifacts after stage completion
+   */
+  private async validateOutputArtifacts(stageId: PipelineStage, output: unknown): Promise<void> {
+    const stageArtifacts = STAGE_ARTIFACTS[stageId];
+    if (!stageArtifacts || stageArtifacts.outputs.length === 0) return;
+
+    const stageDir = join(this.artifactDir, stageId);
+    try {
+      const results = await loadArtifactsFromDirectory(stageDir, true);
+      for (const { artifact, filePath } of results) {
+        const validation = validateArtifact(artifact);
+        if (!validation.valid) {
+          logger.warn(`[Pipeline:${this.pipelineId}] Invalid artifact ${filePath}: ${validation.errors.join(", ")}`);
+          this.auditLog.log(
+            "artifact",
+            "artifact_invalid",
+            "pipeline",
+            { stageId, filePath, errors: validation.errors },
+          );
+        } else {
+          this.auditLog.log(
+            "artifact",
+            "artifact_loaded",
+            "pipeline",
+            { stageId, filePath, type: getArtifactTypeFromFilename(filePath.split(/[/\\]/).pop() || "") ?? "UNKNOWN" },
+          );
+        }
+      }
+    } catch {
+      // No artifacts produced - not necessarily an error
+    }
   }
 
   /**
@@ -326,6 +453,11 @@ export class Pipeline {
     );
 
     const gateResult = await checkGate(stage.gate);
+    if (this.processController && stage.phaseId) {
+      this.processController.recordGateResult(stage.phaseId, gateResult, {
+        status: gateResult.passed ? "running" : "blocked",
+      });
+    }
 
     const entry: GateStatusEntry = {
       stageId: stage.id,
@@ -367,6 +499,14 @@ export class Pipeline {
           status: approvalRequest.status,
           approver: approvalRequest.approver,
         };
+        if (this.processController && stage.phaseId) {
+          this.processController.recordApprovalState(stage.phaseId, {
+            required: true,
+            status: approvalRequest.status,
+            approver: approvalRequest.approver,
+            requestId: approvalRequest.id,
+          });
+        }
 
         // Approval required gates enter approval workflow instead of immediately blocking
         if (approvalRequest.status === "pending") {
@@ -438,6 +578,13 @@ export class Pipeline {
       throw new Error(`Unknown stage: ${stageId}`);
     }
 
+    if (this.processController && stage.phaseId) {
+      this.processController.updateRuntimePhase(stage.phaseId, {
+        name: stage.name,
+        status: "running",
+      });
+    }
+
     // Check gate before executing stage
     const gateResult = await this.checkGateForStage(stage);
 
@@ -446,9 +593,15 @@ export class Pipeline {
       this.metrics.recordGateCheck(stageId, stage.gate?.id || "default", gateResult.passed);
     }
 
+    // Load input artifacts for this stage
+    const artifactInputs = await this.loadInputArtifacts(stageId);
+    const enrichedInput = artifactInputs
+      ? { ...(input as Record<string, unknown>), ...artifactInputs }
+      : input;
+
     const context: StageContext = {
       stage: stageId,
-      input,
+      input: enrichedInput,
       status: "running",
       startTime: Date.now(),
       metadata: {
@@ -464,11 +617,47 @@ export class Pipeline {
     logger.info(`[Pipeline:${this.pipelineId}] Starting stage: ${stageId}`);
 
     try {
-      const output = await executor(stage, input);
+      const output = await executor(stage, enrichedInput);
       context.output = output;
       context.status = "completed";
       context.endTime = Date.now();
+
+      // Validate output artifacts after stage completion
+      await this.validateOutputArtifacts(stageId, output);
+
       this.updateStage(context);
+
+      // Post-stage enforcement check
+      if (this.processController && stage.phaseId) {
+        this.processController.updateRuntimePhase(stage.phaseId, {
+          name: stage.name,
+          status: "completed",
+        });
+        if (stage.gate?.requiresApproval) {
+          this.processController.recordApprovalState(stage.phaseId, {
+            required: true,
+            status: "approved",
+            approver: "pipeline",
+          });
+        }
+      }
+
+      if (this.processController) {
+        const postStageViolations = await this.processController.enforceProcess();
+        const newViolations = postStageViolations.filter(
+          (v) =>
+            !this.auditLog
+              .export()
+              .some(
+                (e) =>
+                  (e.details?.violation as ProcessViolation)?.type === v.type &&
+                  (e.details?.violation as ProcessViolation)?.phaseId === v.phaseId
+              )
+        );
+        for (const v of newViolations) {
+          this.auditLog.log("violation", "process_violation", "pipeline", { violation: v });
+        }
+      }
 
       // Record stage completion metrics
       const duration = context.endTime - (context.startTime || 0);
@@ -480,6 +669,13 @@ export class Pipeline {
       context.status = "failed";
       context.error = error instanceof Error ? error.message : String(error);
       context.endTime = Date.now();
+
+      if (this.processController && stage.phaseId) {
+        this.processController.updateRuntimePhase(stage.phaseId, {
+          name: stage.name,
+          status: "blocked",
+        });
+      }
 
       // Record stage failure metrics
       const duration = context.endTime - (context.startTime || 0);
@@ -508,6 +704,17 @@ export class Pipeline {
 
     // Record pipeline start in audit log
     this.auditLog.log("phase", "pipeline_started", "pipeline", { pipelineId: this.pipelineId });
+
+    // Initialize process controller and run initial enforcement check
+    this.processController = new ProcessController(this.tracker, {
+      mode: "strict",
+      enforceStageGates: true,
+    });
+    this.initializeProcessGovernance();
+    const initialViolations = await this.processController.enforceProcess();
+    for (const v of initialViolations) {
+      this.auditLog.log("violation", "process_violation", "pipeline", { violation: v });
+    }
 
     try {
       // Run stages sequentially, executing parallel branches when possible

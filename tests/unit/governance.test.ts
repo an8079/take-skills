@@ -30,4 +30,70 @@ describe("Governance", () => {
     expect(result.violations.some((violation) => violation.type === "phase_order")).toBe(true);
     expect(result.violations.some((violation) => violation.type === "dependency_blocked")).toBe(true);
   });
+
+  it("enforces runtime gate failures and pending approvals", () => {
+    const controller = new ProcessController({
+      mode: "strict",
+      enforceStageGates: true,
+      requireApproval: true,
+    });
+
+    controller.registerRuntimePhase("discuss", { status: "completed" });
+    controller.registerRuntimePhase("plan", {
+      status: "blocked",
+      dependencies: ["discuss"],
+    });
+    controller.recordGateResult("plan", {
+      gate: {
+        id: "gate-plan-complete",
+        name: "Plan Gate",
+        description: "Plan must be approved",
+        fromStatus: "discussing",
+        toStatus: "planned",
+        criteria: [],
+        requiresApproval: true,
+      },
+      passed: false,
+      blockingCriteria: [
+        {
+          id: "missing-plan",
+          description: "Plan artifact missing",
+          check: async () => false,
+          severity: "blocking",
+        },
+      ],
+      warningCriteria: [],
+      skippedCriteria: [],
+      checkedAt: Date.now(),
+    });
+    controller.recordApprovalState("plan", {
+      required: true,
+      status: "pending",
+      approver: "reviewer",
+      requestId: "approval-1",
+    });
+
+    const violations = controller.enforceProcess();
+
+    expect(violations.some((violation) => violation.type === "gate_blocked")).toBe(true);
+    expect(violations.some((violation) => violation.type === "approval_missing")).toBe(true);
+  });
+
+  it("flags runtime dependency order violations", () => {
+    const controller = new ProcessController({
+      mode: "strict",
+      maxActivePhases: 1,
+    });
+
+    controller.registerRuntimePhase("discuss", { status: "running" });
+    controller.registerRuntimePhase("plan", {
+      status: "running",
+      dependencies: ["discuss"],
+    });
+
+    const violations = controller.enforceProcess();
+
+    expect(violations.some((violation) => violation.type === "phase_order")).toBe(true);
+    expect(violations.some((violation) => violation.type === "dependency_blocked")).toBe(true);
+  });
 });

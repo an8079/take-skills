@@ -68,8 +68,19 @@ function bumpVersion(current, bump) {
 
 // ── Git helpers ─────────────────────────────────────────────────────────────
 
+// Sanitize git ref to prevent command injection
+function sanitizeGitRef(ref) {
+  if (!ref) return null;
+  // Only allow safe git ref characters (tag/branch names)
+  if (!/^[a-zA-Z0-9._\-/]+$/.test(ref)) {
+    throw new Error(`Invalid git ref: ${ref}`);
+  }
+  return ref;
+}
+
 function getCommitsSinceTag(tag) {
-  const range = tag ? `${tag}..HEAD` : 'HEAD';
+  const safeTag = sanitizeGitRef(tag);
+  const range = safeTag ? `${safeTag}..HEAD` : 'HEAD';
   const raw = execSync(
     `git log ${range} --format="%H|%s" --no-merges`,
     { cwd: ROOT, encoding: 'utf-8' }
@@ -78,7 +89,8 @@ function getCommitsSinceTag(tag) {
 }
 
 function getMergeCommitsSinceTag(tag) {
-  const range = tag ? `${tag}..HEAD` : 'HEAD';
+  const safeTag = sanitizeGitRef(tag);
+  const range = safeTag ? `${safeTag}..HEAD` : 'HEAD';
   const raw = execSync(
     `git log ${range} --format="%s" --merges`,
     { cwd: ROOT, encoding: 'utf-8' }

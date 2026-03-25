@@ -19,7 +19,7 @@ export interface EvidenceItem {
   id: string;
   type: EvidenceType;
   timestamp: number;
-  data: string | Record<string, unknown>;
+  data: string | Record<string, unknown> | unknown[];
   metadata?: Record<string, unknown>;
 }
 
@@ -185,7 +185,7 @@ export class EvidenceCollector {
       id,
       type: "trace",
       timestamp: Date.now(),
-      data: this.traceSession,
+      data: this.traceSession as unknown as Record<string, unknown>,
       metadata: {
         duration: this.traceSession.endTime
           ? this.traceSession.endTime - this.traceSession.startTime

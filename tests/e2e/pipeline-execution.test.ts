@@ -6,12 +6,15 @@
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { Pipeline, DEFAULT_STAGES } from '../../src/pipeline/chain.js';
-import type { PipelineConfig, StageContext } from '../../src/pipeline/types.js';
+import type { PipelineConfig, StageContext, StageDefinition, PipelineStage } from '../../src/pipeline/types.js';
+
+/** DEFAULT_STAGES with all gates stripped — for tests that don't care about gate enforcement */
+const UNGATED_STAGES: StageDefinition[] = DEFAULT_STAGES.map(s => ({ ...s, gate: undefined, phaseId: undefined }));
 
 describe('Full Pipeline E2E Tests', () => {
   describe('Full Pipeline Execution', () => {
     it('should execute complete pipeline with all stages', async () => {
-      const pipeline = new Pipeline();
+      const pipeline = new Pipeline({ stages: UNGATED_STAGES });
 
       const executor = vi.fn().mockImplementation(async (stage, input) => {
         return { stage: stage.id, output: `result-from-${stage.id}`, input };
@@ -24,7 +27,7 @@ describe('Full Pipeline E2E Tests', () => {
     });
 
     it('should execute stages in dependency order', async () => {
-      const pipeline = new Pipeline();
+      const pipeline = new Pipeline({ stages: UNGATED_STAGES });
 
       const callOrder: string[] = [];
 
@@ -45,7 +48,7 @@ describe('Full Pipeline E2E Tests', () => {
     });
 
     it('should pass output from one stage as input to next', async () => {
-      const pipeline = new Pipeline();
+      const pipeline = new Pipeline({ stages: UNGATED_STAGES });
 
       const executor = vi.fn().mockImplementation(async (stage, input) => {
         // Each stage should receive the output from previous stage
@@ -62,8 +65,9 @@ describe('Full Pipeline E2E Tests', () => {
     });
 
     it('should skip optional stages when conditions not met', async () => {
+      const ungatedBase = UNGATED_STAGES.slice(0, -2);
       const stagesWithOptional = [
-        ...DEFAULT_STAGES.slice(0, -2), // All except deploy and canary
+        ...ungatedBase, // All except deploy and canary
         {
           id: 'deploy' as const,
           name: 'Deployment',
@@ -95,7 +99,7 @@ describe('Full Pipeline E2E Tests', () => {
     });
 
     it('should handle stage failure with continueOnError false', async () => {
-      const pipeline = new Pipeline({ continueOnError: false });
+      const pipeline = new Pipeline({ stages: UNGATED_STAGES, continueOnError: false });
 
       const executor = vi.fn().mockImplementation(async (stage, _input) => {
         if (stage.id === 'code') {
@@ -111,7 +115,7 @@ describe('Full Pipeline E2E Tests', () => {
     });
 
     it('should record stage execution in results', async () => {
-      const pipeline = new Pipeline();
+      const pipeline = new Pipeline({ stages: UNGATED_STAGES });
 
       const executor = vi.fn().mockResolvedValue({ result: 'success' });
 
@@ -123,7 +127,7 @@ describe('Full Pipeline E2E Tests', () => {
     });
 
     it('should generate audit log entries', async () => {
-      const pipeline = new Pipeline();
+      const pipeline = new Pipeline({ stages: UNGATED_STAGES });
 
       const executor = vi.fn().mockResolvedValue({ result: 'success' });
 
@@ -137,7 +141,7 @@ describe('Full Pipeline E2E Tests', () => {
 
   describe('Pipeline with Mock QA Provider', () => {
     it('should integrate with mock QA results', async () => {
-      const pipeline = new Pipeline();
+      const pipeline = new Pipeline({ stages: UNGATED_STAGES });
 
       // Mock QA that returns simulated QA results
       const mockQA = vi.fn().mockResolvedValue({
@@ -161,7 +165,7 @@ describe('Full Pipeline E2E Tests', () => {
     });
 
     it('should handle QA failures appropriately', async () => {
-      const pipeline = new Pipeline({ continueOnError: false });
+      const pipeline = new Pipeline({ stages: UNGATED_STAGES, continueOnError: false });
 
       const mockQA = vi.fn().mockResolvedValue({
         passed: false,
@@ -187,7 +191,7 @@ describe('Full Pipeline E2E Tests', () => {
   describe('Canary Deployment Simulation', () => {
     it('should simulate canary deployment stages', async () => {
       const canaryStages = [
-        ...DEFAULT_STAGES.slice(0, 6), // Up to review
+        ...UNGATED_STAGES.slice(0, 6), // Up to review
         {
           id: 'deploy' as const,
           name: 'Deploy',
@@ -226,7 +230,7 @@ describe('Full Pipeline E2E Tests', () => {
 
     it('should track canary metrics', async () => {
       const canaryStages = [
-        ...DEFAULT_STAGES.slice(0, 6),
+        ...UNGATED_STAGES.slice(0, 6),
         {
           id: 'deploy' as const,
           name: 'Deploy',

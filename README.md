@@ -3,7 +3,7 @@
 [![CI](https://github.com/YOUR_USERNAME/claude-studio/actions/workflows/ci.yml/badge.svg)](https://github.com/YOUR_USERNAME/claude-studio/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **版本：** v3.0.0 | 更新日期：2026-03-23 | 个性化开发助手工作流
+> **版本：** v3.1.0 | 更新日期：2026-03-25 | 个性化开发助手工作流
 
 基于 Claude Code 的完整开发工作流配置，覆盖需求分析到项目交付的完整流程。
 
@@ -64,6 +64,8 @@ cp -r commands/*.md ~/.claude/commands/
 | `office-hours` | |
 | `plan` | |
 | `pua` | |
+| `qa-only` | |
+| `qa` | |
 | `rag` | |
 | `ralph` | |
 | `review` | |
@@ -128,7 +130,6 @@ cp -r commands/*.md ~/.claude/commands/
 
 ```bash
 /test                   # 运行测试
-/verify                 # 验证循环
 ```
 
 - 测试用例生成与执行
@@ -139,7 +140,6 @@ cp -r commands/*.md ~/.claude/commands/
 
 ```bash
 /review                 # 代码审查
-/security               # 安全审查
 ```
 
 - reviewer agent 质量检查
@@ -149,9 +149,7 @@ cp -r commands/*.md ~/.claude/commands/
 ### 阶段七：打包交付
 
 ```bash
-/build                  # 构建项目
-/deploy                 # 部署项目
-/package                # 打包交付
+npm run build          # 构建项目
 ```
 
 - 构建与部署
@@ -161,8 +159,7 @@ cp -r commands/*.md ~/.claude/commands/
 ### 阶段八：迭代优化
 
 ```bash
-/reflect                # 反思学习
-/learn                  # 提取学习模式
+/review                 # 代码审查与反思
 ```
 
 - 分析项目表现
@@ -267,8 +264,8 @@ claude-studio/
 ### 持续学习
 
 - 会话结束自动提取模式
-- `/reflect` 命令处理纠正
-- `/learn` 命令手动提取
+- `/review` 命令处理审查
+- `/ralph` 命令处理反思
 
 ---
 

@@ -315,8 +315,14 @@ class MemoryManager {
 
     // 删除超过限制的旧版本
     if (files.length > CONFIG.MAX_VERSIONS) {
+      const resolvedVersionDir = path.resolve(versionDir);
       for (let i = CONFIG.MAX_VERSIONS; i < files.length; i++) {
-        fs.unlinkSync(files[i].path);
+        const resolvedPath = path.resolve(files[i].path);
+        // 防止路径遍历攻击
+        if (!resolvedPath.startsWith(resolvedVersionDir + path.sep)) {
+          throw new Error(`Path traversal attempt detected: ${files[i].path}`);
+        }
+        fs.unlinkSync(resolvedPath);
         console.log(`🗑️  已删除旧版本: ${files[i].name}`);
       }
     }

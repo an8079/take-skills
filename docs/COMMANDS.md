@@ -1,6 +1,6 @@
 # 命令索引
 
-> **版本：** v2.0.0 | 更新日期：2026-03-01
+> **版本：** v3.1.0 | 更新日期：2026-03-24
 
 本文档提供所有命令的快速参考。
 
@@ -21,55 +21,47 @@
 
 ---
 
-## 交付命令
+## 增强命令 (lyd-*)
 
 | 命令 | 文件 | 用途 |
 |------|------|------|
-| `/build` | build.md | 构建项目 |
-| `/deploy` | deploy.md | 部署项目 |
-| `/package` | package.md | 打包交付 |
+| `/lyd-analyze` | lyd-analyze.md | 项目分析 |
+| `/lyd-scope` | lyd-scope.md | 范围管理 |
+| `/lyd-import` | lyd-import.md | 导入项目 |
 
 ---
 
-## 增强命令
+## 自动模式命令 (lyd-*)
 
 | 命令 | 文件 | 用途 |
 |------|------|------|
-| `/analyze` | analyze.md | 项目分析 |
-| `/scope` | scope.md | 范围管理 |
-| `/import` | import.md | 导入项目 |
-| `/reflect` | reflect.md | 反思学习 |
-| `/learn` | learn.md | 提取学习模式 |
-| `/verify` | verify.md | 验证循环 |
-| `/checkpoint` | checkpoint.md | 保存验证点 |
+| `/lyd-autopilot` | lyd-autopilot.md | 自动驾驶模式 |
+| `/lyd-ultraqa` | lyd-ultraqa.md | QA 测试模式 |
+| `/lyd-ultrawork` | lyd-ultrawork.md | 高效工作模式 |
+| `/lyd-team` | lyd-team.md | 团队协作模式 |
 
 ---
 
-## 自动模式命令
+## 专项命令 (lyd-*)
 
 | 命令 | 文件 | 用途 |
 |------|------|------|
-| `/autopilot` | autopilot.md | 自动驾驶模式 |
-| `/ultraqa` | ultraqa.md | QA 测试模式 |
-| `/ultrawork` | ultrawork.md | 高效工作模式 |
-| `/team` | team.md | 团队协作模式 |
-
----
-
-## 专项命令
-
-| 命令 | 文件 | 用途 |
-|------|------|------|
-| `/security` | security.md | 安全审查 |
-| `/deep-interview` | deep-interview.md | 深度访谈模式 |
-| `/auto-interview` | auto-interview.md | 自动访谈模式 |
-| `/notify` | notify.md | 通知管理 |
-| `/rag` | rag.md | RAG 检索增强 |
-| `/pua` | pua.md | PUA 模式 |
-| `/office-hours` | office-hours.md | 办公时间 |
-| `/structure-thinking` | structure_thinking.md | 结构化思考 |
-| `/find-product-remind` | find-product-remind.md | 产品提醒 |
-| `/test-teams` | test-teams.md | 团队测试 |
+| `/lyd-boss` | lyd-boss.md | 老板督导 PUA 模式 |
+| `/lyd-reverse-architect` | lyd-reverse-architect.md | 逆向思维架构师 |
+| `/lyd-po` | lyd-po.md | 提示词优化器 |
+| `/lyd-imapo` | lyd-imapo.md | AI 图像提示词工程师 |
+| `/lyd-qa` | lyd-qa.md | 自动化 QA 测试与修复 |
+| `/lyd-qa-only` | lyd-qa-only.md | 仅生成缺陷报告 |
+| `/lyd-deep-interview` | lyd-deep-interview.md | 深度访谈模式 |
+| `/lyd-auto-interview` | lyd-auto-interview.md | 自动访谈模式 |
+| `/lyd-notify` | lyd-notify.md | 通知管理 |
+| `/lyd-rag` | lyd-rag.md | RAG 检索增强 |
+| `/lyd-pua` | lyd-pua.md | PUA 模式 |
+| `/lyd-office-hours` | lyd-office-hours.md | 办公时间 |
+| `/lyd-structure-thinking` | lyd-structure-thinking.md | 结构化思考 |
+| `/lyd-find-product-remind` | lyd-find-product-remind.md | 产品提醒 |
+| `/lyd-test-teams` | lyd-test-teams.md | 团队测试 |
+| `/lyd-ralph` | lyd-ralph.md | Ralph 循环模式 |
 
 ---
 
@@ -79,53 +71,44 @@
 
 **访谈阶段**
 - `/interview` - 需求访谈
-- `/deep-interview` - 深度访谈
-- `/auto-interview` - 自动访谈
+- `/lyd-deep-interview` - 深度访谈
+- `/lyd-auto-interview` - 自动访谈
 
 **规格阶段**
 - `/spec` - 生成规格文档
 
 **计划阶段**
 - `/plan` - 创建实现计划
-- `/scope` - 范围管理
+- `/lyd-scope` - 范围管理
 
 **编码阶段**
 - `/code` - 编码模式
 - `/tdd` - TDD 工作流
-- `/import` - 导入项目
+- `/lyd-import` - 导入项目
 
 **测试阶段**
 - `/test` - 运行测试
-- `/verify` - 验证循环
-- `/ultraqa` - QA 测试
+- `/lyd-qa` - 自动化 QA 测试与修复
+- `/lyd-qa-only` - 仅生成缺陷报告
+- `/lyd-ultraqa` - QA 测试模式
 
 **审查阶段**
 - `/review` - 代码审查
-- `/security` - 安全审查
-
-**部署阶段**
-- `/build` - 构建项目
-- `/deploy` - 部署项目
-- `/package` - 打包交付
-
-**优化阶段**
-- `/reflect` - 反思学习
-- `/learn` - 提取学习模式
-- `/checkpoint` - 保存验证点
 
 **分析阶段**
-- `/analyze` - 项目分析
-- `/structure-thinking` - 结构化思考
+- `/lyd-analyze` - 项目分析
+- `/lyd-structure-thinking` - 结构化思考
 
 **特殊模式**
-- `/autopilot` - 自动驾驶
-- `/ultrawork` - 高效工作
-- `/team` - 团队协作
+- `/lyd-autopilot` - 自动驾驶
+- `/lyd-ultrawork` - 高效工作
+- `/lyd-team` - 团队协作
+- `/lyd-ralph` - Ralph 循环
 - `/debug` - 调试模式
 
 ---
 
-## 命令详细说明
+## 核心命令详细说明
 
 ### /interview
 
@@ -252,58 +235,6 @@ Agent: debug-helper
 
 ---
 
-### /autopilot
-
-```
-用途: 自动驾驶模式
-```
-
-**功能:**
-- 端到端自动化
-- 智能决策
-- 状态保持
-
----
-
-### /ultraqa
-
-```
-用途: QA 测试模式
-```
-
-**功能:**
-- 测试用例生成
-- 测试执行
-- 质量报告
-
----
-
-### /ultrawork
-
-```
-用途: 高效工作模式
-```
-
-**功能:**
-- 专注工作流
-- 减少中断
-- 高吞吐量
-
----
-
-### /team
-
-```
-用途: 团队协作模式
-```
-
-**功能:**
-- 多 Agent 协作
-- 任务分配
-- 进度追踪
-
----
-
 ## 触发词映射
 
 | 触发词 | 对应命令 |
@@ -315,24 +246,23 @@ Agent: debug-helper
 | `TDD` | /tdd |
 | `跑测试` | /test |
 | `审查代码` | /review |
-| `安全审查` | /security |
-| `构建` | /build |
-| `部署` | /deploy |
-| `打包` | /package |
-| `分析` | /analyze |
-| `范围` | /scope |
-| `导入` | /import |
 | `调试` | /debug |
-| `反思` | /reflect |
-| `学习` | /learn |
-| `验证` | /verify |
-| `检查点` | /checkpoint |
-| `自动驾驶` | /autopilot |
-| `QA` | /ultraqa |
-| `高效` | /ultrawork |
-| `团队` | /team |
-| `深度访谈` | /deep-interview |
+| `分析` | /lyd-analyze |
+| `范围` | /lyd-scope |
+| `导入` | /lyd-import |
+| `深度访谈` | /lyd-deep-interview |
 | `快速开始` | /interview 快速开始 |
+| `pua` | /lyd-pua |
+| `团队` | /lyd-team |
+| `qa` | /lyd-qa |
+| `ultrawork` | /lyd-ultrawork |
+| `autopilot` | /lyd-autopilot |
+| `ultraqa` | /lyd-ultraqa |
+| `ralph` | /lyd-ralph |
+| `boss` | /lyd-boss |
+| `逆向` | /lyd-reverse-architect |
+| `po` | /lyd-po |
+| `imapo` | /lyd-imapo |
 
 ---
 

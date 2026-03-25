@@ -6,12 +6,25 @@
 
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 import { Pipeline, GateBlockedError, DEFAULT_STAGES } from '../../src/pipeline/chain.js';
-import type { StageContext, PipelineConfig } from '../../src/pipeline/types.js';
+import type { StageContext, PipelineConfig, PipelineStage, StageDefinition } from '../../src/pipeline/types.js';
+
+/** Create an ungated version of a stage for testing */
+function ungatedStage(id: PipelineStage, dependsOn: PipelineStage[] = []): StageDefinition {
+  const defaultStage = DEFAULT_STAGES.find(s => s.id === id);
+  return {
+    id,
+    name: defaultStage?.name ?? id,
+    description: defaultStage?.description ?? '',
+    agent: defaultStage?.agent ?? 'test',
+    command: defaultStage?.command,
+    dependsOn,
+  };
+}
 
 describe('Pipeline Integration Tests', () => {
   describe('executeStage with gate blocking', () => {
     it('should execute stage successfully when no gate is defined', async () => {
-      const pipeline = new Pipeline();
+      const pipeline = new Pipeline({ stages: [ungatedStage('interview')] });
 
       const executor = vi.fn().mockResolvedValue({ output: 'test-result' });
 
@@ -264,7 +277,7 @@ describe('Pipeline Integration Tests', () => {
     });
 
     it('should track completed stages correctly', async () => {
-      const pipeline = new Pipeline();
+      const pipeline = new Pipeline({ stages: [ungatedStage('interview')] });
 
       const executor = vi.fn().mockResolvedValue({ output: 'result' });
 
@@ -277,7 +290,12 @@ describe('Pipeline Integration Tests', () => {
     });
 
     it('should record audit log entries during execution', async () => {
-      const pipeline = new Pipeline();
+      const stages = [
+        ungatedStage('interview'),
+        ungatedStage('spec', ['interview']),
+        ungatedStage('plan', ['spec']),
+      ];
+      const pipeline = new Pipeline({ stages });
 
       const executor = vi.fn().mockImplementation(async (stage, input) => {
         return { output: 'result' };
