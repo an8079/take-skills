@@ -7,6 +7,24 @@
 
 ---
 
+## [Unreleased] - 2026-03-27
+
+### 新增 (Added)
+
+#### 技能库扩展（每日更新）
+- **mcp-protocol** - MCP（Model Context Protocol）协议开发与集成技能。覆盖 MCP 服务器开发、客户端集成、工具定义规范、调试技巧、安全最佳实践。填补 2026 年 MCP 生态快速发展的技能空白。
+- **finops-for-ai** - AI Agent 成本优化技能。提供 Token 成本分析、模型分层路由、Prompt 压缩、语义缓存、预算熔断等完整 FinOps 框架，对应 2026 年 AI Agent 成本优化核心需求。
+- **investigate** - 系统性调试与根因分析技能。四阶段调查法（调查→分析→假设→实施），铁律：无根因分析不修复。对应 gstack investigate skill 的核心方法论。
+- **office-hours** - 结构化问题定义技能。模拟产品经理办公时间，深度理解需求、挑战假设、探索替代方案。对应 gstack office-hours 的产品思维框架。
+- **retro** - 工程团队回顾与改进技能。支持周回顾、Sprint 回顾、项目回顾、KPT 回顾法、团队贡献分析。对应 gstack retro 技能体系。
+
+### 调研来源
+- 分析 gstack (oh-my-claude) 最新技能体系
+- 调研 2026 AI Agent 趋势（MCP/A2A 协议、多 Agent 编排、FinOps）
+- 对标 LangChain 2026 新特性
+
+---
+
 ## [3.0.0] - 2026-03-24
 
 ### 新增 (Added)
