@@ -191,3 +191,19 @@ cat skills/tdd-workflow/SKILL.md
 - **gsd-advisor-researcher**: Gsd Advisor Researcher — 2026-03
 - **gsd-assumptions-analyzer**: Gsd Assumptions Analyzer — 2026-03
 - **gsd-research-synthesizer**: Gsd Research Synthesizer — 2026-03
+- **gsd-planner**: Gsd Planner — 2026-03
+- **gsd-executor**: Gsd Executor — 2026-03
+- **gsd-verifier**: Gsd Verifier — 2026-03
+- **gsd-debugger**: Gsd Debugger — 2026-03
+- **gsd-roadmapper**: Gsd Roadmapper — 2026-03
+- **gsd-nyquist-auditor**: Gsd Nyquist Auditor — 2026-03
+- **gsd-integration-checker**: Gsd Integration Checker — 2026-03
+- **gsd-ui-checker**: Gsd Ui Checker — 2026-03
+- **gsd-ui-auditor**: Gsd Ui Auditor — 2026-03
+- **gsd-plan-checker**: Gsd Plan Checker — 2026-03
+- **gsd-phase-researcher**: Gsd Phase Researcher — 2026-03
+- **gsd-project-researcher**: Gsd Project Researcher — 2026-03
+- **gsd-codebase-mapper**: Gsd Codebase Mapper — 2026-03
+- **gsd-advisor-researcher**: Gsd Advisor Researcher — 2026-03
+- **gsd-assumptions-analyzer**: Gsd Assumptions Analyzer — 2026-03
+- **gsd-research-synthesizer**: Gsd Research Synthesizer — 2026-03
