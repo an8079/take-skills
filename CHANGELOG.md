@@ -7,6 +7,53 @@
 
 ---
 
+## [Unreleased] - 2026-03-28
+
+### 新增 (Added)
+
+#### 技能库扩展（每日更新）
+
+##### gstack 新技能（2026-03-27 调研）
+- **cso** - 首席安全官技能。覆盖 OWASP Top 10 + STRIDE 威胁建模，17个低噪误报排除规则，8/10+置信度门禁，每个发现含具体漏洞利用场景。对应 gstack CSO agent 角色。
+- **autoplan** - 评审管道技能。一条命令触发 CEO→设计→工程评审全链路，编码决策原则，仅将品味决策提交人工审批。对应 gstack Review Pipeline 角色。
+- **codex** - 第二意见技能。OpenAI Codex CLI 独立代码审查，三模式：pass/fail gate、对抗挑战、开放咨询。/review 和 /codex 双审查时触发跨模型分析。对应 gstack Second Opinion。
+- **browse** - 浏览器QA技能。真实 Chromium 浏览器驱动，~100ms/命令，支持 headed 模式查看每一步操作。对应 gstack QA Engineer 角色。
+- **careful** - 安全护栏技能。Destructive 命令（rm -rf、DROP TABLE、force-push）预警，say "be careful" 激活，支持覆盖任何警告。对应 gstack Safety Guardrails。
+- **freeze** - 编辑锁技能。限制文件修改范围到单一目录，防止调试时意外修改其他文件。对应 gstack Edit Lock。
+- **guard** - 组合安全技能。/careful + /freeze 二合一，最大化安全保护。对应 gstack Full Safety。
+- **setup-deploy** - 部署配置技能。一次性配置 /land-and-deploy，检测平台、生产 URL 和部署命令。对应 gstack Deploy Configurator。
+- **gstack-upgrade** - 自更新技能。升级 gstack 到最新版本，检测全局/ vendored 安装方式并同步更新。对应 gstack Self-Updater。
+- **design-consultation** - 设计伙伴技能。从零构建完整设计系统，调研竞品，提出创意风险，生成逼真产品原型。对应 gstack Design Partner 角色。
+
+##### alirezarezvani/claude-skills v2.0.0 新技能（2026-03-27 调研）
+- **git-worktree-manager** - Git worktree 生命周期管理 + 清理自动化脚本。覆盖 worktree 创建、切换、清理全流程。
+- **mcp-server-builder** - OpenAPI 规范 → MCP scaffold + manifest validator。一键从 API 规范生成 MCP 服务器框架。
+- **changelog-generator** - Release note 生成器 + conventional commit linter。自动化 CHANGELOG 维护。
+- **ci-cd-pipeline-builder** - 技术栈检测 + pipeline 生成器。智能识别项目类型并生成适配的 CI/CD 配置。
+- **prompt-engineer-toolkit** - Prompt A/B 测试 + 版本/diff 管理工具。系统化优化提示词质量。
+
+### 行业趋势（2026-03-27 调研）
+
+#### 核心发现
+- **Flow Engineering 崛起**：从 Prompt Engineering 升级为多 Agent 协作流程设计，2026年主流方向
+- **AEO（Agent Engine Optimization）新战场**：Kantar 报告显示未来营销人核心技能是"流程设计力"
+- **MCP 协议成为标配**：2026年每 4 个 Skills 中就有 1 个基于 MCP 协议构建
+- **本地 AI 加速普及**：Ollama + Open WebUI 组合让私有化部署成为主流选择
+- **可视化 Agent 流**：Langflow、Dify、n8n 拖拽式界面使非 ML 工程师也能构建复杂 AI 应用
+- **Agentic SEO 萌芽**：Google 开始索引 AI Agent 输出内容，搜索算法面临重构
+
+#### GitHub 热门 AI 仓库（2026-03）
+- OpenClaw、n8n、Ollama、Langflow、Dify、DeepSeek-V3、Google Gemini CLI、RAGFlow、Claude Code
+
+### 调研来源
+- garrytan/gstack GitHub（最新 28 个技能 + sprint 生命周期）
+- alirezarezvani/claude-skills v2.0.0 release notes
+- ByteByteGo 2026 Top AI GitHub Repositories
+- 掘金 2026年3月 AI 行业重磅速递
+- Reddit r/ycombinator gstack 讨论
+
+---
+
 ## [Unreleased] - 2026-03-27
 
 ### 新增 (Added)

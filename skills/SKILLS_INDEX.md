@@ -1,8 +1,8 @@
 # 技能索引
 
 > 项目路径: `F:\claude-studio\3.4\claude-studio\claude-studio`
-> 生成日期: 2026-03-27
-> 技能总数: 73
+> 生成日期: 2026-03-27 | 更新: 2026-03-27
+> 技能总数: 88（含 gstack 2026-03 新技能 10个 + alirezarezvani v2.0.0 新技能 5个）
 
 ---
 
@@ -23,7 +23,7 @@
 
 ---
 
-## Development (21个)
+## Development (21个 → 26个，新增2026-03）
 
 | 技能 | 路径 | 用途 |
 |------|------|------|
@@ -48,10 +48,14 @@
 | investigate | skills/investigate/SKILL.md | 系统调试与根因分析 |
 | smart-skill-selector | skills/smart-skill-selector/SKILL.md | 技能选择 |
 | skill-creator | skills/skill-creator/SKILL.md | 技能创建 |
+| git-worktree-manager | skills/git-worktree-manager/SKILL.md | Git worktree 生命周期管理 |
+| changelog-generator | skills/changelog-generator/SKILL.md | Release note 自动生成 |
+| ci-cd-pipeline-builder | skills/ci-cd-pipeline-builder/SKILL.md | CI/CD Pipeline 智能生成 |
+| prompt-engineer-toolkit | skills/prompt-engineer-toolkit/SKILL.md | Prompt A/B测试与版本管理 |
 
 ---
 
-## Infrastructure (6个)
+## Infrastructure (6个 → 7个，新增2026-03)
 
 | 技能 | 路径 | 用途 |
 |------|------|------|
@@ -61,6 +65,7 @@
 | devops-delivery | skills/devops-delivery/SKILL.md | DevOps 交付 |
 | auto-build-workflow | skills/auto-build-workflow/SKILL.md | 自动构建 |
 | notifications | skills/notifications/SKILL.md | 通知系统 |
+| mcp-server-builder | skills/mcp-server-builder/SKILL.md | OpenAPI → MCP 服务器生成 |
 
 ---
 
@@ -99,7 +104,7 @@
 
 ---
 
-## Tools & Docs (10个)
+## Tools & Docs (10个 → 15个，新增2026-03)
 
 | 技能 | 路径 | 用途 |
 |------|------|------|
@@ -113,6 +118,11 @@
 | competitive-analysis | skills/competitive-analysis/SKILL.md | 竞品分析 |
 | office-hours | skills/office-hours/SKILL.md | 结构化问题定义 |
 | retro | skills/retro/SKILL.md | 工程回顾与改进 |
+| browse | skills/browse/SKILL.md | 真实浏览器QA（gstack） |
+| careful | skills/careful/SKILL.md | 安全护栏（gstack） |
+| guard | skills/guard/SKILL.md | 组合安全（gstack） |
+| cso | skills/cso/SKILL.md | 首席安全官（gstack） |
+| autoplan | skills/autoplan/SKILL.md | 全自动评审管道（gstack） |
 
 ---
 
