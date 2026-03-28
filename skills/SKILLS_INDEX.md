@@ -2,7 +2,7 @@
 
 > 项目路径: `F:\claude-studio\3.4\claude-studio\claude-studio`
 > 生成日期: 2026-03-27 | 更新: 2026-03-27
-> 技能总数: 88（含 gstack 2026-03 新技能 10个 + alirezarezvani v2.0.0 新技能 5个）
+> 技能总数: 93（含 oh-my-claude 2026-03 新技能 5个）
 
 ---
 
