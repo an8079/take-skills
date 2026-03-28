@@ -1,8 +1,8 @@
 # 技能索引
 
 > 项目路径: `F:\claude-studio\3.4\claude-studio\claude-studio`
-> 生成日期: 2026-03-27 | 更新: 2026-03-27
-> 技能总数: 93（含 oh-my-claude 2026-03 新技能 5个）
+> 生成日期: 2026-03-28 | 更新: 2026-03-28
+> 技能总数: 84（含 oh-my-claude 2026-03 gap 5个新技能）
 
 ---
 
@@ -23,7 +23,7 @@
 
 ---
 
-## Development (21个 → 26个，新增2026-03）
+## Development (26个，新增2026-03）
 
 | 技能 | 路径 | 用途 |
 |------|------|------|
@@ -52,6 +52,8 @@
 | changelog-generator | skills/changelog-generator/SKILL.md | Release note 自动生成 |
 | ci-cd-pipeline-builder | skills/ci-cd-pipeline-builder/SKILL.md | CI/CD Pipeline 智能生成 |
 | prompt-engineer-toolkit | skills/prompt-engineer-toolkit/SKILL.md | Prompt A/B测试与版本管理 |
+| api-reviewer | skills/api-reviewer/SKILL.md | API 质量专项审查（安全性/性能） |
+| performance-reviewer | skills/performance-reviewer/SKILL.md | 性能专项审查（前端/后端/DB） |
 
 ---
 
@@ -104,7 +106,7 @@
 
 ---
 
-## Tools & Docs (10个 → 15个，新增2026-03)
+## Tools & Docs (15个 → 18个，新增2026-03)
 
 | 技能 | 路径 | 用途 |
 |------|------|------|
@@ -123,6 +125,9 @@
 | guard | skills/guard/SKILL.md | 组合安全（gstack） |
 | cso | skills/cso/SKILL.md | 首席安全官（gstack） |
 | autoplan | skills/autoplan/SKILL.md | 全自动评审管道（gstack） |
+| style-reviewer | skills/style-reviewer/SKILL.md | 设计风格一致性审查 |
+| web-clone | skills/web-clone/SKILL.md | 网页克隆与高保真还原 |
+| ecomode | skills/ecomode/SKILL.md | 极简高效执行模式（省token） |
 
 ---
 
