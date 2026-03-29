@@ -1,374 +1,466 @@
 # take-skills
 
-> AI助手技能包 — 让Claude Code和Cursor更强大
+**AI助手技能包 — 让 Claude Code 和 Cursor 像专家一样工作**
 
-**理念**：质量优先，精而不多。每个Skill都有真实用途。
+> *如果你装了100个Skills但一个都不记得怎么用，这个项目不适合你。如果你只装5个最实用的Skills，让AI真正提升效率，take-skills就是为你设计的。*
 
----
-
-## 🎯 一、这是什么
-
-take-skills是一套AI助手增强包，包含：
-
-| 类别 | 数量 | 说明 |
-|------|------|------|
-| 核心技能 | 2个 | takes-master项目管理 / skill-creator技能创建 |
-| 专项技能 | 14个 | 代码审查、API测试、性能分析、样式检查等 |
-
-**不需要全部安装**，按需选取。
-
----
-
-## 🔧 二、安装到 Cursor
-
-Cursor支持两种方式：
-
-### 方式A：通过Cursor AI面板（最简单）
-
-**Step 1：打开Cursor设置**
-```
-1. 打开Cursor
-2. 点击左下角 ⚙️ 设置
-3. 找到 "AI" 或 "Prompts" 选项卡
-4. 找到 "Custom Skills" 或 "Custom Instructions"
-```
-
-**Step 2：添加Skill**
-1. 打开 `skills/` 目录下的任意一个技能文件夹
-2. 复制 `SKILL.md` 的全部内容
-3. 粘贴到Cursor的Custom Instructions里
-4. 保存
-
-**Step 3：验证**
-在任意聊天窗口输入技能的触发词，例如输入：
-```
-"帮我用api-reviewer分析这个接口"
-```
-Cursor识别到触发词，自动调用对应技能。
-
----
-
-### 方式B：通过Cursor的Rules配置（推荐进阶用法）
-
-**Step 1：找到Cursor配置目录**
-
-macOS：
-```
-~/.cursor/
-```
-
-Windows：
-```
-C:\Users\<用户名>\.cursor\
-```
-
-**Step 2：编辑全局规则**
 ```bash
-# 打开配置目录
-cd ~/.cursor
-
-# 查看现有配置
-ls -la
+# ⚡ 一键安装（支持 Claude Code / Cursor）
+curl -fsSL https://raw.githubusercontent.com/an8079/take-skills/main/install.sh | bash
 ```
 
-**Step 3：创建skill规则文件**
+**支持工具**：Claude Code · Cursor IDE · Windsurf · VS Code Copilot
 
-在 `~/.cursor/rules/` 目录下（如果没有就新建）：
+---
+
+## 📦 快速安装
+
+### 选项A：全自动（推荐，第一次用必选）
+
+**Claude Code（官方CLI）**
+```bash
+# 方式1：curl（一行命令搞定）
+curl -fsSL https://raw.githubusercontent.com/an8079/take-skills/main/install.sh | bash
+
+# 方式2：手动下载安装脚本
+wget https://raw.githubusercontent.com/an8079/take-skills/main/install.sh -O install.sh
+chmod +x install.sh && ./install.sh --claude
+
+# 安装完成后验证
+claude --skills-list   # 应该看到 takes-master 等技能列表
+```
+
+**Cursor IDE（Mac/Windows/Linux）**
+```bash
+# 安装到全局（所有项目可用）
+curl -fsSL https://raw.githubusercontent.com/an8079/take-skills/main/install.sh | bash -s -- --cursor --global
+
+# 安装到当前项目（仅当前项目可用）
+curl -fsSL https://raw.githubusercontent.com/an8079/take-skills/main/install.sh | bash -s -- --cursor --local
+```
+
+---
+
+### 选项B：手动安装（高级用户）
+
+**手动安装到 Claude Code**
+
+```bash
+# 1. 克隆仓库
+git clone https://github.com/an8079/take-skills.git ~/take-skills
+
+# 2. 创建技能目录
+mkdir -p ~/.claude/skills
+
+# 3. 复制需要的技能（这里以 takes-master 为例）
+cp -r ~/take-skills/skills/takes-master ~/.claude/skills/
+
+# 4. 在 ~/.clauderc 中注册
+cat >> ~/.clauderc << 'EOF'
+{
+  "skills": {
+    "takes-master": {
+      "path": "~/.claude/skills/takes-master",
+      "trigger": ["takes:", "update", "项目状态", "推送代码"]
+    }
+  }
+}
+EOF
+
+# 5. 重启 Claude Code
+```
+
+**手动安装到 Cursor IDE**
+
+Cursor 的 Skills 功能通过 Custom Instructions 实现：
+
+```bash
+# 1. 克隆仓库
+git clone https://github.com/an8079/take-skills.git ~/take-skills
+
+# 2. 创建 Cursor 规则目录
+mkdir -p ~/.cursor/rules
+
+# 3. 为每个 Skill 创建规则文件
+cp ~/take-skills/skills/takes-master/SKILL.md ~/.cursor/rules/takes-master.md
+
+# 4. 在 Cursor 设置中启用
+#    打开 Cursor → Settings → AI → Custom Instructions
+#    添加一行：@takes-master.md
+```
+
+---
+
+## 🧠 能装哪些Skills？
+
+### ⭐ 核心技能（必装，Claude Code/Cursor通用）
+
+#### takes-master
+**一句话**：`takes:update` — 让AI帮你管理项目，Git→检查→commit→推送完整流程
+
+**触发方式**：在聊天框输入
+```
+takes:update
+项目状态怎么样？
+检查一下代码质量
+```
+
+**功能**：
+- 自动检查Git状态和构建
+- 4问质量审核（改了什么？有重复吗？是增量吗？信息自解释吗？）
+- 规范化commit信息
+- 推送前自动验证
+- WeChat结果汇报
+
+```bash
+# 安装
+curl -fsSL https://raw.githubusercontent.com/an8079/take-skills/main/install.sh | bash -s -- --skill takes-master
+```
+
+---
+
+#### code-review
+**一句话**：3分钟完成代码安全+性能+质量审查
+
+**触发方式**：
+```
+帮我review这段代码
+审查这个函数
+检查一下有没有bug
+```
+
+**输出示例**：
+```
+🔍 代码审查报告
+
+✅ 综合评分：85/100
+⚠️ 发现3个问题：
+
+🔴 [R01] 高危 | SQL注入风险
+   位置：user_data.py 第23行
+   问题：execute() 使用字符串拼接
+   修复：改用参数化查询
+
+🟡 [R06] 中危 | 文件过长（487行）
+   建议：拆分为多个模块
+
+🟡 [R10] 中危 | 嵌套循环
+   位置：processor.py 第56行
+   修复：考虑使用pandas向量化操作
+```
+
+```bash
+# 安装
+curl -fsSL https://raw.githubusercontent.com/an8079/take-skills/main/install.sh | bash -s -- --skill code-review
+```
+
+---
+
+#### api-reviewer
+**一句话**：分析REST API的安全性、规范性、性能
+
+**触发方式**：
+```
+分析这个接口
+审查API的安全性
+检查endpoint规范
+```
+
+---
+
+#### skill-creator
+**一句话**：告诉AI你想做什么，它帮你创建完整的Skill包
+
+**触发方式**：
+```
+创建一个数据清洗的skill
+我要一个定时提醒的技能
+```
+
+---
+
+### 📋 完整技能清单
+
+| 技能 | 触发词示例 | 适合人群 |
+|------|------------|---------|
+| takes-master | `takes:update`、`项目状态` | 所有开发者 |
+| code-review | `审查代码`、`检查bug` | 后端/全栈 |
+| api-reviewer | `分析接口`、`API安全` | 后端/API开发者 |
+| style-reviewer | `检查样式`、`格式化` | 前端/全栈 |
+| performance-reviewer | `性能分析`、`N+1` | 全栈/架构师 |
+| api-contract-testing | `接口测试`、`契约测试` | 测试/后端 |
+| chaos-engineering | `容错测试`、`故障注入` | SRE/DevOps |
+| property-based-testing | `属性测试`、`fuzzing` | 测试/安全 |
+| git-rebase | `rebase冲突`、`解决git问题` | 所有开发者 |
+| observability | `可观测性`、`日志配置` | DevOps/后端 |
+| autopilot | `自动驾驶`、`批量任务` | 运营/PM |
+| deep-interview | `用户访谈`、`需求挖掘` | 产品/UX |
+| hud | `数据面板`、`dashboard` | 数据/PM |
+| web-clone | `克隆网站`、`仿页面` | 前端/设计 |
+| ecomode | `能耗优化`、`绿色计算` | 架构师 |
+
+---
+
+## 🔧 详细安装教程（各工具）
+
+### Cursor IDE（最完整指南）
+
+Cursor 是基于 VS Code 的 AI 代码编辑器，内置 Custom Instructions 功能。
+
+#### Step 1：打开 Cursor 设置
+
+打开 Cursor → 点击左下角 **⚙️ Settings** → 找到 **AI** 选项卡
+
+#### Step 2：找到 Custom Instructions
+
+在 AI 设置中，找 **Custom Instructions**（自定义指令）或 **Rules** 选项
+
+#### Step 3：添加 Skill
+
+有3种方式：
+
+**方式1：直接在 Custom Instructions 里粘贴（最简单）**
+
+```markdown
+<!-- @takes-master -->
+# takes-master
+当用户说"takes:update"或"项目状态"时：
+1. 检查Git状态
+2. 执行4问质量审核
+3. 执行规范commit
+4. 推送并汇报
+
+<!-- @code-review -->
+# code-review
+当用户发送代码并要求审查时：
+1. 检查安全漏洞（SQL注入/硬编码凭证/eval）
+2. 检查代码异味（过长方法/重复代码）
+3. 检查性能隐患（嵌套循环/同步阻塞）
+4. 输出结构化报告
+```
+
+**方式2：通过 `@` 引用外部文件（推荐，可维护）**
+
+在 Custom Instructions 框里输入：
+```
+@~/.cursor/rules/takes-master.md
+@~/.cursor/rules/code-review.md
+```
+
+然后把对应文件放到 `~/.cursor/rules/` 目录：
+
 ```bash
 mkdir -p ~/.cursor/rules
+cp /path/to/take-skills/skills/takes-master/SKILL.md ~/.cursor/rules/takes-master.md
+cp /path/to/take-skills/skills/code-review/SKILL.md ~/.cursor/rules/code-review.md
 ```
 
-为每个skill创建单独的规则文件，例如 `api-reviewer.md`：
-```markdown
-# Cursor Rule: api-reviewer
-# 用途：自动分析API接口的安全性、性能和规范性
+**方式3：通过 MCP Server（进阶，适合团队）**
 
-当用户说"分析接口"、"审查API"、"检查endpoint"时：
-1. 读取用户提供的API定义文件
-2. 按照以下维度审查：
-   - 安全性：认证方式、权限控制、输入校验
-   - 性能：响应时间、缓存策略、限流机制
-   - 规范：RESTful风格、错误码设计、版本管理
-3. 输出格式：
-   - 问题描述
-   - 严重程度（高/中/低）
-   - 修复建议
+Cursor 支持连接 MCP Server：
+
+1. **Settings → AI → MCP Server → Add New**
+2. Server Name: `take-skills`
+3. Command:
+   ```bash
+   cd /path/to/take-skills && python3 skill_server.py
+   ```
+4. 重启 Cursor
+
+#### Step 4：验证安装成功
+
+在 Cursor 聊天框输入：
+```
+takes:update
 ```
 
-**Step 4：在cursor-settings.json中启用**
-找到 `settings.json` 或 `cursor.settings`：
-```json
-{
-  "rules": [
-    {
-      "name": "api-reviewer",
-      "file": "~/.cursor/rules/api-reviewer.md",
-      "trigger": ["分析接口", "审查API", "检查endpoint"]
-    },
-    {
-      "name": "code-review",
-      "file": "~/.cursor/rules/code-review.md", 
-      "trigger": ["审查代码", "检查bug", "review"]
-    }
-  ]
-}
-```
-
-**Step 5：重启Cursor**
-修改配置后，重启Cursor使规则生效。
+如果 Cursor 识别到 takes-master 技能，返回了项目状态检查流程，说明安装成功 ✅
 
 ---
 
-### 方式C：通过Cursor的 MCP（Machine Learning Control Plane）
+### Claude Code（官方CLI）
 
-**Step 1：打开Cursor Settings → MCP Server**
-```
-Settings → AI → MCP Server → Add New
-```
+Claude Code 是 Anthropic 官方的命令行工具，通过 `~/.claude/skills/` 管理技能。
 
-**Step 2：添加本地Skill服务**
-Server Name: `take-skills`
-Command: 
+#### Step 1：安装 Claude Code
+
 ```bash
-cd /path/to/take-skills && python3 skill_server.py
+# macOS
+brew install anthropic/claude-code/claude
+
+# Linux/WSL
+curl -fsSL https://downloads.anthropic.com/claude-code/install.sh | sh
+
+# Windows (PowerShell)
+iwr https://downloads.anthropic.com/claude-code/install.ps1 -UseBasicParsing | iex
 ```
 
-**Step 3：在skill_server.py中配置路由**
-```python
-# skill_server.py 示例
-from flask import Flask, request, jsonify
+#### Step 2：安装 Skills
 
-app = Flask(__name__)
-
-SKILLS = {
-    "api-reviewer": "./skills/api-reviewer/SKILL.md",
-    "code-review": "./skills/code-review/SKILL.md",
-}
-
-@app.route("/skill/<name>", methods=["POST"])
-def invoke_skill(name):
-    if name not in SKILLS:
-        return jsonify({"error": "Skill not found"}), 404
-    
-    with open(SKILLS[name]) as f:
-        content = f.read()
-    
-    return jsonify({"content": content, "skill": name})
-
-app.run(port=3000)
-```
-
----
-
-## 🧠 三、安装到 Claude Code（Claude官方CLI）
-
-Claude Code通过 `~/.claude/` 目录管理技能。
-
-### 方式A：SKILL.md直接导入（最简单）
-
-**Step 1：找到Claude Code的skill目录**
 ```bash
-# Claude Code默认skill目录
-ls -la ~/.claude/skills/
-```
+# 方法1：使用安装脚本
+curl -fsSL https://raw.githubusercontent.com/an8079/take-skills/main/install.sh | bash -s -- --claude
 
-如果没有，自己创建：
-```bash
+# 方法2：手动安装
 mkdir -p ~/.claude/skills
+cp -r /path/to/take-skills/skills/* ~/.claude/skills/
 ```
 
-**Step 2：复制SKILL.md文件**
+#### Step 3：配置触发词
 
-从本仓库复制需要的技能到Claude Code目录：
+编辑 `~/.clauderc`：
+
 ```bash
-# 方式1：单个skill
-cp -r skills/code-review ~/.claude/skills/
-
-# 方式2：全部skill（不推荐，太多了）
-cp -r skills/* ~/.claude/skills/
-```
-
-**Step 3：在.clauderc中注册**
-```bash
-# 打开配置
 nano ~/.clauderc
 ```
 
 添加：
+
 ```json
 {
   "skills": {
+    "takes-master": {
+      "path": "~/.claude/skills/takes-master",
+      "trigger": ["takes:", "update", "项目状态", "推送"]
+    },
     "code-review": {
       "path": "~/.claude/skills/code-review",
       "trigger": ["review", "审查代码", "检查bug"]
-    },
-    "api-reviewer": {
-      "path": "~/.claude/skills/api-reviewer",
-      "trigger": ["api", "接口分析", "endpoint"]
-    },
-    "takes-master": {
-      "path": "~/.claude/skills/takes-master",
-      "trigger": ["takes:", "update", "项目管理"]
     }
   }
 }
 ```
 
-**Step 4：验证**
-```bash
-# 测试skill是否加载
-claude --skills-list
+#### Step 4：验证
 
-# 测试触发
-claude "用code-review分析一下这个函数"
+```bash
+# 测试 takes-master
+claude "takes:update"
+
+# 应该看到项目状态检查流程启动
+
+# 测试 code-review
+claude "帮我review一下 app/main.py"
 ```
 
 ---
 
-### 方式B：通过CLAUDE.md项目级配置（推荐）
+### Windsurf（Codeium旗下，免费）
 
-在项目根目录创建 `CLAUDE.md`：
-```markdown
-# Project Skills
-
-## 代码审查 (code-review)
-当输入包含以下关键词时触发：审查代码、review、检查bug
-<!-- 技能内容来自 skills/code-review/SKILL.md -->
-<!-- BEGIN SKILL -->
-[这里粘贴SKILL.md的内容]
-<!-- END SKILL -->
-
-## API分析 (api-reviewer)
-当输入包含以下关键词时触发：分析接口、API审查
-<!-- BEGIN SKILL -->
-[这里粘贴SKILL.md的内容]
-<!-- END SKILL -->
-```
-
-Claude Code启动时会自动读取项目目录下的 `CLAUDE.md`，其中的技能定义会自动加载。
-
----
-
-### 方式C：通过环境变量配置
+Windsurf 基于 VS Code，安装方式与 Cursor 类似：
 
 ```bash
-# 在~/.bashrc 或 ~/.zshrc 中添加
-export CLAUDE_SKILLS_DIR="/path/to/take-skills/skills"
-export CLAUDE_DEFAULT_SKILL="takes-master"
-```
+# 1. 克隆仓库
+git clone https://github.com/an8079/take-skills.git ~/take-skills
 
-然后：
-```bash
-source ~/.zshrc  # 或 source ~/.bashrc
+# 2. 复制规则文件
+mkdir -p ~/.windsurf/rules
+cp ~/take-skills/skills/*/SKILL.md ~/.windsurf/rules/
+
+# 3. 在 Windsurf 设置中启用
+# Super Completions → Rules → Add Rule → 选择 takes-master
 ```
 
 ---
 
-## 📋 四、所有Skill一览（按用途分类）
+### VS Code Copilot
 
-### 核心技能（必装）
-
-| Skill | 触发词 | 用途 |
-|-------|---------|------|
-| takes-master | `takes:update`、`项目状态`、`推送代码` | orchestration-service项目管理，Git状态+质量审核+推送 |
-| skill-creator | `创建技能`、`/skill:create` | 从零创建新技能，自动生成SKILL.md |
-
-### 代码质量（推荐）
-
-| Skill | 触发词 | 用途 |
-|-------|---------|------|
-| code-review | `审查代码`、`检查bug`、`review` | 安全漏洞+代码异味+性能隐患，3分钟输出结构化报告 |
-| api-reviewer | `分析接口`、`审查API`、`endpoint` | RESTful规范+安全性+性能，输出问题+严重程度+修复建议 |
-| style-reviewer | `检查样式`、`样式问题` | 代码风格统一，格式化建议 |
-| performance-reviewer | `性能分析`、`优化建议` | 性能瓶颈识别，N+1查询等检测 |
-
-### 测试与DevOps
-
-| Skill | 触发词 | 用途 |
-|-------|---------|------|
-| api-contract-testing | `接口测试`、`contract test` | 自动化API契约测试 |
-| chaos-engineering | `混沌工程`、`容错测试` | 故障注入测试 |
-| property-based-testing | `属性测试`、`fuzzing` | 基于属性的测试生成 |
-
-### Git与协作
-
-| Skill | 触发词 | 用途 |
-|-------|---------|------|
-| git-rebase | `rebase冲突`、`git问题` | 自动分析rebase冲突并提供解决方案 |
-| observability | `可观测性`、`日志问题` | 日志+指标+链路追踪配置建议 |
-
-### 产品与设计
-
-| Skill | 触发词 | 用途 |
-|-------|---------|------|
-| web-clone | `克隆网站`、`仿制页面` | 输入URL生成页面结构和样式 |
-| ecomode | `能耗优化`、`环保设计` | 代码环保分析 |
-| autopilot | `自动驾驶模式`、`批量任务` | 批量任务自动化执行 |
-| deep-interview | `用户访谈`、`需求挖掘` | 产品需求深度访谈 |
-| hud | `数据面板`、`驾驶舱` | 数据可视化驾驶舱生成 |
-| ralplan | `研究规划`、`RFP分析` | 研究计划制定和分析 |
-
----
-
-## 🚀 五、推荐安装方案
-
-### 方案A：最小化（只装最常用的）
+Copilot 主要通过 `.github/copilot-instructions.md` 或 VS Code 设置中的 Custom Instructions：
 
 ```bash
-# 只装这3个
-cp -r skills/takes-master ~/.claude/skills/
-cp -r skills/code-review ~/.claude/skills/
-cp -r skills/api-reviewer ~/.claude/skills/
-```
+# 1. 在项目根目录创建
+mkdir -p .github
+cp /path/to/take-skills/skills/takes-master/SKILL.md .github/copilot-instructions.md
 
-### 方案B：完整安装（按需取用）
-
-```bash
-# 复制全部
-cp -r skills/* ~/.claude/skills/
-
-# 编辑~/.clauderc，只启用需要的
-nano ~/.clauderc
+# 2. 或在 VS Code Settings 中添加路径引用
+# Settings → Extensions → Copilot → Custom Instructions → Add New → @.github/copilot-instructions.md
 ```
 
 ---
 
-## ❓ 六、常见问题
+## 🔄 升级 Skills
+
+```bash
+# 重新运行安装脚本（自动更新到最新版本）
+curl -fsSL https://raw.githubusercontent.com/an8079/take-skills/main/install.sh | bash
+
+# 或手动更新
+cd ~/take-skills && git pull
+```
+
+---
+
+## ❓ 常见问题
 
 **Q：安装后不生效？**
-```
-1. 重启Claude Code / Cursor
-2. 检查触发词是否正确输入
-3. 检查配置文件格式（JSON是否有效）
+```bash
+# 1. 重启工具（Claude Code/Cursor）
+# 2. 检查文件是否正确放置
+ls ~/.claude/skills/       # Claude Code
+ls ~/.cursor/rules/        # Cursor
+
+# 3. 检查触发词是否正确输入
 ```
 
-**Q：和Cursor/C4内置能力冲突？**
-```
-take-skills是补充，不是替代。内置能力照常使用，
-skill只在特定触发词出现时激活。
+**Q：和内置能力冲突吗？**
+> 不冲突。take-skills是补充，在特定触发词出现时激活，不影响正常AI能力。
+
+**Q：如何只安装部分Skills？**
+```bash
+# 只安装 takes-master + code-review
+./install.sh --skill takes-master --skill code-review
 ```
 
-**Q：如何卸载？**
-```
-删除对应的rule文件或skill目录即可：
-rm -rf ~/.claude/skills/code-review
+**Q：Cursor免费版可以用吗？**
+> 可以。Custom Instructions功能在免费版就支持，不需要Pro。
+
+**Q：卸载怎么操作？**
+```bash
+# Claude Code
+rm -rf ~/.claude/skills/takes-master
+
+# Cursor
+rm ~/.cursor/rules/takes-master.md
 ```
 
 ---
 
-## 📦 七、自定义开发新Skill
+## 🏗️ 自定义开发新Skill
 
 ```bash
-# 使用skill-creator
-claude "创建一个数据分析的skill"
+# 使用 skill-creator 自动生成
+claude "创建一个XX技能"
 
 # 或手动创建
 mkdir skills/my-skill
 nano skills/my-skill/SKILL.md
-# 参考已有skill的格式编写
+```
+
+SKILL.md 标准格式：
+
+```markdown
+---
+name: my-skill
+description: 我的自定义技能
+triggers:
+  - "触发词1"
+  - "触发词2"
+---
+
+# my-skill
+
+## 触发条件
+当用户说"...触发词1..."时激活
+
+## 执行步骤
+1. 步骤1
+2. 步骤2
+
+## 输出格式
+返回XXX格式的结果
 ```
 
 ---
 
-**项目地址**：github.com/an8079/take-skills
+**GitHub**：github.com/an8079/take-skills
 **版本**：v9 | 2026-03-29
