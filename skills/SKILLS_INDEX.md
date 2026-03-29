@@ -2,7 +2,7 @@
 
 > 项目路径: `F:\claude-studio\3.4\claude-studio\claude-studio`
 > 生成日期: 2026-03-28 | 更新: 2026-03-28
-> 技能总数: 84（含 oh-my-claude 2026-03 gap 5个新技能）
+> 技能总数: 88（含 oh-my-claude 2026-03 gap 5个新技能，2026-03-29 新增 4个）
 
 ---
 
@@ -106,7 +106,18 @@
 
 ---
 
-## Tools & Docs (15个 → 18个，新增2026-03)
+## Workflow & Planning (4个，新增2026-03-29，来自 oh-my-claude 独家技能)
+
+| 技能 | 路径 | 用途 |
+|------|------|------|
+| autopilot | skills/autopilot/SKILL.md | 全自主执行模式：自动拆解+并行推进+持续迭代 |
+| ralplan | skills/ralplan/SKILL.md | RALPLAN 结构化规划：4模式 Quick/Standard/Deep/Review |
+| deep-interview | skills/deep-interview/SKILL.md | 苏格拉底式深度访谈：三层真相挖掘需求 |
+| hud | skills/hud/SKILL.md | 实时任务状态 HUD：飞行员式进度+风险预警 |
+
+---
+
+## Tools & Docs (18个，新增2026-03)
 
 | 技能 | 路径 | 用途 |
 |------|------|------|

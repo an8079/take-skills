@@ -1,3 +1,30 @@
+## [2026-03-29] 自动升级（UTC 01:44）
+
+### 调研摘要
+- 数据来源：oh-my-claude 30技能完整列表分析 + Azure Skills Plugin 发布 + GitHub Trending Skills 生态调研
+- 趋势：Skills 生态系统爆发（GitHub Trending Top 15 中 6 个新仓库是 Skills），Azure Skills Plugin 整合 19+ skills
+
+### 新增技能（4个，全部来自 oh-my-claude 独家技能库）
+
+#### autopilot（自主执行模式）
+- 全自主执行：接收高层目标，自动拆解、并行推进、持续迭代，无需人工介入每个步骤
+- 包含 Parse → Execute → Iterate → Wrap Up 四阶段协议
+
+#### ralplan（RALPLAN 结构化规划）
+- 4 种规划模式：Quick / Standard / Deep / Review，Deliberate 审议阶段避免幻觉式规划
+
+#### deep-interview（苏格拉底深度访谈）
+- 三层真相挖掘：Surface Need → Deep Motivation → Meta Motivation，最多 10 层追问
+
+#### hud（实时任务状态 HUD）
+- 飞行员 HUD 风格：实时推送进度条、耗时、风险预警，支持 ANSI 彩色格式
+
+### 竞品对比
+oh-my-claude 30 技能中已有 9 个引入（deep-dive, learner, team, ultraqa, visual-verdict + 本次 4 个）
+技能总数：82 → 86
+
+---
+
 ## \[2026-03-27\] 自动升级
 ## [2026-03-28] 自动升级（下午）
 
