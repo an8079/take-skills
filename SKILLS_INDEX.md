@@ -1,72 +1,142 @@
 # take-skills 技能索引
 
-> **理念**：技能不在多，在精。冗余即垃圾。
-> **安装**：一条命令即可 → `curl -sSL https://bit.ly/takes-install | bash`
-> **版本**：v8 | 2026-03-29
+> **理念**：质量优先，精而不滥。每个Skill有真实触发场景和用途。
+> **安装**：见 README.md
+> **版本**：v9 | 2026-03-29
 
 ---
 
-## ⭐ 核心技能（生产可用）
+## ⭐ 核心技能（必装，2个）
 
-| 技能 | 版本 | 说明 | 命令 |
-|------|------|------|------|
-| takes-master | v1.0 | orchestration-service项目管理 | `/takes:update` |
-| skill-creator | v1.0 | 技能创建工具 | `/skill:create` |
+### takes-master
+**触发词**：`takes:update`、`项目状态`、`推送代码`、`检查代码`
+
+**用途**：orchestration-service项目管理Git→检查→commit→推送完整工作流
+```
+takes:update → 自动执行4问质量检查 → commit → 推送 → WeChat汇报
+```
+**推荐理由**：让项目更新有章可循，有记录可查
+
+### skill-creator
+**触发词**：`创建技能`、`/skill:create`、`写一个skill`
+
+**用途**：从零生成完整Skill包（SKILL.md + agent.py + references/）
+**推荐理由**：有了它，可以随时为新需求创建新技能
 
 ---
 
-## 📦 OpenClaw 官方技能（从 clawhub 安装）
+## 🔍 代码质量（推荐，4个）
 
-```bash
-# 方式1: 命令行（需要 openclaw cli）
-openclaw skills install <skill-name>
+### api-reviewer
+**触发词**：`分析接口`、`审查API`、`endpoint检查`
 
-# 方式2: 一键安装脚本（无需 openclaw cli）
-curl -sSL https://bit.ly/takes-install | bash
+**用途**：RESTful规范 + 安全性（认证/权限/SQL注入）+ 性能（响应时间/缓存/限流）
+```
+输入：API定义文件
+输出：问题列表 + 严重程度 + 修复建议
 ```
 
-| 技能 | 用途 | 安装命令 |
-|------|------|---------|
-| weather | 天气预报 | `openclaw skills install weather` |
-| minimax-pdf | PDF生成 | `openclaw skills install minimax-pdf` |
-| minimax-xlsx | Excel生成 | `openclaw skills install minimax-xlsx` |
-| pptx-generator | PPT生成 | `openclaw skills install pptx-generator` |
-| feishu-doc | 飞书文档 | `openclaw skills install feishu-doc` |
-| tencent-docs | 腾讯文档 | `openclaw skills install tencent-docs` |
-| wecom-connect | 企业微信 | `openclaw skills install wecom-connect` |
-| weixin-connect | 个人微信 | `openclaw skills install weixin-connect` |
-| cron-mastery | 定时任务 | `openclaw skills install cron-mastery` |
-| maxclaw-helper | 平台助手 | `openclaw skills install maxclaw-helper` |
+### code-review
+**触发词**：`审查代码`、`检查bug`、`review代码`
+
+**用途**：安全漏洞 + 代码异味 + 性能隐患，3分钟输出结构化报告
+
+### style-reviewer
+**触发词**：`检查样式`、`代码格式化`
+
+**用途**：代码风格统一，命名规范，格式化建议
+
+### performance-reviewer
+**触发词**：`性能分析`、`优化建议`、`N+1`
+
+**用途**：性能瓶颈识别，N+1查询，异步阻塞检测
 
 ---
 
-## 🔧 takes-install.sh 一键安装器
+## 🧪 测试与DevOps（3个）
 
-**快速安装：**
-```bash
-curl -sSL https://bit.ly/takes-install | bash
-```
+### api-contract-testing
+**触发词**：`接口测试`、`contract test`、`契约测试`
 
-**安装单个：**
-```bash
-curl -sSL https://bit.ly/takes-install | bash -s -- takes-master
-```
+**用途**：自动化API契约测试，断言验证
 
-**查看已安装：**
-```bash
-takes-install.sh list
-```
+### chaos-engineering
+**触发词**：`混沌工程`、`容错测试`、`故障注入`
+
+**用途**：模拟服务故障，验证系统韧性
+
+### property-based-testing
+**触发词**：`属性测试`、`fuzzing`、`模糊测试`
+
+**用途**：基于属性的测试生成，随机边界测试
 
 ---
 
-## 📊 与 oh-my-claude 对比
+## 🔀 Git与协作（1个）
 
-| 维度 | oh-my-claude | take-skills |
-|------|-------------|-------------|
-| 技能数 | 47个 | 2个（核心）+ 10个官方 |
-| 质量策略 | 精选 | **质量优先，宁缺毋滥** |
-| 安装方式 | 手动复制 | **一键脚本** |
-| 更新机制 | 无自动 | 每4小时自动巡检 |
+### git-rebase
+**触发词**：`rebase冲突`、`git问题`、`解决冲突`
 
-> take-skills 的理念：用户反馈109个skills拖慢Agent，清理后反而更好用。
-> 所以take-skills只保留真正有价值的，壳子全部不要。
+**用途**：自动分析rebase冲突，给出最优解决方案
+
+---
+
+## 📊 可观测性（1个）
+
+### observability
+**触发词**：`可观测性`、`日志配置`、`链路追踪`
+
+**用途**：日志+指标+链路追踪的完整可观测性方案建议
+
+---
+
+## 🚀 效率工具（3个）
+
+### autopilot
+**触发词**：`自动驾驶`、`批量任务`、`自动化执行`
+
+**用途**：批量任务自动规划与执行，减少重复操作
+
+### deep-interview
+**触发词**：`用户访谈`、`需求挖掘`、`产品调研`
+
+**用途**：产品需求深度访谈框架，自动生成访谈问题
+
+### hud
+**触发词**：`数据面板`、`驾驶舱`、`dashboard`
+
+**用途**：数据可视化驾驶舱，结构化图表建议
+
+---
+
+## 🎨 产品与UX（2个）
+
+### web-clone
+**触发词**：`克隆网站`、`仿制页面`、`页面结构分析`
+
+**用途**：输入URL，输出页面结构+样式分析
+
+### ecomode
+**触发词**：`能耗优化`、`环保设计`、`绿色计算`
+
+**用途**：代码能源消耗评估，优化建议
+
+---
+
+## 📋 安装方式
+
+### Cursor
+1. Settings → AI → Custom Instructions
+2. 复制对应SKILL.md内容粘贴进去
+3. 保存，重启Cursor
+
+### Claude Code
+1. `cp -r skills/<name> ~/.claude/skills/`
+2. 在`~/.clauderc`中注册
+3. 重启Claude Code
+
+详细教程见 README.md
+
+---
+
+**总技能数**：16个（核心2 + 代码质量4 + 测试DevOps 3 + Git协作1 + 可观测性1 + 效率3 + 产品UX 2）

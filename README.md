@@ -1,256 +1,374 @@
-# Claude-Studio：让 AI 成为真正的开发搭档
+# take-skills
 
-> **版本：** v3.1.0 | 更新日期：2026-03-25 | 多智能体软件开发工作台
+> AI助手技能包 — 让Claude Code和Cursor更强大
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-
----
-
-## 核心理念
-
-Claude-Studio 不只是一个 AI 编程助手，而是一个完整的**开发流程管理系统**：
-
-> **记忆系统 + 团队协作 + 质量门禁 + 流程引擎**
+**理念**：质量优先，精而不多。每个Skill都有真实用途。
 
 ---
 
-## 核心功能（30+ 命令）
+## 🎯 一、这是什么
 
-### 创意工具箱
+take-skills是一套AI助手增强包，包含：
 
-这些是在实践中摸索出来的独特工具：
-
-| 命令 | 功能 | 亮点 |
+| 类别 | 数量 | 说明 |
 |------|------|------|
-| `/lyd-boss` | PUA 督导模式 | 任务追踪、进度激励、不达标不放行 |
-| `/lyd-plan-review` | GAN 风格计划审查 | CEO + Architect 双视角，量化打分，80分门槛 |
-| `/lyd-fro-review` | 前端对抗性审查 | Generator vs Evaluator，原创性 checklist |
-| `/lyd-code-review` | 多角色代码审查 | 安全/性能/可维护性/架构，四维度独立评审 |
-| `/lyd-reverse-architect` | 魔鬼代言人 | 挑战所有假设，识别隐藏风险 |
-| `/lyd-cleaner` | AI Slop 清理器 | 回归安全，删除工作流 |
+| 核心技能 | 2个 | takes-master项目管理 / skill-creator技能创建 |
+| 专项技能 | 14个 | 代码审查、API测试、性能分析、样式检查等 |
 
-### 深度思考
-
-| 命令 | 功能 | 亮点 |
-|------|------|------|
-| `/lyd-structure-thinking` | 架构思维分析 | 直接扫描代码，6 维度评估 |
-| `/lyd-deep-interview` | 苏格拉底式访谈 | 数学模糊度门槛，需求结晶 |
-| `/lyd-auto-interview` | 双 Agent 辩论 | 攻防交锋，暴露隐藏假设 |
-
-### 执行引擎
-
-| 命令 | 功能 | 亮点 |
-|------|------|------|
-| `/lyd-autopilot` | 全自动驾驶 | 零干预，idea 到代码 |
-| `/lyd-ralph` | Ralph 循环 | 自我反思迭代，目标验证 |
-| `/lyd-ultrawork` | 最大并行 | 高吞吐任务完成 |
-| `/lyd-ultraqa` | QA 循环 | test→verify→fix 迭代 |
-| `/lyd-sandbox` | 容器隔离执行 | 安全执行未知代码 |
-
-### 团队协作
-
-| 命令 | 功能 | 亮点 |
-|------|------|------|
-| `/lyd-team` | 动态组队 | analyst + executor + verifier 协同 |
-| `/lyd-test-teams` | 测试团队 | 3 测试员 + 1 资深 |
-
-### 开发者工具
-
-| 命令 | 功能 | 亮点 |
-|------|------|------|
-| `/lyd-po` | 提示词优化器 | 自动调优提示词 |
-| `/lyd-imapo` | 图片提示词工程师 | Midjourney/DALL-E 优化 |
-| `/lyd-label` | GitHub Issue 自动标签 | P0/P1/P2 + bug/feature |
-| `/lyd-sandbox` | 容器隔离 | Docker 容器安全执行 |
-
-### 产品与需求
-
-| 命令 | 功能 | 亮点 |
-|------|------|------|
-| `/lyd-office-hours` | 产品审视 | gstack 风格，深度拷问 |
-| `/lyd-find-product-remind` | 技能推荐 | 智能检测缺失技能 |
+**不需要全部安装**，按需选取。
 
 ---
 
-## 团队协作管道
+## 🔧 二、安装到 Cursor
 
+Cursor支持两种方式：
+
+### 方式A：通过Cursor AI面板（最简单）
+
+**Step 1：打开Cursor设置**
 ```
-┌─────────────────────────────────────────────────────────┐
-│                  团队协作管道                          │
-├─────────────────────────────────────────────────────────┤
-│                                                         │
-│  team-plan    →    team-exec    →    team-verify     │
-│  (分析规划)         (执行任务)          (验证结果)        │
-│       ↓                   ↓                ↓            │
-│       └───────────────────┼────────────────┘            │
-│                           ↓                             │
-│                    team-fix (如需要)                      │
-│                    (修复问题，最多3次)                    │
-│                           ↓                             │
-│                    complete / failed                     │
-└─────────────────────────────────────────────────────────┘
+1. 打开Cursor
+2. 点击左下角 ⚙️ 设置
+3. 找到 "AI" 或 "Prompts" 选项卡
+4. 找到 "Custom Skills" 或 "Custom Instructions"
 ```
 
-### 团队角色
+**Step 2：添加Skill**
+1. 打开 `skills/` 目录下的任意一个技能文件夹
+2. 复制 `SKILL.md` 的全部内容
+3. 粘贴到Cursor的Custom Instructions里
+4. 保存
 
-| 角色 | Agent | 职责 |
-|------|-------|------|
-| 监督者 | team-lead | 协调团队、跟踪进度 |
-| 分析师 | analyst | 拆解需求、设计方案 |
-| 执行者 | executor | 实现功能 |
-| 验证者 | verifier | 检查质量 |
-| 批评者 | critic | 挑战方案 |
+**Step 3：验证**
+在任意聊天窗口输入技能的触发词，例如输入：
+```
+"帮我用api-reviewer分析这个接口"
+```
+Cursor识别到触发词，自动调用对应技能。
 
 ---
 
-## 状态与记忆系统
+### 方式B：通过Cursor的Rules配置（推荐进阶用法）
 
-### 跨 Session 持久化
+**Step 1：找到Cursor配置目录**
 
+macOS：
 ```
-.omc/state/
-├── sessions/{sessionId}/   # Session 级状态
-└── team/{teamName}/        # 团队状态
-    ├── tasks/              # 任务列表
-    ├── workers/            # Worker 信息
-    ├── shared-memory.json  # 共享内存
-    └── events.jsonl        # 事件日志
+~/.cursor/
 ```
 
-### Notepad 共享笔记本
-
-团队知识沉淀三区域：
-
-- **Priority** - 高优先级上下文（自动加载）
-- **Working** - 工作日志（7 天自动清理）
-- **Manual** - 永久笔记
-
-### 心跳与健康检测
-
-- 30 秒心跳超时检测
-- Worker 失联自动告警
-- 任务重新分配
-
----
-
-## 质量门禁
-
-| 阶段 | 门槛 | 失败处理 |
-|------|------|---------|
-| plan→exec | 需要计划文档 | 阻塞直到达标 |
-| exec→verify | 所有任务完成 | Fix 循环 |
-| verify→complete | 80 分门槛 | 最多 3 次修复 |
-
-### 代码审查评分
-
+Windows：
 ```
-P0 (Critical): 安全漏洞、性能灾难、数据丢失风险
-P1 (Important): 内存泄漏、并发问题、边界条件
-P2 (Suggestion): 代码风格、重复代码、文档缺失
-P3 (Info): 优化建议
+C:\Users\<用户名>\.cursor\
 ```
 
+**Step 2：编辑全局规则**
+```bash
+# 打开配置目录
+cd ~/.cursor
+
+# 查看现有配置
+ls -la
+```
+
+**Step 3：创建skill规则文件**
+
+在 `~/.cursor/rules/` 目录下（如果没有就新建）：
+```bash
+mkdir -p ~/.cursor/rules
+```
+
+为每个skill创建单独的规则文件，例如 `api-reviewer.md`：
+```markdown
+# Cursor Rule: api-reviewer
+# 用途：自动分析API接口的安全性、性能和规范性
+
+当用户说"分析接口"、"审查API"、"检查endpoint"时：
+1. 读取用户提供的API定义文件
+2. 按照以下维度审查：
+   - 安全性：认证方式、权限控制、输入校验
+   - 性能：响应时间、缓存策略、限流机制
+   - 规范：RESTful风格、错误码设计、版本管理
+3. 输出格式：
+   - 问题描述
+   - 严重程度（高/中/低）
+   - 修复建议
+```
+
+**Step 4：在cursor-settings.json中启用**
+找到 `settings.json` 或 `cursor.settings`：
+```json
+{
+  "rules": [
+    {
+      "name": "api-reviewer",
+      "file": "~/.cursor/rules/api-reviewer.md",
+      "trigger": ["分析接口", "审查API", "检查endpoint"]
+    },
+    {
+      "name": "code-review",
+      "file": "~/.cursor/rules/code-review.md", 
+      "trigger": ["审查代码", "检查bug", "review"]
+    }
+  ]
+}
+```
+
+**Step 5：重启Cursor**
+修改配置后，重启Cursor使规则生效。
+
 ---
 
-## 为什么选择 Claude-Studio？
+### 方式C：通过Cursor的 MCP（Machine Learning Control Plane）
 
-| 对比项 | 传统 AI | Claude-Studio |
-|--------|---------|---------------|
-| 上下文 | 单次会话 | 跨 Session 持久化 |
-| 协作 | 单打独斗 | 团队分工 |
-| 质量 | 依赖自觉 | 强制门禁 |
-| 记忆 | 无 | 完整项目记忆 |
-| 流程 | 随意 | 8 阶段管道 |
-| 审查 | 自评 | 多角色对抗 |
-| 迭代 | 手动 | 自动 Fix 循环 |
+**Step 1：打开Cursor Settings → MCP Server**
+```
+Settings → AI → MCP Server → Add New
+```
+
+**Step 2：添加本地Skill服务**
+Server Name: `take-skills`
+Command: 
+```bash
+cd /path/to/take-skills && python3 skill_server.py
+```
+
+**Step 3：在skill_server.py中配置路由**
+```python
+# skill_server.py 示例
+from flask import Flask, request, jsonify
+
+app = Flask(__name__)
+
+SKILLS = {
+    "api-reviewer": "./skills/api-reviewer/SKILL.md",
+    "code-review": "./skills/code-review/SKILL.md",
+}
+
+@app.route("/skill/<name>", methods=["POST"])
+def invoke_skill(name):
+    if name not in SKILLS:
+        return jsonify({"error": "Skill not found"}), 404
+    
+    with open(SKILLS[name]) as f:
+        content = f.read()
+    
+    return jsonify({"content": content, "skill": name})
+
+app.run(port=3000)
+```
 
 ---
 
-## 适用场景
+## 🧠 三、安装到 Claude Code（Claude官方CLI）
 
-### 复杂项目开发
+Claude Code通过 `~/.claude/` 目录管理技能。
 
-多模块、多技术栈的项目需要：
-1. 分析师拆解需求
-2. 架构师设计方案
-3. `/lyd-plan-review` 双视角审查
-4. 团队并行实现
-5. `/lyd-code-review` 多维度审查
-6. Fix 循环直到达标
+### 方式A：SKILL.md直接导入（最简单）
 
-### 遗留项目维护
+**Step 1：找到Claude Code的skill目录**
+```bash
+# Claude Code默认skill目录
+ls -la ~/.claude/skills/
+```
 
-没有文档的老代码：
-1. `/lyd-structure-thinking` 直接分析代码
-2. 生成架构文档
-3. `/lyd-reverse-architect` 识别风险
+如果没有，自己创建：
+```bash
+mkdir -p ~/.claude/skills
+```
 
-### 高要求代码审查
+**Step 2：复制SKILL.md文件**
 
-AI 自评有 bias，需要对抗：
-1. `/lyd-fro-review` 前端 GAN 审查
-2. `/lyd-code-review` 四角色独立评审
-3. P0 问题必须修复
+从本仓库复制需要的技能到Claude Code目录：
+```bash
+# 方式1：单个skill
+cp -r skills/code-review ~/.claude/skills/
+
+# 方式2：全部skill（不推荐，太多了）
+cp -r skills/* ~/.claude/skills/
+```
+
+**Step 3：在.clauderc中注册**
+```bash
+# 打开配置
+nano ~/.clauderc
+```
+
+添加：
+```json
+{
+  "skills": {
+    "code-review": {
+      "path": "~/.claude/skills/code-review",
+      "trigger": ["review", "审查代码", "检查bug"]
+    },
+    "api-reviewer": {
+      "path": "~/.claude/skills/api-reviewer",
+      "trigger": ["api", "接口分析", "endpoint"]
+    },
+    "takes-master": {
+      "path": "~/.claude/skills/takes-master",
+      "trigger": ["takes:", "update", "项目管理"]
+    }
+  }
+}
+```
+
+**Step 4：验证**
+```bash
+# 测试skill是否加载
+claude --skills-list
+
+# 测试触发
+claude "用code-review分析一下这个函数"
+```
 
 ---
 
-## 快速开始
+### 方式B：通过CLAUDE.md项目级配置（推荐）
+
+在项目根目录创建 `CLAUDE.md`：
+```markdown
+# Project Skills
+
+## 代码审查 (code-review)
+当输入包含以下关键词时触发：审查代码、review、检查bug
+<!-- 技能内容来自 skills/code-review/SKILL.md -->
+<!-- BEGIN SKILL -->
+[这里粘贴SKILL.md的内容]
+<!-- END SKILL -->
+
+## API分析 (api-reviewer)
+当输入包含以下关键词时触发：分析接口、API审查
+<!-- BEGIN SKILL -->
+[这里粘贴SKILL.md的内容]
+<!-- END SKILL -->
+```
+
+Claude Code启动时会自动读取项目目录下的 `CLAUDE.md`，其中的技能定义会自动加载。
+
+---
+
+### 方式C：通过环境变量配置
 
 ```bash
-# 安装
-/plugin install claude-studio
+# 在~/.bashrc 或 ~/.zshrc 中添加
+export CLAUDE_SKILLS_DIR="/path/to/take-skills/skills"
+export CLAUDE_DEFAULT_SKILL="takes-master"
+```
 
-# 团队协作
-/lyd-team "构建电商后端"
-
-# 计划审查
-/lyd-plan-review
-
-# 代码审查
-/lyd-code-review
-
-# 架构分析
-/lyd-structure-thinking
+然后：
+```bash
+source ~/.zshrc  # 或 source ~/.bashrc
 ```
 
 ---
 
-## 目录结构
+## 📋 四、所有Skill一览（按用途分类）
 
+### 核心技能（必装）
+
+| Skill | 触发词 | 用途 |
+|-------|---------|------|
+| takes-master | `takes:update`、`项目状态`、`推送代码` | orchestration-service项目管理，Git状态+质量审核+推送 |
+| skill-creator | `创建技能`、`/skill:create` | 从零创建新技能，自动生成SKILL.md |
+
+### 代码质量（推荐）
+
+| Skill | 触发词 | 用途 |
+|-------|---------|------|
+| code-review | `审查代码`、`检查bug`、`review` | 安全漏洞+代码异味+性能隐患，3分钟输出结构化报告 |
+| api-reviewer | `分析接口`、`审查API`、`endpoint` | RESTful规范+安全性+性能，输出问题+严重程度+修复建议 |
+| style-reviewer | `检查样式`、`样式问题` | 代码风格统一，格式化建议 |
+| performance-reviewer | `性能分析`、`优化建议` | 性能瓶颈识别，N+1查询等检测 |
+
+### 测试与DevOps
+
+| Skill | 触发词 | 用途 |
+|-------|---------|------|
+| api-contract-testing | `接口测试`、`contract test` | 自动化API契约测试 |
+| chaos-engineering | `混沌工程`、`容错测试` | 故障注入测试 |
+| property-based-testing | `属性测试`、`fuzzing` | 基于属性的测试生成 |
+
+### Git与协作
+
+| Skill | 触发词 | 用途 |
+|-------|---------|------|
+| git-rebase | `rebase冲突`、`git问题` | 自动分析rebase冲突并提供解决方案 |
+| observability | `可观测性`、`日志问题` | 日志+指标+链路追踪配置建议 |
+
+### 产品与设计
+
+| Skill | 触发词 | 用途 |
+|-------|---------|------|
+| web-clone | `克隆网站`、`仿制页面` | 输入URL生成页面结构和样式 |
+| ecomode | `能耗优化`、`环保设计` | 代码环保分析 |
+| autopilot | `自动驾驶模式`、`批量任务` | 批量任务自动化执行 |
+| deep-interview | `用户访谈`、`需求挖掘` | 产品需求深度访谈 |
+| hud | `数据面板`、`驾驶舱` | 数据可视化驾驶舱生成 |
+| ralplan | `研究规划`、`RFP分析` | 研究计划制定和分析 |
+
+---
+
+## 🚀 五、推荐安装方案
+
+### 方案A：最小化（只装最常用的）
+
+```bash
+# 只装这3个
+cp -r skills/takes-master ~/.claude/skills/
+cp -r skills/code-review ~/.claude/skills/
+cp -r skills/api-reviewer ~/.claude/skills/
 ```
-Claude-Studio/
-├── commands/              # 30+ 斜杠命令
-│   ├── lyd-*.md          # 18 个 lyd 系列命令
-│   └── ...
-├── agents/               # Agent 定义
-│   └── team-agents.md    # 6 个团队 Agent
-├── src/team/             # 团队协作核心
-│   ├── pipeline.ts        # 5 阶段管道
-│   ├── task-manager.ts    # 任务分发
-│   ├── message-router.ts  # 消息传递
-│   ├── heartbeat.ts       # 健康检测
-│   ├── notepad.ts        # 共享笔记本
-│   └── shared-memory.ts   # 共享内存
-├── src/mcp/              # MCP 工具
-│   └── state-tools.ts     # 状态管理
-└── scripts/              # 工程化脚本
+
+### 方案B：完整安装（按需取用）
+
+```bash
+# 复制全部
+cp -r skills/* ~/.claude/skills/
+
+# 编辑~/.clauderc，只启用需要的
+nano ~/.clauderc
 ```
 
 ---
 
-## Roadmap
+## ❓ 六、常见问题
 
-- [ ] Web UI 可视化团队状态
-- [ ] 更多专业化 Agent
-- [ ] Git 深度集成
-- [ ] 图形化流程配置
+**Q：安装后不生效？**
+```
+1. 重启Claude Code / Cursor
+2. 检查触发词是否正确输入
+3. 检查配置文件格式（JSON是否有效）
+```
+
+**Q：和Cursor/C4内置能力冲突？**
+```
+take-skills是补充，不是替代。内置能力照常使用，
+skill只在特定触发词出现时激活。
+```
+
+**Q：如何卸载？**
+```
+删除对应的rule文件或skill目录即可：
+rm -rf ~/.claude/skills/code-review
+```
 
 ---
 
-## 许可证
+## 📦 七、自定义开发新Skill
 
-MIT License
+```bash
+# 使用skill-creator
+claude "创建一个数据分析的skill"
+
+# 或手动创建
+mkdir skills/my-skill
+nano skills/my-skill/SKILL.md
+# 参考已有skill的格式编写
+```
 
 ---
 
-**GitHub**: https://github.com/an8079/take-skills
+**项目地址**：github.com/an8079/take-skills
+**版本**：v9 | 2026-03-29
