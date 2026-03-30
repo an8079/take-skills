@@ -1,16 +1,16 @@
 ---
-name: lyd-label
+name: takes-label
 description: 基于关键词分析自动为 GitHub Issue 打标签。支持 priority/type/complexity/component 分类，使用 GitHub CLI (gh issue edit) 应用标签。
 ---
 
-# /lyd-label - Issue 自动标签
+# /takes-label - Issue 自动标签
 
 基于 Issue 标题和内容中的关键词，自动为 GitHub Issue 打标签。
 
 ## 使用方式
 
 ```
-/lyd-label <issue-number-or-url>
+/takes-label <issue-number-or-url>
 ```
 
 ## 标签分类体系
@@ -69,13 +69,13 @@ description: 基于关键词分析自动为 GitHub Issue 打标签。支持 prio
 ## 示例
 
 ```
-/lyd-label 123
+/takes-label 123
 → 获取 Issue #123 信息
 → 分析关键词: "crash", "login", "critical"
 → 应用标签: priority/P0, type/bug, component/auth
 → 标签应用成功
 
-/lyd-label https://github.com/owner/repo/issues/456
+/takes-label https://github.com/owner/repo/issues/456
 → 从 URL 提取 Issue #456
 → 分析关键词: "performance", "slow", "database"
 → 应用标签: priority/P2, type/enhancement, component/performance, complexity/medium
@@ -106,4 +106,4 @@ description: 基于关键词分析自动为 GitHub Issue 打标签。支持 prio
 
 ---
 
-**提示：** `/lyd-label` 依赖 GitHub CLI (`gh`)。确保已安装并认证。
+**提示：** `/takes-label` 依赖 GitHub CLI (`gh`)。确保已安装并认证。

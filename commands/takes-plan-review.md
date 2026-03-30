@@ -1,5 +1,5 @@
 ---
-name: lyd-plan-review
+name: takes-plan-review
 description: 规格计划文档质疑审查团队 - CEO+架构师双视角审查，产品经理优化
 ---
 
@@ -16,7 +16,7 @@ description: 规格计划文档质疑审查团队 - CEO+架构师双视角审查
 ## 工作流程
 
 ```
-1. [触发] /lyd-plan-review
+1. [触发] /takes-plan-review
 2. [读取] 扫描项目 specs/*.md 规格文档
 3. [并行] CEO-reviewer + Architect-reviewer 各自独立分析
 4. [讨论] 两方交换质疑清单，识别分歧点
@@ -281,7 +281,7 @@ description: 规格计划文档质疑审查团队 - CEO+架构师双视角审查
 ## 使用方式
 
 ```
-/lyd-plan-review
+/takes-plan-review
 ```
 
 ## 注意事项

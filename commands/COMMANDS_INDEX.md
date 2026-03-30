@@ -24,9 +24,9 @@
 
 | 命令 | 文件 | 用途 |
 |------|------|------|
-| `/lyd-analyze` | lyd-analyze.md | 项目分析 |
-| `/lyd-scope` | lyd-scope.md | 范围管理 |
-| `/lyd-import` | lyd-import.md | 导入项目 |
+| `/takes-analyze` | takes-analyze.md | 项目分析 |
+| `/takes-scope` | takes-scope.md | 范围管理 |
+| `/takes-import` | takes-import.md | 导入项目 |
 
 ---
 
@@ -34,10 +34,10 @@
 
 | 命令 | 文件 | 用途 |
 |------|------|------|
-| `/lyd-autopilot` | lyd-autopilot.md | 自动驾驶模式 |
-| `/lyd-ultraqa` | lyd-ultraqa.md | QA 测试模式 |
-| `/lyd-ultrawork` | lyd-ultrawork.md | 高效工作模式 |
-| `/lyd-team` | lyd-team.md | 团队协作模式 |
+| `/takes-autopilot` | takes-autopilot.md | 自动驾驶模式 |
+| `/takes-ultraqa` | takes-ultraqa.md | QA 测试模式 |
+| `/takes-ultrawork` | takes-ultrawork.md | 高效工作模式 |
+| `/takes-team` | takes-team.md | 团队协作模式 |
 
 ---
 
@@ -45,22 +45,22 @@
 
 | 命令 | 文件 | 用途 |
 |------|------|------|
-| `/lyd-boss` | lyd-boss.md | 老板督导 PUA 模式 |
-| `/lyd-reverse-architect` | lyd-reverse-architect.md | 逆向思维架构师 |
-| `/lyd-po` | lyd-po.md | 提示词优化器 |
-| `/lyd-imapo` | lyd-imapo.md | AI 图像提示词工程师 |
-| `/lyd-qa` | lyd-qa.md | 自动化 QA 测试与修复 |
-| `/lyd-qa-only` | lyd-qa-only.md | 仅生成缺陷报告 |
-| `/lyd-rag` | lyd-rag.md | RAG 检索增强 |
-| `/lyd-pua` | lyd-pua.md | PUA 模式 |
-| `/lyd-office-hours` | lyd-office-hours.md | 办公时间 |
-| `/lyd-structure-thinking` | lyd-structure-thinking.md | 结构化思考 |
-| `/lyd-find-product-remind` | lyd-find-product-remind.md | 产品提醒 |
-| `/lyd-test-teams` | lyd-test-teams.md | 团队测试 |
-| `/lyd-ralph` | lyd-ralph.md | Ralph 循环模式 |
-| `/lyd-deep-interview` | lyd-deep-interview.md | 深度访谈模式 |
-| `/lyd-auto-interview` | lyd-auto-interview.md | 自动访谈模式 |
-| `/lyd-notify` | lyd-notify.md | 通知管理 |
+| `/takes-boss` | takes-boss.md | 老板督导 PUA 模式 |
+| `/takes-reverse-architect` | takes-reverse-architect.md | 逆向思维架构师 |
+| `/takes-po` | takes-po.md | 提示词优化器 |
+| `/takes-imapo` | takes-imapo.md | AI 图像提示词工程师 |
+| `/takes-qa` | takes-qa.md | 自动化 QA 测试与修复 |
+| `/takes-qa-only` | takes-qa-only.md | 仅生成缺陷报告 |
+| `/takes-rag` | takes-rag.md | RAG 检索增强 |
+| `/takes-pua` | takes-pua.md | PUA 模式 |
+| `/takes-office-hours` | takes-office-hours.md | 办公时间 |
+| `/takes-structure-thinking` | takes-structure-thinking.md | 结构化思考 |
+| `/takes-find-product-remind` | takes-find-product-remind.md | 产品提醒 |
+| `/takes-test-teams` | takes-test-teams.md | 团队测试 |
+| `/takes-ralph` | takes-ralph.md | Ralph 循环模式 |
+| `/takes-deep-interview` | takes-deep-interview.md | 深度访谈模式 |
+| `/takes-auto-interview` | takes-auto-interview.md | 自动访谈模式 |
+| `/takes-notify` | takes-notify.md | 通知管理 |
 
 ---
 
@@ -76,22 +76,22 @@
 | `跑测试` | /test |
 | `审查代码` | /review |
 | `调试` | /debug |
-| `分析` | /lyd-analyze |
-| `范围` | /lyd-scope |
-| `导入` | /lyd-import |
-| `深度访谈` | /lyd-deep-interview |
+| `分析` | /takes-analyze |
+| `范围` | /takes-scope |
+| `导入` | /takes-import |
+| `深度访谈` | /takes-deep-interview |
 | `快速开始` | /interview 快速开始 |
-| `pua` | /lyd-pua |
-| `团队` | /lyd-team |
-| `qa` | /lyd-qa |
-| `ultrawork` | /lyd-ultrawork |
-| `autopilot` | /lyd-autopilot |
-| `ultraqa` | /lyd-ultraqa |
-| `ralph` | /lyd-ralph |
-| `boss` | /lyd-boss |
-| `逆向` | /lyd-reverse-architect |
-| `po` | /lyd-po |
-| `imapo` | /lyd-imapo |
+| `pua` | /takes-pua |
+| `团队` | /takes-team |
+| `qa` | /takes-qa |
+| `ultrawork` | /takes-ultrawork |
+| `autopilot` | /takes-autopilot |
+| `ultraqa` | /takes-ultraqa |
+| `ralph` | /takes-ralph |
+| `boss` | /takes-boss |
+| `逆向` | /takes-reverse-architect |
+| `po` | /takes-po |
+| `imapo` | /takes-imapo |
 
 ---
 

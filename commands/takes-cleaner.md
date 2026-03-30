@@ -1,12 +1,12 @@
 ---
-name: lyd-cleaner
+name: takes-cleaner
 description: AI 垃圾代码清理。删除重复代码、死代码、无用抽象，保留原有行为。适用于代码感觉臃肿、重复、过度抽象的情况。
 color: orange
 emoji: 🧹
 vibe: 删除比添加更重要。每一行多余的代码都是未来的债。
 ---
 
-# 🧹 /lyd-cleaner — AI 垃圾代码清理
+# 🧹 /takes-cleaner — AI 垃圾代码清理
 
 清理 AI 生成的臃肿代码，删除重复、死代码、无用抽象，保留原有行为。
 
@@ -82,10 +82,10 @@ Step 5: 输出报告
 ## 触发方式
 
 ```
-/lyd-cleaner                    # 清理当前改动
-/lyd-cleaner <文件>             # 清理指定文件
-/lyd-cleaner src/auth           # 清理指定目录
-/lyd-cleaner --review           # 仅审查模式（不修改）
+/takes-cleaner                    # 清理当前改动
+/takes-cleaner <文件>             # 清理指定文件
+/takes-cleaner src/auth           # 清理指定目录
+/takes-cleaner --review           # 仅审查模式（不修改）
 ```
 
 ## 示例
@@ -93,23 +93,23 @@ Step 5: 输出报告
 ### Good 用法
 
 ```
-/lyd-cleaner src/auth
+/takes-cleaner src/auth
 → 删除 auth 模块中的死代码、重复逻辑
 
-/lyd-cleaner src/utils.ts src/api.ts
+/takes-cleaner src/utils.ts src/api.ts
 → 清理指定文件的包装层
 
-/lyd-cleaner --review
+/takes-cleaner --review
 → 仅审查模式，输出清理计划但不修改
 ```
 
 ### Bad 用法
 
 ```
-/lyd-cleaner 重构 auth 支持 SSO
+/takes-cleaner 重构 auth 支持 SSO
 → 范围过大，是新功能不是清理
 
-/lyd-cleaner 清理格式
+/takes-cleaner 清理格式
 → 应该用 lint/format 工具
 ```
 
@@ -158,4 +158,4 @@ Step 5: 输出报告
 
 ---
 
-**提示：** `/lyd-cleaner` 是代码质量的最后一道防线。删除比添加更重要——每一行多余的代码都是未来的债。
+**提示：** `/takes-cleaner` 是代码质量的最后一道防线。删除比添加更重要——每一行多余的代码都是未来的债。

@@ -1,16 +1,16 @@
 ---
-name: lyd-code-review
+name: takes-code-review
 description: 多角色代码审查团队 - 安全/性能/可维护性/架构四维度并行审查
 ---
 
-# /lyd-code-review - 多角色代码审查团队
+# /takes-code-review - 多角色代码审查团队
 
 GAN 式对抗评估模式：代码修改者与评估者分离，四专业 Agent 并行独立审查。
 
 ## 使用方式
 
 ```
-/lyd-code-review [文件路径|git diff|PR编号]
+/takes-code-review [文件路径|git diff|PR编号]
 ```
 
 或
@@ -247,7 +247,7 @@ GAN 式对抗评估模式：代码修改者与评估者分离，四专业 Agent 
 
 ```
 ┌─────────────────────────────────────────────────────────────┐
-│                    /lyd-code-review                           │
+│                    /takes-code-review                           │
 ├─────────────────────────────────────────────────────────────┤
 │                                                              │
 │  1. 读取代码                                                 │
@@ -447,7 +447,7 @@ P3 问题 任意
 
 ---
 
-*报告由 lyd-code-review 多角色审查团队生成*
+*报告由 takes-code-review 多角色审查团队生成*
 ```
 
 ## 优先级定义
@@ -461,7 +461,7 @@ P3 问题 任意
 
 ## 与 /review 的区别
 
-| 维度 | /lyd-code-review | /review |
+| 维度 | /takes-code-review | /review |
 |------|------------------|---------|
 | 审查员数量 | 4 个并行 Agent | 1 个 Agent |
 | 审查深度 | 四维度独立分析 | 综合评估 |
@@ -471,4 +471,4 @@ P3 问题 任意
 
 ---
 
-**提示：** `/lyd-code-review` 适合重要发布前的全面审查，或安全敏感场景的深度审计。日常小修复使用 `/review` 更高效。
+**提示：** `/takes-code-review` 适合重要发布前的全面审查，或安全敏感场景的深度审计。日常小修复使用 `/review` 更高效。

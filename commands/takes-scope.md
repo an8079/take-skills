@@ -1,5 +1,5 @@
 ---
-name: lyd-scope
+name: takes-scope
 description: 管理和查看开发边界。控制哪些文件/目录可以修改，哪些必须保持不变。
 ---
 
