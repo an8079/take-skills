@@ -30,6 +30,9 @@ jobs:
       - name: Install Vitest
         run: npm install -D vitest
 
+      - name: Build TypeScript
+        run: npm run build
+
       - name: Run tests
         run: npx vitest run --reporter=verbose
 
