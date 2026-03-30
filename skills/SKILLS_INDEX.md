@@ -1,225 +1,99 @@
 # 技能索引
 
-> 项目路径: `F:\claude-studio\3.4\claude-studio\claude-studio`
-> 生成日期: 2026-03-28 | 更新: 2026-03-28
-> 技能总数: 88（含 oh-my-claude 2026-03 gap 5个新技能，2026-03-29 新增 4个）
+> take-skills 官方技能目录
+> 更新：2026-03-30 | 技能总数：19
 
 ---
 
-## Agents (10个)
+## 核心工作流（4个）
 
 | 技能 | 路径 | 用途 |
 |------|------|------|
-| software-architect | skills/agents/software-architect/SKILL.md | 系统架构设计 |
-| senior-developer | skills/agents/senior-developer/SKILL.md | 高级开发专家 |
-| code-reviewer | skills/agents/code-reviewer/SKILL.md | 代码审查 |
-| security-engineer | skills/agents/security-engineer/SKILL.md | 安全工程 |
-| devops-automator | skills/agents/devops-automator/SKILL.md | DevOps 自动化 |
-| data-engineer | skills/agents/data-engineer/SKILL.md | 数据工程 |
-| technical-writer | skills/agents/technical-writer/SKILL.md | 技术写作 |
-| sre | skills/agents/sre/SKILL.md | 站点可靠性工程 |
-| backend-architect | skills/agents/backend-architect/SKILL.md | 后端架构 |
-| frontend-developer | skills/agents/frontend-developer/SKILL.md | 前端开发 |
+| autopilot | skills/autopilot/SKILL.md | 全自主执行：自动拆解+并行推进+持续迭代 |
+| ralplan | skills/ralplan/SKILL.md | 结构化规划：Quick/Standard/Deep/Review 四模式 |
+| deep-interview | skills/deep-interview/SKILL.md | 苏格拉底式访谈：三层真相挖掘需求 |
+| hud | skills/hud/SKILL.md | 实时任务状态 HUD：进度+风险预警 |
 
 ---
 
-## Development (26个，新增2026-03）
+## 代码质量（5个）
 
 | 技能 | 路径 | 用途 |
 |------|------|------|
-| api-design | skills/api-design/SKILL.md | RESTful API 设计 |
-| tdd-workflow | skills/tdd-workflow/SKILL.md | 测试驱动开发 |
-| code-review | skills/code-review/SKILL.md | 代码审查 |
-| security-review | skills/security-review/SKILL.md | 安全审查 |
-| spec-writing | skills/spec-writing/SKILL.md | 规格文档编写 |
-| requirement-analysis | skills/requirement-analysis/SKILL.md | 需求分析 |
-| database-design | skills/database-design/SKILL.md | 数据库设计 |
-| backend-patterns | skills/backend-patterns/SKILL.md | 后端模式 |
-| frontend-patterns | skills/frontend-patterns/SKILL.md | 前端模式 |
-| prompt-engineering | skills/prompt-engineering/SKILL.md | 提示工程 |
-| error-recovery | skills/error-recovery/SKILL.md | 错误恢复 |
-| context-manager | skills/context-manager/SKILL.md | 上下文管理 |
-| self-iterating | skills/self-iterating/SKILL.md | 自我迭代 |
-| tech-stack-detection | skills/tech-stack-detection/SKILL.md | 技术栈检测 |
-| progress-tracking | skills/progress-tracking/SKILL.md | 进度跟踪 |
-| continuous-learning | skills/continuous-learning/SKILL.md | 持续学习 |
-| auto-critique | skills/auto-critique/SKILL.md | 自动评审 |
-| reflection | skills/reflection/SKILL.md | 反思总结 |
-| investigate | skills/investigate/SKILL.md | 系统调试与根因分析 |
-| smart-skill-selector | skills/smart-skill-selector/SKILL.md | 技能选择 |
-| skill-creator | skills/skill-creator/SKILL.md | 技能创建 |
-| git-worktree-manager | skills/git-worktree-manager/SKILL.md | Git worktree 生命周期管理 |
-| changelog-generator | skills/changelog-generator/SKILL.md | Release note 自动生成 |
-| ci-cd-pipeline-builder | skills/ci-cd-pipeline-builder/SKILL.md | CI/CD Pipeline 智能生成 |
-| prompt-engineer-toolkit | skills/prompt-engineer-toolkit/SKILL.md | Prompt A/B测试与版本管理 |
-| api-reviewer | skills/api-reviewer/SKILL.md | API 质量专项审查（安全性/性能） |
-| performance-reviewer | skills/performance-reviewer/SKILL.md | 性能专项审查（前端/后端/DB） |
+| code-review | skills/code-review/SKILL.md | 多角色代码审查团队 |
+| api-reviewer | skills/api-reviewer/SKILL.md | API 专项审查（安全性/性能/最佳实践） |
+| style-reviewer | skills/style-reviewer/SKILL.md | 代码风格一致性审查 |
+| performance-reviewer | skills/performance-reviewer/SKILL.md | 性能专项审查（前后端/DB/并发） |
+| chaos-engineering | skills/chaos-engineering/SKILL.md | 混沌工程：故障注入与韧性测试 |
 
 ---
 
-## Infrastructure (6个 → 7个，新增2026-03)
+## 研发工具（6个）
 
 | 技能 | 路径 | 用途 |
 |------|------|------|
-| kubernetes | skills/kubernetes/SKILL.md | K8s 集群管理 |
-| mcp-builder | skills/mcp-builder/SKILL.md | MCP 服务器构建 |
-| mcp-protocol | skills/mcp-protocol/SKILL.md | MCP 协议开发与集成 |
-| devops-delivery | skills/devops-delivery/SKILL.md | DevOps 交付 |
-| auto-build-workflow | skills/auto-build-workflow/SKILL.md | 自动构建 |
-| notifications | skills/notifications/SKILL.md | 通知系统 |
-| mcp-server-builder | skills/mcp-server-builder/SKILL.md | OpenAPI → MCP 服务器生成 |
+| git-rebase | skills/git-rebase/SKILL.md | Git Rebase 专项：交互式变基/冲突处理/Squash |
+| git-troubleshooter | skills/git-troubleshooter/SKILL.md | Git 故障排查：冲突/回退/恢复/reflog |
+| observability | skills/observability/SKILL.md | 可观测性：日志/指标/链路追踪设计 |
+| api-contract-testing | skills/api-contract-testing/SKILL.md | API契约测试：Pact框架 + 消费者驱动 |
+| property-based-testing | skills/property-based-testing/SKILL.md | 属性测试：快速蔟+ Shrinking |
+| ecomode | skills/ecomode/SKILL.md | 极简执行模式：省token高效率 |
 
 ---
 
-## AI/ML (15个)
+## 辅助技能（4个）
 
 | 技能 | 路径 | 用途 |
 |------|------|------|
-| nlp-pipeline | skills/nlp-pipeline/SKILL.md | NLP 流水线 |
-| computer-vision | skills/computer-vision/SKILL.md | 计算机视觉 |
-| embedding-generation | skills/embedding-generation/SKILL.md | 向量生成 |
-| graph-rag | skills/graph-rag/SKILL.md | 知识图谱 RAG |
-| rag-design | skills/rag-design/SKILL.md | RAG 设计 |
-| vector-search | skills/vector-search/SKILL.md | 向量搜索 |
-| user-profiling | skills/user-profiling/SKILL.md | 用户画像 |
-| ecommerce-recommender | skills/ecommerce-recommender/SKILL.md | 电商推荐 |
-| bioinformatics... | skills/bioinformatics-manuscript-reviewer/SKILL.md | 生物信息学 |
-| agent-eval | skills/agent-eval/SKILL.md | Agent 评估 |
-| fine-tuning... | skills/fine-tuning-with-trl/SKILL.md | 模型微调 |
-| ray-data | skills/ray-data/SKILL.md | 分布式数据 |
-| langgraph... | skills/langgraph-workflows/SKILL.md | LangGraph 工作流 |
-| langchain... | skills/langchain-arch/SKILL.md | LangChain 架构 |
-| finops-for-ai | skills/finops-for-ai/SKILL.md | AI 成本优化 |
+| takes-master | skills/takes-master/SKILL.md | takes 生态系统管理：批量安装/升级/维护 |
+| skill-creator | skills/skill-creator-1.0.0/SKILL.md | 从零创建新 SKILL.md 的标准工作流 |
+| cron-mastery | skills/cron-mastery/SKILL.md | Cron表达式解析/验证/生成 + OpenClaw定时任务 |
+| json-generator | skills/json-generator/SKILL.md | 测试JSON数据生成：faker模式/边界值/异常构造 |
 
 ---
 
-## Frameworks (6个)
+## Takes 命令（30个）
 
-| 技能 | 路径 | 用途 |
-|------|------|------|
-| nextjs | skills/nextjs/SKILL.md | Next.js 开发 |
-| fastapi-backend | skills/fastapi-backend/SKILL.md | FastAPI 后端 |
-| java-spring | skills/java-spring/SKILL.md | Spring Boot |
-| graphql | skills/graphql/SKILL.md | GraphQL |
-| go-patterns | skills/go-patterns/SKILL.md | Go 模式 |
-| rust-patterns | skills/rust-patterns/SKILL.md | Rust 模式 |
+位于 `commands/` 目录，触发词为 `/takes-*`：
 
----
+**分析类**：`takes-analyze` `takes-scope` `takes-import`
 
-## Workflow & Planning (4个，新增2026-03-29，来自 oh-my-claude 独家技能)
+**自动类**：`takes-autopilot` `takes-ultraqa` `takes-ultrawork` `takes-team`
 
-| 技能 | 路径 | 用途 |
-|------|------|------|
-| autopilot | skills/autopilot/SKILL.md | 全自主执行模式：自动拆解+并行推进+持续迭代 |
-| ralplan | skills/ralplan/SKILL.md | RALPLAN 结构化规划：4模式 Quick/Standard/Deep/Review |
-| deep-interview | skills/deep-interview/SKILL.md | 苏格拉底式深度访谈：三层真相挖掘需求 |
-| hud | skills/hud/SKILL.md | 实时任务状态 HUD：飞行员式进度+风险预警 |
+**专项类**：`takes-qa` `takes-qa-only` `takes-rag` `takes-pua` `takes-office-hours`
+
+**深度类**：`takes-deep-interview` `takes-auto-interview` `takes-notify` `takes-boss`
+
+**架构类**：`takes-reverse-architect` `takes-po` `takes-imapo` `takes-cleaner`
+
+**思维类**：`takes-structure-thinking` `takes-find-product-remind` `takes-test-teams` `takes-ralph`
 
 ---
 
-## Tools & Docs (18个，新增2026-03)
-
-| 技能 | 路径 | 用途 |
-|------|------|------|
-| webapp-testing | skills/webapp-testing/SKILL.md | Web 应用测试 |
-| docx | skills/docx/SKILL.md | Word 文档处理 |
-| pdf-skills | skills/pdf-skills/SKILL.md | PDF 处理 |
-| claude-skills | skills/claude-skills/SKILL.md | Claude 技能开发 |
-| project-template | skills/project-template/SKILL.md | 项目模板 |
-| frontend-design | skills/frontend-design/SKILL.md | 前端设计 |
-| performance-tuning | skills/performance-tuning/SKILL.md | 性能调优 |
-| competitive-analysis | skills/competitive-analysis/SKILL.md | 竞品分析 |
-| office-hours | skills/office-hours/SKILL.md | 结构化问题定义 |
-| retro | skills/retro/SKILL.md | 工程回顾与改进 |
-| browse | skills/browse/SKILL.md | 真实浏览器QA（gstack） |
-| careful | skills/careful/SKILL.md | 安全护栏（gstack） |
-| guard | skills/guard/SKILL.md | 组合安全（gstack） |
-| cso | skills/cso/SKILL.md | 首席安全官（gstack） |
-| autoplan | skills/autoplan/SKILL.md | 全自动评审管道（gstack） |
-| style-reviewer | skills/style-reviewer/SKILL.md | 设计风格一致性审查 |
-| web-clone | skills/web-clone/SKILL.md | 网页克隆与高保真还原 |
-| ecomode | skills/ecomode/SKILL.md | 极简高效执行模式（省token） |
-
----
-
-## 其他 (5个)
-
-| 技能 | 路径 | 用途 |
-|------|------|------|
-| git-workflow | skills/git-workflow/SKILL.md | Git 工作流 |
-| preprocessing... | skills/preprocessing-data-with-automated-pipelines/SKILL.md | 数据预处理 |
-| customer-service... | skills/customer-service-expert/SKILL.md | 客服专家 |
-| scientific-writing | skills/scientific-writing/SKILL.md | 科学写作 |
-| agent-eval | skills/agent-eval/SKILL.md | Agent 评估 |
-
----
-
-## 技能 YAML Frontmatter 格式
+## YAML Frontmatter 格式
 
 每个技能文件包含 YAML frontmatter：
 
 ```yaml
 ---
 name: 技能名
-description: 技能描述
-tags: [标签1, 标签2]
+description: 简短描述
+triggers:
+  - 触发词1
+  - 触发词2
 ---
 ```
 
-## 查看单个技能详情
+## 安装方式
 
 ```bash
-# 读取技能文件
-cat skills/agents/software-architect/SKILL.md
-cat skills/api-design/SKILL.md
-cat skills/tdd-workflow/SKILL.md
+# 方式1：一键安装所有技能
+curl -fsSL https://raw.githubusercontent.com/an8079/take-skills/main/install.sh | bash
+
+# 方式2：选择性安装
+cd ~/take-skills/skills && git clone <skill-repo>
+
+# takes-master：管理所有skill
+/takes-master install api-reviewer
+/takes-master list
 ```
-
-## 触发方式
-
-| 触发词 | 行为 |
-|--------|------|
-| `autopilot` | 激活自动驾驶模式 |
-| `tdd` | 进入 TDD 模式 |
-| `deep interview` | 苏格拉底式访谈 |
-| `/team` | 团队编排 |
-
----
-
-## 插件配置
-
-- **hooks.json**: `hooks/hooks.json` - 定义命令和工具钩子
-- **无 .claude-plugin 目录** - 当前未使用插件目录机制
-- **MCP 配置**: `mcp-configs/mcp-servers.json` - MCP 服务器配置
-- **gsd-planner**: Gsd Planner — 2026-03
-- **gsd-executor**: Gsd Executor — 2026-03
-- **gsd-verifier**: Gsd Verifier — 2026-03
-- **gsd-debugger**: Gsd Debugger — 2026-03
-- **gsd-roadmapper**: Gsd Roadmapper — 2026-03
-- **gsd-nyquist-auditor**: Gsd Nyquist Auditor — 2026-03
-- **gsd-integration-checker**: Gsd Integration Checker — 2026-03
-- **gsd-ui-checker**: Gsd Ui Checker — 2026-03
-- **gsd-ui-auditor**: Gsd Ui Auditor — 2026-03
-- **gsd-plan-checker**: Gsd Plan Checker — 2026-03
-- **gsd-phase-researcher**: Gsd Phase Researcher — 2026-03
-- **gsd-project-researcher**: Gsd Project Researcher — 2026-03
-- **gsd-codebase-mapper**: Gsd Codebase Mapper — 2026-03
-- **gsd-advisor-researcher**: Gsd Advisor Researcher — 2026-03
-- **gsd-assumptions-analyzer**: Gsd Assumptions Analyzer — 2026-03
-- **gsd-research-synthesizer**: Gsd Research Synthesizer — 2026-03
-- **gsd-planner**: Gsd Planner — 2026-03
-- **gsd-executor**: Gsd Executor — 2026-03
-- **gsd-verifier**: Gsd Verifier — 2026-03
-- **gsd-debugger**: Gsd Debugger — 2026-03
-- **gsd-roadmapper**: Gsd Roadmapper — 2026-03
-- **gsd-nyquist-auditor**: Gsd Nyquist Auditor — 2026-03
-- **gsd-integration-checker**: Gsd Integration Checker — 2026-03
-- **gsd-ui-checker**: Gsd Ui Checker — 2026-03
-- **gsd-ui-auditor**: Gsd Ui Auditor — 2026-03
-- **gsd-plan-checker**: Gsd Plan Checker — 2026-03
-- **gsd-phase-researcher**: Gsd Phase Researcher — 2026-03
-- **gsd-project-researcher**: Gsd Project Researcher — 2026-03
-- **gsd-codebase-mapper**: Gsd Codebase Mapper — 2026-03
-- **gsd-advisor-researcher**: Gsd Advisor Researcher — 2026-03
-- **gsd-assumptions-analyzer**: Gsd Assumptions Analyzer — 2026-03
-- **gsd-research-synthesizer**: Gsd Research Synthesizer — 2026-03
