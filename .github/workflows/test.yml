@@ -27,9 +27,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Install Vitest
-        run: npm install -D vitest
-
       - name: Build TypeScript
         run: npm run build
 
