@@ -254,7 +254,7 @@ take-skills 67技能 vs oh-my-claude 47技能，本次补全L2-L7高端技能链
 #### claude-hub 集成 (Phase 1-3)
 - **GitHub CLI 封装** - `scripts/gh-utils.ts` 提供 `gh pr view/diff/review`、`gh issue edit` 等命令封装
 - **凭证管理** - `scripts/credential-manager.ts` 实现 Token 掩码、脱敏、安全存储
-- **Issue 自动标签** - `/lyd-label` 命令，支持 P0/P1/P2、bug/feature/enhancement 分类
+- **Issue 自动标签** - `/takes-label` 命令，支持 P0/P1/P2、bug/feature/enhancement 分类
 - **Webhook 框架** - `scripts/webhook-utils.ts` 实现 HMAC-SHA256 签名验证和事件路由
 
 #### claude-hub 集成 Phase 2
@@ -262,19 +262,19 @@ take-skills 67技能 vs oh-my-claude 47技能，本次补全L2-L7高端技能链
 - **会话编排系统** - `scripts/orchestration.ts` (23.9KB) 实现 DAG 执行引擎，支持 parallel/sequential/wait_for_core
 
 #### 新增命令 (6个)
-- `/lyd-boss` - PUA 督导模式，任务进度追踪与激励
-- `/lyd-reverse-architect` - 魔鬼代言人架构审查
-- `/lyd-po` - 提示词优化器
-- `/lyd-imapo` - 图片提示词工程师
-- `/lyd-cleaner` - AI slop 清理器，回归安全删除工作流
-- `/lyd-sandbox` - 容器隔离执行命令
+- `/takes-boss` - PUA 督导模式，任务进度追踪与激励
+- `/takes-reverse-architect` - 魔鬼代言人架构审查
+- `/takes-po` - 提示词优化器
+- `/takes-imapo` - 图片提示词工程师
+- `/takes-cleaner` - AI slop 清理器，回归安全删除工作流
+- `/takes-sandbox` - 容器隔离执行命令
 
 #### Agent 标准格式
 - 所有 Agent Prompt 统一格式：vibe 描述 + color 标识 + emoji 标记 + template 结构
 - 5个核心 Agent 全部重构：interviewer、architect、coder、reviewer、debug-helper
 
 ### 修复 (Fixed)
-- `commands.test.ts` - 更新测试用例匹配 lyd- 前缀命令名称
+- `commands.test.ts` - 更新测试用例匹配 takes- 前缀命令名称
 - GitHub webhook 安全 - HMAC-SHA256 签名验证
 
 ### 文档 (Documentation)

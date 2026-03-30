@@ -18,16 +18,16 @@ const COMMANDS_DIR = path.resolve(process.cwd(), 'commands');
 
 // Commands that should exist according to README (v3.0.0)
 // Core commands: no prefix
-// Enhanced commands: lyd- prefix
+// Enhanced commands: takes- prefix
 const README_COMMANDS = [
   // Core commands (no prefix)
   'interview', 'spec', 'plan', 'code', 'tdd', 'test', 'review', 'debug',
-  // lyd-* enhanced commands
-  'lyd-analyze', 'lyd-scope', 'lyd-import',
-  'lyd-autopilot', 'lyd-ultraqa', 'lyd-ultrawork', 'lyd-team',
-  'lyd-qa', 'lyd-qa-only', 'lyd-rag', 'lyd-pua', 'lyd-office-hours',
-  'lyd-structure-thinking', 'lyd-find-product-remind', 'lyd-test-teams', 'lyd-ralph',
-  'lyd-deep-interview', 'lyd-auto-interview', 'lyd-notify', 'lyd-boss', 'lyd-reverse-architect', 'lyd-po', 'lyd-imapo'
+  // takes-* enhanced commands
+  'takes-analyze', 'takes-scope', 'takes-import',
+  'takes-autopilot', 'takes-ultraqa', 'takes-ultrawork', 'takes-team',
+  'takes-qa', 'takes-qa-only', 'takes-rag', 'takes-pua', 'takes-office-hours',
+  'takes-structure-thinking', 'takes-find-product-remind', 'takes-test-teams', 'takes-ralph',
+  'takes-deep-interview', 'takes-auto-interview', 'takes-notify', 'takes-boss', 'takes-reverse-architect', 'takes-po', 'takes-imapo'
 ];
 
 // Normalize line endings to handle CRLF (Windows) and LF (Unix)
@@ -51,7 +51,7 @@ describe('Command Contract Tests', () => {
     });
 
     it('should resolve a shipped command from the repository command set', () => {
-      const command = getCommand('lyd-autopilot');
+      const command = getCommand('takes-autopilot');
       expect(command).not.toBeNull();
       expect(command?.filePath.includes(`${path.sep}commands${path.sep}`)).toBe(true);
     });
